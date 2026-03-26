@@ -1,215 +1,1173 @@
 <!doctype html>
 <html lang="es">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>De Sousa Consulting — Estructuración estratégica</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>De Sousa Consulting — Estructuración estratégica</title>
 
-  <meta name="description" content="Estructuración estratégica para empresas que buscan crecer con orden, control y escalabilidad." />
+    <meta
+      name="description"
+      content="Estructuración estratégica para empresas que buscan crecer con orden, control y escalabilidad."
+    />
+    <meta name="theme-color" content="#144982" />
 
-  <link rel="stylesheet" href="/styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
 
-  <style>
-    body {
-      margin: 0;
-      font-family: "Inter", sans-serif;
-      color: #1e1d1d;
-    }
+    <meta property="og:title" content="De Sousa Consulting — Estructuración estratégica" />
+    <meta
+      property="og:description"
+      content="Estructuración estratégica para empresas que buscan crecer con orden, control y escalabilidad."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="De Sousa Consulting" />
+    <meta property="og:url" content="https://desousaconsulting.com/" />
+    <meta property="og:image" content="https://desousaconsulting.com/assets/og-desousa.jpg" />
+    <link rel="canonical" href="https://desousaconsulting.com/" />
 
-    .wrap {
-      width: min(1180px, calc(100% - 32px));
-      margin: 0 auto;
-    }
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="De Sousa Consulting — Estructuración estratégica" />
+    <meta
+      name="twitter:description"
+      content="Estructura, criterio y ejecución para decisiones empresariales de mayor nivel."
+    />
+    <meta name="twitter:image" content="https://desousaconsulting.com/assets/og-desousa.jpg" />
 
-    h1, h2, h3 {
-      font-family: "Playfair Display", serif;
-    }
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script defer src="/config.js"></script>
+    <script defer src="/app.js"></script>
 
-    .site-header {
-      position: sticky;
-      top: 0;
-      background: #fff;
-      border-bottom: 1px solid #eee;
-      z-index: 10;
-    }
+    <style>
+      :root {
+        --primary: #144982;
+        --primary-dark: #0f3763;
+        --highlight: #abc1d7;
+        --neutral-dark: #1e1d1d;
+        --neutral-light: #d9d9d9;
+        --accent: #c8a96a;
+        --surface: #f7f9fc;
+        --surface-2: #f3f6fa;
+        --surface-3: #eef3f8;
+        --border: rgba(20, 73, 130, 0.12);
+        --border-soft: rgba(20, 73, 130, 0.08);
+        --shadow-soft: 0 12px 30px rgba(15, 55, 99, 0.05);
+        --shadow-medium: 0 20px 50px rgba(15, 55, 99, 0.08);
+        --radius-card: 24px;
+        --radius-panel: 30px;
+        --radius-pill: 999px;
+        --container: 1180px;
+      }
 
-    .header-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      min-height: 70px;
-    }
+      * {
+        box-sizing: border-box;
+      }
 
-    .btn {
-      padding: 12px 18px;
-      border-radius: 999px;
-      background: #c8a96a;
-      color: #fff;
-      text-decoration: none;
-      font-size: 14px;
-    }
+      html {
+        scroll-behavior: smooth;
+      }
 
-    /* HERO MOBILE FIRST */
-    .hero {
-      padding: 24px 0 16px;
-    }
+      body {
+        margin: 0;
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--neutral-dark);
+        background: #ffffff;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
 
-    .hero-grid {
-      display: grid;
-      gap: 24px;
-    }
+      img {
+        max-width: 100%;
+        display: block;
+      }
 
-    h1 {
-      font-size: 2.2rem;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      max-width: 16ch;
-    }
+      a {
+        color: inherit;
+      }
 
-    .lead {
-      margin-top: 16px;
-      font-size: 15px;
-      line-height: 1.6;
-      color: #555;
-    }
+      .wrap {
+        width: min(var(--container), calc(100% - 32px));
+        margin: 0 auto;
+      }
 
-    .cta-row {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 20px;
-    }
+      h1,
+      h2,
+      h3 {
+        font-family: "Playfair Display", Georgia, serif;
+      }
 
-    .btn.secondary {
-      background: #fff;
-      color: #144982;
-      border: 1px solid #ddd;
-    }
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border-soft);
+      }
 
-    .hero-image {
-      width: 100%;
-      height: 220px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, rgba(20,73,130,0.08), rgba(171,193,215,0.2));
-    }
+      .header-inner {
+        min-height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
 
-    /* SECTIONS */
-    .section {
-      padding: 64px 0;
-    }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: var(--primary);
+        min-width: 0;
+      }
 
-    .grid {
-      display: grid;
-      gap: 16px;
-      margin-top: 24px;
-    }
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+        flex: 0 0 38px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--border);
+        background: var(--surface-2);
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 19px;
+        font-weight: 700;
+      }
 
-    .card {
-      padding: 20px;
-      border: 1px solid #eee;
-      border-radius: 20px;
-      background: #fff;
-    }
+      .brand-text {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        line-height: 1.2;
+      }
 
-    /* DESKTOP */
-    @media (min-width: 860px) {
+      .site-nav {
+        display: none;
+        align-items: center;
+        gap: 26px;
+      }
+
+      .site-nav a {
+        text-decoration: none;
+        font-size: 14px;
+        color: rgba(30, 29, 29, 0.76);
+        transition: color 0.2s ease;
+      }
+
+      .site-nav a:hover {
+        color: var(--primary);
+      }
+
+      .btn {
+        min-height: 46px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 18px;
+        border-radius: var(--radius-pill);
+        border: 1px solid var(--accent);
+        background: var(--accent);
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1;
+        transition: transform 0.18s ease, filter 0.18s ease, background-color 0.18s ease,
+          border-color 0.18s ease;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+        filter: brightness(0.96);
+      }
+
+      .btn.secondary {
+        background: #ffffff;
+        color: var(--primary);
+        border-color: var(--border);
+      }
+
+      .btn.secondary:hover {
+        background: var(--surface);
+        filter: none;
+      }
+
       .hero {
-        padding: 56px 0 32px;
+        position: relative;
+        overflow: hidden;
+        padding: 22px 0 18px;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 85% 12%, rgba(171, 193, 215, 0.26), transparent 36%),
+          radial-gradient(circle at 10% 24%, rgba(20, 73, 130, 0.05), transparent 32%);
+        pointer-events: none;
       }
 
       .hero-grid {
-        grid-template-columns: 1.1fr 0.9fr;
-        gap: 48px;
+        position: relative;
+        display: grid;
+        gap: 22px;
+        align-items: center;
+      }
+
+      .hero-copy {
+        order: 1;
+      }
+
+      .hero-visual-wrap {
+        order: 2;
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--primary);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
       }
 
       h1 {
-        font-size: clamp(2.8rem, 4vw, 4rem);
+        margin: 0;
+        max-width: 11ch;
+        font-size: clamp(2.35rem, 10vw, 3rem);
+        line-height: 0.98;
+        letter-spacing: -0.045em;
       }
 
       .lead {
-        font-size: 17px;
+        margin: 14px 0 0;
+        max-width: 34ch;
+        font-size: 15px;
+        line-height: 1.65;
+        color: rgba(30, 29, 29, 0.75);
       }
 
       .cta-row {
-        flex-direction: row;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 22px;
       }
 
-      .hero-image {
-        height: 420px;
+      .cta-row .btn {
+        width: 100%;
       }
 
-      .grid {
-        grid-template-columns: repeat(3, 1fr);
+      .hero-note {
+        margin: 16px 0 0;
+        font-size: 12px;
+        line-height: 1.6;
+        color: rgba(30, 29, 29, 0.58);
       }
-    }
-  </style>
-</head>
 
-<body>
+      .hero-visual {
+        width: 100%;
+        min-height: 240px;
+        border-radius: 26px;
+        background:
+          linear-gradient(135deg, rgba(20, 73, 130, 0.08), rgba(171, 193, 215, 0.24)),
+          #f5f8fc;
+        border: 1px solid var(--border);
+        overflow: hidden;
+        position: relative;
+      }
 
-<header class="site-header">
-  <div class="wrap header-inner">
-    <div><strong>De Sousa Consulting</strong></div>
-    <a class="btn" href="#diagnostico">Iniciar diagnóstico</a>
-  </div>
-</header>
+      .hero-image-placeholder {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 18px;
+      }
 
-<main>
+      .hero-image-card {
+        width: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        background: rgba(255, 255, 255, 0.84);
+        border-radius: 20px;
+        padding: 16px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: var(--shadow-soft);
+      }
 
-<section class="hero">
-  <div class="wrap hero-grid">
+      .hero-image-card p {
+        margin: 0;
+      }
 
-    <div>
-      <h1>Estructuración estratégica para crecimiento empresarial.</h1>
-      <p class="lead">Estrategia, finanzas y operaciones bajo una misma estructura.</p>
+      .mini-label {
+        color: var(--primary);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
 
-      <div class="cta-row">
+      .mini-copy {
+        margin-top: 8px;
+        font-size: 14px;
+        line-height: 1.65;
+        color: rgba(30, 29, 29, 0.72);
+      }
+
+      .hero-metrics {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .hero-metric {
+        border-radius: 16px;
+        background: #ffffff;
+        padding: 12px;
+        border: 1px solid rgba(20, 73, 130, 0.08);
+      }
+
+      .hero-metric strong {
+        display: block;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--primary);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .hero-metric span {
+        display: block;
+        margin-top: 8px;
+        font-size: 13px;
+        line-height: 1.55;
+        color: rgba(30, 29, 29, 0.74);
+      }
+
+      .section {
+        padding: 56px 0;
+      }
+
+      .section.alt {
+        background: var(--surface);
+      }
+
+      .section-header {
+        max-width: 680px;
+      }
+
+      .section-label {
+        margin: 0 0 12px;
+        color: var(--primary);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: clamp(2rem, 8vw, 2.6rem);
+        line-height: 1.04;
+        letter-spacing: -0.035em;
+      }
+
+      .section-intro {
+        margin: 14px 0 0;
+        max-width: 58ch;
+        font-size: 15px;
+        line-height: 1.72;
+        color: rgba(30, 29, 29, 0.76);
+      }
+
+      .grid-4,
+      .grid-3 {
+        display: grid;
+        gap: 16px;
+        margin-top: 24px;
+      }
+
+      .feature-card,
+      .vertical-card,
+      .timeline-card,
+      .cred-card {
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        background: #ffffff;
+        padding: 20px;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .feature-icon {
+        width: 44px;
+        height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 16px;
+        color: var(--primary);
+        background: var(--surface-2);
+      }
+
+      .feature-card h3,
+      .vertical-card h3,
+      .timeline-card h3,
+      .cred-card h3 {
+        margin: 16px 0 0;
+        font-size: 22px;
+        line-height: 1.12;
+        letter-spacing: -0.03em;
+      }
+
+      .feature-card p,
+      .vertical-card p,
+      .timeline-card p,
+      .cred-card p {
+        margin: 10px 0 0;
+        font-size: 14px;
+        line-height: 1.7;
+        color: rgba(30, 29, 29, 0.74);
+      }
+
+      .cred-grid {
+        display: grid;
+        gap: 16px;
+        margin-top: 24px;
+      }
+
+      .cred-card .mini-label {
+        display: inline-block;
+        margin-bottom: 2px;
+      }
+
+      .vertical-card {
+        text-decoration: none;
+        transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+      }
+
+      .vertical-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(200, 169, 106, 0.45);
+        box-shadow: 0 18px 42px rgba(15, 55, 99, 0.10);
+      }
+
+      .vertical-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .vertical-arrow {
+        width: 36px;
+        height: 36px;
+        flex: 0 0 36px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--primary);
+        font-size: 18px;
+      }
+
+      .timeline-desktop {
+        display: none;
+        gap: 14px;
+        margin-top: 24px;
+      }
+
+      .timeline-mobile {
+        display: grid;
+        gap: 14px;
+        margin-top: 24px;
+      }
+
+      .timeline-step {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        background: #ffffff;
+        padding: 16px;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .step-num {
+        width: 38px;
+        height: 38px;
+        flex: 0 0 38px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: var(--primary);
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .timeline-step h3,
+      .timeline-card h3 {
+        font-size: 20px;
+      }
+
+      .timeline-card .step-label {
+        margin: 0;
+        color: var(--primary);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+
+      .timeline-connector {
+        display: none;
+      }
+
+      .cta-section {
+        padding: 0 0 72px;
+      }
+
+      .cta-panel {
+        border: 1px solid rgba(20, 73, 130, 0.12);
+        border-radius: 28px;
+        background: var(--primary);
+        color: #ffffff;
+        padding: 28px 18px;
+        box-shadow: 0 20px 50px rgba(15, 55, 99, 0.14);
+      }
+
+      .cta-panel .section-label {
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      .cta-panel h2 {
+        color: #ffffff;
+      }
+
+      .cta-panel .section-intro {
+        color: rgba(255, 255, 255, 0.82);
+      }
+
+      .form-card {
+        margin-top: 20px;
+        max-width: 840px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.08);
+        padding: 16px;
+      }
+
+      .form {
+        display: grid;
+        gap: 12px;
+      }
+
+      .form-grid {
+        display: grid;
+        gap: 12px;
+      }
+
+      input,
+      textarea,
+      select {
+        width: 100%;
+        padding: 13px 14px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: #ffffff;
+        color: var(--neutral-dark);
+        font: inherit;
+        transition: border-color 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      input:focus,
+      textarea:focus,
+      select:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px rgba(200, 169, 106, 0.18);
+      }
+
+      textarea {
+        resize: vertical;
+      }
+
+      .fine {
+        margin: 2px 0 0;
+        font-size: 12px;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      #formStatus {
+        min-height: 18px;
+      }
+
+      .foot {
+        padding: 0 0 32px;
+      }
+
+      .foot-inner {
+        padding-top: 22px;
+        border-top: 1px solid var(--border-soft);
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        font-size: 12px;
+        color: rgba(30, 29, 29, 0.58);
+      }
+
+      @media (min-width: 860px) {
+        .wrap {
+          width: min(var(--container), calc(100% - 48px));
+        }
+
+        .site-nav {
+          display: inline-flex;
+        }
+
+        .brand-mark {
+          width: 42px;
+          height: 42px;
+          flex-basis: 42px;
+        }
+
+        .brand-text {
+          font-size: 13px;
+        }
+
+        .hero {
+          padding: 44px 0 28px;
+        }
+
+        .hero-grid {
+          grid-template-columns: 1.02fr 0.98fr;
+          gap: 44px;
+          min-height: 520px;
+        }
+
+        .hero-copy {
+          order: 1;
+        }
+
+        .hero-visual-wrap {
+          order: 2;
+        }
+
+        h1 {
+          font-size: clamp(3.2rem, 5vw, 4.35rem);
+          max-width: 10ch;
+        }
+
+        .lead {
+          font-size: 17px;
+          max-width: 40ch;
+        }
+
+        .cta-row {
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+
+        .cta-row .btn {
+          width: auto;
+        }
+
+        .hero-visual {
+          min-height: 500px;
+          border-radius: 30px;
+        }
+
+        .hero-image-placeholder {
+          padding: 22px;
+        }
+
+        .section {
+          padding: 74px 0;
+        }
+
+        .grid-4 {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .grid-3,
+        .cred-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .cta-panel {
+          padding: 38px 28px;
+        }
+      }
+
+      @media (min-width: 1120px) {
+        .grid-4 {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .grid-3,
+        .cred-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .timeline-desktop {
+          display: grid;
+          grid-template-columns: repeat(5, minmax(0, 1fr));
+        }
+
+        .timeline-mobile {
+          display: none;
+        }
+
+        .timeline-item {
+          position: relative;
+        }
+
+        .timeline-connector {
+          display: block;
+          position: absolute;
+          top: 50%;
+          right: -7px;
+          width: 14px;
+          height: 1px;
+          background: var(--highlight);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a href="#top" class="brand" aria-label="Inicio De Sousa Consulting">
+          <span class="brand-mark">D</span>
+          <span class="brand-text">De Sousa Consulting</span>
+        </a>
+
+        <nav class="site-nav" aria-label="Navegación principal">
+          <a href="#que-hacemos">Qué hacemos</a>
+          <a href="#credibilidad">Credibilidad</a>
+          <a href="#verticales">Verticales</a>
+          <a href="#modelo">Modelo</a>
+          <a href="#diagnostico">Diagnóstico</a>
+        </nav>
+
         <a class="btn" href="#diagnostico">Iniciar diagnóstico</a>
-        <a class="btn secondary" href="#verticales">Explorar verticales</a>
       </div>
-    </div>
+    </header>
 
-    <div class="hero-image"></div>
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="wrap hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Firma consultora estratégica</p>
+            <h1 id="hero-title">Estructuración estratégica para crecimiento empresarial.</h1>
+            <p class="lead">Estrategia, finanzas y operaciones bajo una misma estructura.</p>
 
-  </div>
-</section>
+            <div class="cta-row">
+              <a class="btn" href="#diagnostico">Iniciar diagnóstico estratégico</a>
+              <a class="btn secondary" href="#verticales">Explorar verticales</a>
+            </div>
 
-<section class="section" id="verticales">
-  <div class="wrap">
-    <h2>Verticales estratégicas</h2>
+            <p class="hero-note">
+              Diseñamos rutas de decisión, estructuras operativas y bases de crecimiento para organizaciones que necesitan más claridad, control y consistencia.
+            </p>
+          </div>
 
-    <div class="grid">
-      <div class="card">Transformación Digital y IA</div>
-      <div class="card">Estructuración Financiera</div>
-      <div class="card">Gobierno y Riesgos</div>
-      <div class="card">Inmobiliaria</div>
-      <div class="card">Patrimonial</div>
-      <div class="card">Optimización Operativa</div>
-    </div>
+          <div class="hero-visual-wrap" aria-label="Espacio visual principal de la página de inicio">
+            <div class="hero-visual">
+              <div class="hero-image-placeholder">
+                <div class="hero-image-card">
+                  <p class="mini-label">Espacio visual</p>
+                  <p class="mini-copy">
+                    Este bloque puede alojar una imagen corporativa, una composición institucional o una pieza abstracta adaptable a desktop y mobile.
+                  </p>
 
-  </div>
-</section>
+                  <div class="hero-metrics">
+                    <div class="hero-metric">
+                      <strong>Estructura</strong>
+                      <span>Servicios, prioridades y decisiones con mayor orden.</span>
+                    </div>
+                    <div class="hero-metric">
+                      <strong>Control</strong>
+                      <span>Más visibilidad sobre procesos, riesgos y ejecución.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<section class="section" id="diagnostico">
-  <div class="wrap">
-    <h2>Inicie con un diagnóstico</h2>
-    <p>Defina su ruta de crecimiento con estructura.</p>
+      <section class="section" id="que-hacemos" aria-labelledby="que-hacemos-title">
+        <div class="wrap">
+          <div class="section-header">
+            <p class="section-label">Qué hacemos</p>
+            <h2 id="que-hacemos-title">Capacidades estructuradas para organizaciones que necesitan mayor claridad operativa.</h2>
+            <p class="section-intro">
+              Integramos visión estratégica, criterios financieros y lógica operativa para convertir complejidad empresarial en rutas de trabajo más claras y ejecutables.
+            </p>
+          </div>
 
-    <form class="grid">
-      <input placeholder="Nombre" />
-      <input placeholder="Email" />
-      <input placeholder="Empresa" />
-      <textarea placeholder="Necesidad"></textarea>
-      <button class="btn">Enviar</button>
-    </form>
-  </div>
-</section>
+          <div class="grid-4">
+            <article class="feature-card">
+              <div class="feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7">
+                  <path d="M4 19h16"></path>
+                  <path d="M7 19V9"></path>
+                  <path d="M12 19V5"></path>
+                  <path d="M17 19v-7"></path>
+                </svg>
+              </div>
+              <h3>Estructuración empresarial</h3>
+              <p>Definimos bases organizativas, prioridades y rutas de ejecución con mayor claridad.</p>
+            </article>
 
-</main>
+            <article class="feature-card">
+              <div class="feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7">
+                  <path d="M5 12h14"></path>
+                  <path d="M13 5l7 7-7 7"></path>
+                  <path d="M4 5h5"></path>
+                  <path d="M4 19h5"></path>
+                </svg>
+              </div>
+              <h3>Optimización operativa</h3>
+              <p>Convertimos procesos dispersos en modelos más ordenados, medibles y sostenibles.</p>
+            </article>
 
-</body>
+            <article class="feature-card">
+              <div class="feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7">
+                  <path d="M12 3v18"></path>
+                  <path d="M17 7.5c0-1.933-2.239-3.5-5-3.5s-5 1.567-5 3.5 2.239 3.5 5 3.5 5 1.567 5 3.5-2.239 3.5-5 3.5-5-1.567-5-3.5"></path>
+                </svg>
+              </div>
+              <h3>Planeamiento financiero</h3>
+              <p>Estructuramos decisiones financieras con visión estratégica y foco en preparación empresarial.</p>
+            </article>
+
+            <article class="feature-card">
+              <div class="feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7">
+                  <rect x="4" y="4" width="16" height="16" rx="3"></rect>
+                  <path d="M9 9h6v6H9z"></path>
+                  <path d="M9 2v2M15 2v2M9 20v2M15 20v2M20 9h2M20 15h2M2 9h2M2 15h2"></path>
+                </svg>
+              </div>
+              <h3>Transformación digital</h3>
+              <p>Integramos herramientas, estructura y automatización con una lógica empresarial clara.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt" id="credibilidad" aria-labelledby="credibilidad-title">
+        <div class="wrap">
+          <div class="section-header">
+            <p class="section-label">Credibilidad</p>
+            <h2 id="credibilidad-title">Experiencia aplicada, formación ejecutiva y visión metodológica.</h2>
+            <p class="section-intro">
+              De Sousa Consulting integra experiencia empresarial con formación orientada a operaciones, dirección y mejora continua, bajo un enfoque de ejecución estructurada.
+            </p>
+          </div>
+
+          <div class="cred-grid">
+            <article class="cred-card">
+              <p class="mini-label">Formación</p>
+              <h3>Base ejecutiva y académica</h3>
+              <p>Maestría en Gerencia de Operaciones y Executive MBA orientados a liderazgo, gestión y administración empresarial.</p>
+            </article>
+
+            <article class="cred-card">
+              <p class="mini-label">Metodología</p>
+              <h3>Lean, Kaizen y procesos</h3>
+              <p>Aplicación de mejora continua, mapeo estructurado de procesos, gestión visual e indicadores para reducir fricción y aumentar capacidad operativa.</p>
+            </article>
+
+            <article class="cred-card">
+              <p class="mini-label">Experiencia regional</p>
+              <h3>Trabajo con corporativos y pymes</h3>
+              <p>Experiencia con organizaciones de distintas industrias en Latinoamérica, incluyendo compañías de referencia y empresas en crecimiento.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="verticales" aria-labelledby="verticales-title">
+        <div class="wrap">
+          <div class="section-header">
+            <p class="section-label">Verticales estratégicas</p>
+            <h2 id="verticales-title">Seis líneas de servicio estructuradas para crecer con foco y coherencia.</h2>
+            <p class="section-intro">
+              La Home funciona como punto de entrada y distribuye a cada vertical con una narrativa consistente, formularios alineados y una lógica operativa común.
+            </p>
+          </div>
+
+          <div class="grid-3">
+            <a class="vertical-card" href="/verticales/transformacion-digital-ia/">
+              <div class="vertical-top">
+                <h3>Transformación Digital y Habilitación con Inteligencia Artificial</h3>
+                <span class="vertical-arrow" aria-hidden="true">→</span>
+              </div>
+              <p>Estructuras digitales, automatización y capacidades de IA aplicadas al negocio.</p>
+            </a>
+
+            <a class="vertical-card" href="/verticales/estructuracion-financiera/">
+              <div class="vertical-top">
+                <h3>Estructuración Financiera y Planeamiento de Éxito</h3>
+                <span class="vertical-arrow" aria-hidden="true">→</span>
+              </div>
+              <p>Orden financiero para crecer con preparación y mayor capacidad de decisión.</p>
+            </a>
+
+            <a class="vertical-card" href="/verticales/gobierno-riesgos/">
+              <div class="vertical-top">
+                <h3>Gobierno Corporativo y Gestión Integral de Riesgos</h3>
+                <span class="vertical-arrow" aria-hidden="true">→</span>
+              </div>
+              <p>Mayor control, gobierno y continuidad para organizaciones en crecimiento.</p>
+            </a>
+
+            <a class="vertical-card" href="/verticales/asesoria-inmobiliaria/">
+              <div class="vertical-top">
+                <h3>Asesoría Estratégica Inmobiliaria</h3>
+                <span class="vertical-arrow" aria-hidden="true">→</span>
+              </div>
+              <p>Criterio estructurado para decisiones, activos y proyectos inmobiliarios.</p>
+            </a>
+
+            <a class="vertical-card" href="/verticales/planeacion-patrimonial/">
+              <div class="vertical-top">
+                <h3>Planeación Patrimonial y Gestión de Activos</h3>
+                <span class="vertical-arrow" aria-hidden="true">→</span>
+              </div>
+              <p>Protección, estructura y visión de largo plazo para activos estratégicos.</p>
+            </a>
+
+            <a class="vertical-card" href="/verticales/optimizacion-operativa/">
+              <div class="vertical-top">
+                <h3>Programas de Optimización Operativa</h3>
+                <span class="vertical-arrow" aria-hidden="true">→</span>
+              </div>
+              <p>Procesos más eficientes, medibles y sostenibles en el tiempo.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt" id="modelo" aria-labelledby="modelo-title">
+        <div class="wrap">
+          <div class="section-header">
+            <p class="section-label">Modelo de trabajo</p>
+            <h2 id="modelo-title">Un proceso claro para convertir necesidad empresarial en una ruta de ejecución.</h2>
+            <p class="section-intro">
+              Trabajamos bajo una lógica estructurada que permite diagnosticar, validar, ordenar e implementar sin depender de improvisación o consultoría abierta indefinida.
+            </p>
+          </div>
+
+          <div class="timeline-desktop" role="list" aria-label="Fases del modelo de trabajo">
+            <div class="timeline-item" role="listitem">
+              <article class="timeline-card">
+                <p class="step-label">01</p>
+                <h3>Diagnóstico</h3>
+                <p>Entendemos contexto, retos, prioridades y puntos de fricción.</p>
+              </article>
+              <span class="timeline-connector" aria-hidden="true"></span>
+            </div>
+
+            <div class="timeline-item" role="listitem">
+              <article class="timeline-card">
+                <p class="step-label">02</p>
+                <h3>Validación</h3>
+                <p>Confirmamos alcance, hipótesis y oportunidades de mayor impacto.</p>
+              </article>
+              <span class="timeline-connector" aria-hidden="true"></span>
+            </div>
+
+            <div class="timeline-item" role="listitem">
+              <article class="timeline-card">
+                <p class="step-label">03</p>
+                <h3>Estructuración</h3>
+                <p>Diseñamos el marco de trabajo, prioridades, entregables y ruta de acción.</p>
+              </article>
+              <span class="timeline-connector" aria-hidden="true"></span>
+            </div>
+
+            <div class="timeline-item" role="listitem">
+              <article class="timeline-card">
+                <p class="step-label">04</p>
+                <h3>Implementación</h3>
+                <p>Ponemos en marcha decisiones, herramientas y capacidades definidas.</p>
+              </article>
+              <span class="timeline-connector" aria-hidden="true"></span>
+            </div>
+
+            <div class="timeline-item" role="listitem">
+              <article class="timeline-card">
+                <p class="step-label">05</p>
+                <h3>Seguimiento</h3>
+                <p>Revisamos adopción, ajustes y continuidad operativa de la solución.</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="timeline-mobile">
+            <div class="timeline-step">
+              <span class="step-num">01</span>
+              <div>
+                <h3>Diagnóstico</h3>
+                <p>Entendemos contexto, retos, prioridades y puntos de fricción.</p>
+              </div>
+            </div>
+
+            <div class="timeline-step">
+              <span class="step-num">02</span>
+              <div>
+                <h3>Validación</h3>
+                <p>Confirmamos alcance, hipótesis y oportunidades de mayor impacto.</p>
+              </div>
+            </div>
+
+            <div class="timeline-step">
+              <span class="step-num">03</span>
+              <div>
+                <h3>Estructuración</h3>
+                <p>Diseñamos el marco de trabajo, prioridades, entregables y ruta de acción.</p>
+              </div>
+            </div>
+
+            <div class="timeline-step">
+              <span class="step-num">04</span>
+              <div>
+                <h3>Implementación</h3>
+                <p>Ponemos en marcha decisiones, herramientas y capacidades definidas.</p>
+              </div>
+            </div>
+
+            <div class="timeline-step">
+              <span class="step-num">05</span>
+              <div>
+                <h3>Seguimiento</h3>
+                <p>Revisamos adopción, ajustes y continuidad operativa de la solución.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-section" id="diagnostico" aria-labelledby="diagnostico-title">
+        <div class="wrap">
+          <div class="cta-panel">
+            <div class="section-header">
+              <p class="section-label">Diagnóstico estratégico</p>
+              <h2 id="diagnostico-title">Inicie con un diagnóstico estructurado y defina su ruta de crecimiento.</h2>
+              <p class="section-intro">
+                Este formulario funciona como punto de entrada unificado para Home, verticales y contacto, manteniendo la lógica operativa central del modelo FBOS.
+              </p>
+            </div>
+
+            <div class="form-card">
+              <form id="leadForm" class="form">
+                <input type="hidden" name="category" value="strategic-assessment" />
+                <input type="hidden" id="requestType" name="requestType" value="evaluation" />
+                <input type="hidden" id="demoVertical" name="demoVertical" value="home" />
+
+                <div class="form-grid">
+                  <input id="name" name="name" placeholder="Nombre" autocomplete="name" required />
+                  <input id="email" name="email" type="email" placeholder="Email" autocomplete="email" inputmode="email" required />
+                </div>
+
+                <div class="form-grid">
+                  <input id="industry" name="industry" placeholder="Empresa / Industria" autocomplete="organization" required />
+                  <input id="teamSize" name="teamSize" type="number" min="1" step="1" inputmode="numeric" placeholder="Tamaño del equipo" autocomplete="off" />
+                </div>
+
+                <textarea id="pain" name="pain" rows="4" placeholder="Describa brevemente su principal necesidad o reto actual"></textarea>
+
+                <div class="form-grid">
+                  <select id="country" name="country" autocomplete="country-name">
+                    <option value="">País</option>
+                    <option value="Argentina">Argentina</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Bolivia">Bolivia</option>
+                    <option value="Brasil">Brasil</option>
+                    <option value="Canadá">Canadá</option>
+                    <option value="Chile">Chile</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="Costa Rica">Costa Rica</option>
+                    <option value="Ecuador">Ecuador</option>
+                    <option value="El Salvador">El Salvador</option>
+                    <option value="España">España</option>
+                    <option value="Estados Unidos">Estados Unidos</option>
+                    <option value="Guatemala">Guatemala</option>
+                    <option value="Honduras">Honduras</option>
+                    <option value="México">México</option>
+                    <option value="Nicaragua">Nicaragua</option>
+                    <option value="Panamá">Panamá</option>
+                    <option value="Paraguay">Paraguay</option>
+                    <option value="Perú">Perú</option>
+                    <option value="Puerto Rico">Puerto Rico</option>
+                    <option value="República Dominicana">República Dominicana</option>
+                    <option value="Uruguay">Uruguay</option>
+                    <option value="Venezuela">Venezuela</option>
+                    <option value="Otro">Otro</option>
+                  </select>
+
+                  <input
+                    id="countryOther"
+                    name="countryOther"
+                    type="text"
+                    placeholder="Especifica tu país"
+                    autocomplete="off"
+                    hidden
+                  />
+                </div>
+
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAACo2kg_YUeI2tGEs"></div>
+
+                <button type="submit" class="btn">Solicitar diagnóstico</button>
+
+                <p class="fine">No enviamos newsletters. Solo conversaciones reales y seguimiento estructurado.</p>
+                <p id="formStatus" class="fine" aria-live="polite"></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="wrap foot-inner">
+        <p>De Sousa Consulting</p>
+        <p><a href="mailto:info@desousaconsulting.com">info@desousaconsulting.com</a></p>
+      </div>
+    </footer>
+  </body>
 </html>
+
 
