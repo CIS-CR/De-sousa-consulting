@@ -589,4 +589,56 @@ textarea {
     height: 1px;
     background: var(--highlight);
   }
-}
+   /* =========================
+   CLIENTS STRIP
+   ========================= */
+
+  .clients-strip {
+    padding: 28px 0;
+  }
+
+  .clients-label {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+
+  .clients-slider {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .clients-track {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+  }
+
+  .client-item {
+    flex: 0 0 auto;
+    width: 120px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid var(--border-soft);
+  }
+
+  .client-item img {
+    max-width: 80%;
+    max-height: 60%;
+    object-fit: contain;
+    opacity: 0.8;
+    filter: grayscale(100%);
+    transition: 0.2s ease;
+  }
+
+  .client-item img:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+  }
+
