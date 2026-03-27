@@ -117,17 +117,17 @@
       }
 
       .header-inner {
-        min-height: 74px;
+        min-height: 60px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 14px;
+        gap: 10px;
       }
 
       .brand {
         display: inline-flex;
         align-items: center;
-        gap: 10px;
+        gap: 8px;
         text-decoration: none;
         color: var(--primary);
         min-width: 0;
@@ -135,9 +135,9 @@
       }
 
       .brand-mark {
-        width: 38px;
-        height: 38px;
-        flex: 0 0 38px;
+        width: 32px;
+        height: 32px;
+        flex: 0 0 32px;
         border-radius: 50%;
         display: inline-flex;
         align-items: center;
@@ -145,23 +145,23 @@
         border: 1px solid var(--border);
         background: var(--surface-2);
         font-family: "Playfair Display", Georgia, serif;
-        font-size: 19px;
+        font-size: 17px;
         font-weight: 700;
       }
 
       .brand-text {
         display: grid;
-        font-size: 11px;
+        font-size: 10px;
         font-weight: 700;
-        letter-spacing: 0.14em;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
-        line-height: 1.2;
+        line-height: 1.05;
       }
 
       .header-actions {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
         margin-left: auto;
       }
 
@@ -191,19 +191,19 @@
       }
 
       .lang-toggle {
-        min-height: 40px;
-        min-width: 68px;
+        min-height: 34px;
+        min-width: 54px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 6px;
-        padding: 0 14px;
+        padding: 0 10px;
         border-radius: var(--radius-pill);
         border: 1px solid var(--border);
         background: #ffffff;
         color: var(--neutral-dark);
         font: inherit;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 600;
         cursor: pointer;
         transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
@@ -249,8 +249,8 @@
       }
 
       .menu-toggle {
-        width: 42px;
-        height: 42px;
+        width: 36px;
+        height: 36px;
         display: inline-flex;
         flex-direction: column;
         align-items: center;
@@ -269,7 +269,7 @@
       }
 
       .menu-toggle span {
-        width: 18px;
+        width: 16px;
         height: 2px;
         border-radius: 999px;
         background: var(--neutral-dark);
@@ -338,9 +338,10 @@
       }
 
       .btn.header-cta {
-        min-height: 40px;
-        padding: 10px 16px;
-        font-size: 13px;
+        min-height: 34px;
+        padding: 8px 12px;
+        font-size: 12px;
+        line-height: 1;
       }
 
       .btn.full {
@@ -350,7 +351,7 @@
       .hero {
         position: relative;
         overflow: hidden;
-        padding: 22px 0 18px;
+        padding: 6px 0 18px;
       }
 
       .hero::before {
@@ -379,7 +380,7 @@
       }
 
       .eyebrow {
-        margin: 0 0 12px;
+        margin: 0 0 10px;
         color: var(--primary);
         font-size: 11px;
         font-weight: 700;
@@ -396,7 +397,7 @@
       }
 
       .lead {
-        margin: 14px 0 0;
+        margin: 12px 0 0;
         max-width: 34ch;
         font-size: 15px;
         line-height: 1.65;
@@ -407,7 +408,7 @@
         display: flex;
         flex-direction: column;
         gap: 12px;
-        margin-top: 22px;
+        margin-top: 20px;
       }
 
       .cta-row .btn {
@@ -415,7 +416,7 @@
       }
 
       .hero-note {
-        margin: 16px 0 0;
+        margin: 14px 0 0;
         font-size: 12px;
         line-height: 1.6;
         color: rgba(30, 29, 29, 0.58);
@@ -780,6 +781,12 @@
         color: rgba(30, 29, 29, 0.58);
       }
 
+      @media (max-width: 859px) {
+        .btn.header-cta {
+          display: none;
+        }
+      }
+
       @media (min-width: 860px) {
         .wrap {
           width: min(var(--container), calc(100% - 48px));
@@ -805,6 +812,7 @@
 
         .brand-text {
           font-size: 13px;
+          line-height: 1.12;
         }
 
         .header-inner {
