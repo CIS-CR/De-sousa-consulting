@@ -760,23 +760,64 @@
   </head>
 
   <body>
-    <header class="site-header">
-      <div class="wrap header-inner">
-        <a href="#top" class="brand" aria-label="Inicio De Sousa Consulting">
-          <span class="brand-mark">D</span>
-          <span class="brand-text">De Sousa Consulting</span>
-        </a>
-
-        <nav class="site-nav" aria-label="Navegación principal">
-          <a href="#que-hacemos">Qué hacemos</a>
-          <a href="#credibilidad">Credibilidad</a>
-          <a href="#verticales">Verticales</a>
-          <a href="#modelo">Modelo</a>
-          <a href="#diagnostico">Diagnóstico</a>
-        </nav>
-
-        <a class="btn" href="#diagnostico">Iniciar diagnóstico</a>
+   <header class="site-header">
+     div class="container header-inner">
+       <a href="#top" class="brand" aria-label="De Sousa Consulting - Inicio">
+         <div class="brand-mark">D</div>
+         <div class="brand-text">
+           <span>DE SOUSA</span>
+        <span>CONSULTING</span>
       </div>
+    </a>
+
+    <div class="header-actions">
+      <div class="language-switcher">
+        <button
+          class="lang-toggle"
+          id="langToggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="langMenu"
+        >
+          ES
+          <span class="lang-caret">▾</span>
+        </button>
+
+        <div class="lang-menu" id="langMenu" hidden>
+          <button type="button" data-lang="es">Español</button>
+          <button type="button" data-lang="pt">Português</button>
+          <button type="button" data-lang="en-GB">English (UK)</button>
+        </div>
+      </div>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="mobileMenu"
+      >
+           <span></span>
+           <span></span>
+           <span></span>
+           </button>
+         </div>
+       </div>
+
+       <div class="mobile-menu" id="mobileMenu" hidden>
+         <nav class="mobile-nav" aria-label="Navegación principal">
+           <a href="#top">Inicio</a>
+           <a href="#about">Nosotros</a>
+           <a href="#verticales">Verticales</a>
+           <a href="#metodologia">Metodología</a>
+           <a href="#contacto">Contacto</a>
+         </nav>
+
+         <div class="mobile-menu-footer">
+           <a href="#contacto" class="btn btn-primary">Iniciar diagnóstico</a>
+         </div>
+       </div>
     </header>
 
     <main id="top">
