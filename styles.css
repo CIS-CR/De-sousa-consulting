@@ -689,9 +689,14 @@ textarea {
   }
 
   .client-item {
-    width: 200px;
-    height: 104px;
-    padding: 16px;
+    width: 260px;
+    height: 130px;
+    padding: 18px;
+  }
+
+  .client-item img {
+    max-width: 92%;
+    max-height: 84%;
   }
 }
 
