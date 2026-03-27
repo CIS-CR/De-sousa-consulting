@@ -75,30 +75,22 @@ h3 {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
   text-decoration: none;
   color: var(--primary);
+  min-width: 0;
+  flex-shrink: 1;
 }
 
-.brand-mark {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--border);
-  background: var(--surface-2);
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: 20px;
-  font-weight: 700;
+.brand-logo {
+  max-width: 180px;
 }
 
-.brand-text {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+.brand-logo-image {
+  display: block;
+  width: auto;
+  height: 28px;
+  max-width: 100%;
+  object-fit: contain;
 }
 
 .site-nav {
@@ -537,6 +529,14 @@ textarea {
 @media (min-width: 860px) {
   .site-nav {
     display: inline-flex;
+  }
+
+  .brand-logo {
+    max-width: 240px;
+  }
+
+  .brand-logo-image {
+    height: 38px;
   }
 
   .hero-grid {
