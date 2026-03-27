@@ -787,129 +787,129 @@
           display: none;
         }
       }
+@media (min-width: 860px) {
+  .wrap {
+    width: min(var(--container), calc(100% - 48px));
+  }
 
-      @media (min-width: 860px) {
-        .wrap {
-          width: min(var(--container), calc(100% - 48px));
-        }
+  .desktop-only {
+    display: inline-flex;
+  }
 
-        .desktop-only {
-          display: inline-flex;
-        }
+  .menu-toggle {
+    display: none;
+  }
 
-        .menu-toggle {
-          display: none;
-        }
+  .site-nav {
+    display: inline-flex;
+  }
 
-        .site-nav {
-          display: inline-flex;
-        }
+  .brand-logo {
+    max-width: 260px;
+  }
 
-        .brand-logo {
-          max-width: 260px;
-        }
+  .brand-logo-image {
+    height: 44px;
+  }
 
-        .brand-logo-image {
-          height: 44px;
-        }
+  .header-inner {
+    min-height: 82px;
+    gap: 18px;
+  }
 
-        .header-inner {
-          min-height: 82px;
-          gap: 18px;
-        }
+  .hero {
+    padding: 44px 0 28px;
+  }
 
-        .hero {
-          padding: 44px 0 28px;
-        }
+  .hero-grid {
+    grid-template-columns: 1.02fr 0.98fr;
+    gap: 44px;
+    min-height: 520px;
+  }
 
-        .hero-grid {
-          grid-template-columns: 1.02fr 0.98fr;
-          gap: 44px;
-          min-height: 520px;
-        }
+  h1 {
+    font-size: clamp(3.2rem, 5vw, 4.35rem);
+    max-width: 10ch;
+  }
 
-        h1 {
-          font-size: clamp(3.2rem, 5vw, 4.35rem);
-          max-width: 10ch;
-        }
+  .lead {
+    font-size: 17px;
+    max-width: 40ch;
+  }
 
-        .lead {
-          font-size: 17px;
-          max-width: 40ch;
-        }
+  .cta-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 
-        .cta-row {
-          flex-direction: row;
-          flex-wrap: wrap;
-        }
+  .cta-row .btn {
+    width: auto;
+  }
 
-        .cta-row .btn {
-          width: auto;
-        }
+  .hero-visual {
+    min-height: 500px;
+    border-radius: 30px;
+  }
 
-        .hero-visual {
-          min-height: 500px;
-          border-radius: 30px;
-        }
+  .hero-image-placeholder {
+    padding: 22px;
+  }
 
-        .hero-image-placeholder {
-          padding: 22px;
-        }
+  .section {
+    padding: 74px 0;
+  }
 
-        .section {
-          padding: 74px 0;
-        }
+  .grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
-        .grid-4 {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
+  .grid-3,
+  .cred-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
-        .grid-3,
-        .cred-grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 
-        .form-grid {
-          grid-template-columns: 1fr 1fr;
-        }
+  .cta-panel {
+    padding: 38px 28px;
+  }
+}
 
-        .cta-panel {
-          padding: 38px 28px;
-        }
+@media (min-width: 1120px) {
+  .grid-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 
-      @media (min-width: 1120px) {
-        .grid-4 {
-          grid-template-columns: repeat(4, minmax(0, 1fr));
-        }
+  .grid-3,
+  .cred-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 
-        .grid-3,
-        .cred-grid {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-        }
+  .timeline-desktop {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
 
-        .timeline-desktop {
-          display: grid;
-          grid-template-columns: repeat(5, minmax(0, 1fr));
-        }
+  .timeline-mobile {
+    display: none;
+  }
 
-        .timeline-mobile {
-          display: none;
-        }
+  .timeline-item {
+    position: relative;
+  }
 
-        .timeline-item {
-          position: relative;
-        }
-
-        .timeline-connector {
-          display: block;
-          position: absolute;
-          top: 50%;
-          right: -7px;
-          width: 14px;
-          height: 1px;
-          background: var(--highlight);
-        }
-      }
+  .timeline-connector {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: -7px;
+    width: 14px;
+    height: 1px;
+    background: var(--highlight);
+  }
+}
     </style>
   </head>
 
