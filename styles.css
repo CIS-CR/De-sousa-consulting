@@ -431,8 +431,8 @@ h2 {
 .client-item img {
   width: auto;
   height: auto;
-  max-width: 82%;
-  max-height: 68%;
+  max-width: 164%;
+  max-height: 136%;
   object-fit: contain;
   display: block;
 }
