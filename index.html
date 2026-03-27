@@ -127,35 +127,22 @@
       .brand {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
         text-decoration: none;
         color: var(--primary);
         min-width: 0;
         flex-shrink: 1;
       }
 
-      .brand-mark {
-        width: 32px;
-        height: 32px;
-        flex: 0 0 32px;
-        border-radius: 50%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid var(--border);
-        background: var(--surface-2);
-        font-family: "Playfair Display", Georgia, serif;
-        font-size: 17px;
-        font-weight: 700;
+      .brand-logo {
+        max-width: 220px;
       }
 
-      .brand-text {
-        display: grid;
-        font-size: 10px;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        line-height: 1.05;
+      .brand-logo-image {
+        display: block;
+        width: auto;
+        height: 34px;
+        max-width: 100%;
+        object-fit: contain;
       }
 
       .header-actions {
@@ -434,6 +421,19 @@
         position: relative;
       }
 
+      .hero-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .hero-visual::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(20, 73, 130, 0.08);
+      }
+
       .hero-image-placeholder {
         position: absolute;
         inset: 0;
@@ -441,6 +441,7 @@
         flex-direction: column;
         justify-content: flex-end;
         padding: 18px;
+        z-index: 2;
       }
 
       .hero-image-card {
@@ -448,7 +449,7 @@
         border: 1px solid rgba(255, 255, 255, 0.7);
         background: rgba(255, 255, 255, 0.84);
         border-radius: 20px;
-        padding: 16px;
+        padding: 14px;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         box-shadow: var(--shadow-soft);
@@ -477,7 +478,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 10px;
-        margin-top: 10px;
+        margin-top: 0;
       }
 
       .hero-metric {
@@ -499,8 +500,8 @@
       .hero-metric span {
         display: block;
         margin-top: 8px;
-        font-size: 13px;
-        line-height: 1.55;
+        font-size: 12px;
+        line-height: 1.5;
         color: rgba(30, 29, 29, 0.74);
       }
 
@@ -608,7 +609,7 @@
       .vertical-card:hover {
         transform: translateY(-2px);
         border-color: rgba(200, 169, 106, 0.45);
-        box-shadow: 0 18px 42px rgba(15, 55, 99, 0.10);
+        box-shadow: 0 18px 42px rgba(15, 55, 99, 0.1);
       }
 
       .vertical-top {
@@ -630,6 +631,59 @@
         background: var(--surface);
         color: var(--primary);
         font-size: 18px;
+      }
+
+      /* CLIENTS STRIP */
+      .clients-strip {
+        padding: 20px 0 28px;
+      }
+
+      .clients-label {
+        margin: 0 0 14px;
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--primary);
+      }
+
+      .clients-slider {
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x proximity;
+        padding-bottom: 4px;
+      }
+
+      .clients-slider::-webkit-scrollbar {
+        display: none;
+      }
+
+      .clients-track {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 14px;
+        width: max-content;
+      }
+
+      .client-item {
+        flex: 0 0 auto;
+        width: 144px;
+        height: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 16px;
+        background: #eef2f6;
+        border: 1px solid var(--border-soft);
+        scroll-snap-align: start;
+        padding: 12px;
+      }
+
+      .client-item img {
+        max-width: 78%;
+        max-height: 78%;
+        object-fit: contain;
+        display: block;
       }
 
       .timeline-desktop {
@@ -804,15 +858,12 @@
           display: inline-flex;
         }
 
-        .brand-mark {
-          width: 42px;
-          height: 42px;
-          flex-basis: 42px;
+        .brand-logo {
+          max-width: 260px;
         }
 
-        .brand-text {
-          font-size: 13px;
-          line-height: 1.12;
+        .brand-logo-image {
+          height: 44px;
         }
 
         .header-inner {
@@ -828,14 +879,6 @@
           grid-template-columns: 1.02fr 0.98fr;
           gap: 44px;
           min-height: 520px;
-        }
-
-        .hero-copy {
-          order: 1;
-        }
-
-        .hero-visual-wrap {
-          order: 2;
         }
 
         h1 {
@@ -886,6 +929,41 @@
         .cta-panel {
           padding: 38px 28px;
         }
+
+        .clients-strip {
+          padding: 28px 0 36px;
+        }
+
+        .clients-slider {
+          overflow: visible;
+        }
+
+        .clients-track {
+          gap: 18px;
+          width: auto;
+          flex-wrap: wrap;
+        }
+
+        .client-item {
+          width: 160px;
+          height: 82px;
+          border-radius: 12px;
+          padding: 10px;
+          background: #ffffff;
+        }
+
+        .client-item img {
+          max-width: 78%;
+          max-height: 68%;
+          opacity: 0.82;
+          filter: grayscale(100%);
+          transition: 0.2s ease;
+        }
+
+        .client-item img:hover {
+          opacity: 1;
+          filter: grayscale(0%);
+        }
       }
 
       @media (min-width: 1120px) {
@@ -920,27 +998,6 @@
           height: 1px;
           background: var(--highlight);
         }
-        .hero-image {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        .hero-visual::after {
-          content: "";
-          position: absolute;
-          inset: 0;
-          background: rgba(20, 73, 130, 0.08);
-        }
-        /* Ajuste hero card mobile */
-        .hero-image-card {
-          padding: 14px;
-        }
-
-        .hero-metric span {
-          font-size: 12px;
-          line-height: 1.5;
-        }
       }
     </style>
   </head>
@@ -949,12 +1006,8 @@
     <header class="site-header">
       <div class="wrap header-inner">
         <a href="#top" class="brand brand-logo" aria-label="De Sousa Consulting - Inicio">
-          <img
-            src="/assets/logo-desousa.png"
-            alt="De Sousa Consulting"
-            class="brand-logo-image"
-         />
-       </a> 
+          <img src="/assets/logo-desousa.png" alt="De Sousa Consulting" class="brand-logo-image" />
+        </a>
 
         <nav class="site-nav desktop-only" aria-label="Navegación principal">
           <a href="#top">Inicio</a>
@@ -1027,7 +1080,7 @@
             <p class="lead">Integramos finanzas, operaciones y tecnología bajo un modelo organizado y ejecutable.</p>
 
             <div class="cta-row">
-              <a class="btn" href="#diagnostico">Iniciar diagnóstico </a>
+              <a class="btn" href="#diagnostico">Iniciar diagnóstico</a>
               <a class="btn secondary" href="#verticales">Explorar Servicios</a>
             </div>
 
@@ -1038,12 +1091,8 @@
 
           <div class="hero-visual-wrap" aria-label="Espacio visual principal de la página de inicio">
             <div class="hero-visual">
-              <img 
-                src="/assets/hero-desousa.png" 
-                alt="Estructura empresarial"
-                class="hero-image"
-              >
-  
+              <img src="/assets/hero-desousa.png" alt="Estructura empresarial" class="hero-image" />
+
               <div class="hero-image-placeholder">
                 <div class="hero-image-card">
                   <div class="hero-metrics">
@@ -1055,9 +1104,9 @@
                     <div class="hero-metric">
                       <strong>CONTROL</strong>
                       <span>Mayor visibilidad sobre procesos, riesgos y ejecución.</span>
-                 </div>
+                    </div>
+                  </div>
                 </div>
-               </div>
               </div>
             </div>
           </div>
@@ -1220,37 +1269,34 @@
           </div>
         </div>
       </section>
-      <section class="clients-strip">
+
+      <section class="clients-strip" aria-label="Algunos de nuestros clientes">
         <div class="wrap">
+          <p class="clients-label">Algunos de nuestros clientes</p>
 
-         <p class="clients-label">Algunos de nuestros clientes</p>
+          <div class="clients-slider">
+            <div class="clients-track">
+              <div class="client-item">
+                <img src="/assets/client1.png" alt="Cliente 1" />
+              </div>
 
-         <div class="clients-slider">
-           <div class="clients-track">
+              <div class="client-item">
+                <img src="/assets/client2.png" alt="Cliente 2" />
+              </div>
 
-             <div class="client-item">
-               <img src="/assets/client1.png" alt="Cliente 1">
-             </div>
+              <div class="client-item">
+                <img src="/assets/client3.png" alt="Cliente 3" />
+              </div>
 
-             <div class="client-item">
-               <img src="/assets/client2.png" alt="Cliente 2">
-             </div>
+              <div class="client-item">
+                <img src="/assets/client4.png" alt="Cliente 4" />
+              </div>
 
-             <div class="client-item">
-               <img src="/assets/client3.png" alt="Cliente 3">
-             </div>
-
-             <div class="client-item">
-               <img src="/assets/client4.png" alt="Cliente 4">
-             </div>
-
-             <div class="client-item">
-               <img src="/assets/client5.png" alt="Cliente 5">
-             </div>
-
+              <div class="client-item">
+                <img src="/assets/client5.png" alt="Cliente 5" />
+              </div>
             </div>
           </div>
-
         </div>
       </section>
 
