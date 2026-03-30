@@ -540,27 +540,12 @@
         margin-top: 24px;
       }
 
-      .vertical-card,
-      .cred-card {
+      .vertical-card {
         border: 1px solid var(--border);
         border-radius: 22px;
         background: #ffffff;
         padding: 20px;
         box-shadow: var(--shadow-soft);
-      }
-
-      .cred-grid {
-        display: grid;
-        gap: 16px;
-        margin-top: 24px;
-      }
-
-      .cred-card .mini-label {
-        display: inline-block;
-        margin-bottom: 2px;
-      }
-
-      .vertical-card {
         text-decoration: none;
         transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
       }
@@ -578,16 +563,14 @@
         gap: 16px;
       }
 
-      .vertical-card h3,
-      .cred-card h3 {
+      .vertical-card h3 {
         margin: 0;
         font-size: 22px;
         line-height: 1.12;
         letter-spacing: -0.03em;
       }
 
-      .vertical-card p,
-      .cred-card p {
+      .vertical-card p {
         margin: 10px 0 0;
         font-size: 14px;
         line-height: 1.7;
@@ -606,6 +589,60 @@
         background: var(--surface);
         color: var(--primary);
         font-size: 18px;
+      }
+
+      /* Capabilities */
+      .capabilities {
+        display: grid;
+        gap: 28px;
+        margin-top: 34px;
+      }
+
+      .capability {
+        padding-bottom: 28px;
+        border-bottom: 1px solid var(--border-soft);
+      }
+
+      .capability h3 {
+        margin: 8px 0 10px;
+        font-size: 1.15rem;
+        line-height: 1.28;
+      }
+
+      .capability p {
+        margin: 0;
+        max-width: 34ch;
+        font-size: 14px;
+        line-height: 1.7;
+        color: rgba(30, 29, 29, 0.74);
+      }
+
+      .capability .mini-label {
+        display: inline-block;
+        margin-bottom: 2px;
+      }
+
+      .cred-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+
+      .cred-tag {
+        display: inline-flex;
+        align-items: center;
+        min-height: 28px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--primary);
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        line-height: 1;
+        transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
       }
 
       .clients-strip {
@@ -836,9 +873,32 @@
           padding: 74px 0;
         }
 
-        .grid-3,
-        .cred-grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
+        .grid-3 {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .capabilities {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 32px;
+          align-items: start;
+        }
+
+        .capability {
+          min-width: 0;
+          min-height: 220px;
+          padding: 0 22px 0 0;
+          border-bottom: none;
+          position: relative;
+        }
+
+        .capability:not(:last-child)::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: -16px;
+          width: 1px;
+          height: 100%;
+          background: var(--border-soft);
         }
 
         .form-grid {
@@ -896,11 +956,6 @@
       }
 
       @media (min-width: 1120px) {
-        .grid-3,
-        .cred-grid {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-        }
-
         .client-item {
           width: 220px;
           height: 116px;
@@ -910,6 +965,30 @@
         .client-item img {
           max-width: 76%;
           max-height: 56%;
+        }
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        .capability {
+          transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        .capabilities:hover .capability {
+          opacity: 0.55;
+        }
+
+        .capabilities .capability:hover {
+          opacity: 1;
+          transform: translateY(-2px);
+        }
+
+        .capabilities .capability:hover h3 {
+          color: var(--primary);
+        }
+
+        .capabilities .capability:hover .cred-tag {
+          border-color: rgba(20, 73, 130, 0.18);
+          background: #ffffff;
         }
       }
     </style>
@@ -1029,48 +1108,44 @@
           <div class="section-header">
             <p class="section-label">Trayectoria</p>
             <h2 id="credibilidad-title">Experiencia aplicada.</h2>
-            <p class="section-intro">
-              Formación ejecutiva, enfoque práctico y alcance internacional.
-            </p>
+            <p class="section-intro">Formación ejecutiva, enfoque práctico y alcance internacional.</p>
           </div>
 
-     </div>
+          <div class="capabilities">
+            <div class="capability">
+              <p class="mini-label">Formación</p>
+              <h3>Formación ejecutiva internacional</h3>
+              <p>MBA, operaciones y especialización empresarial.</p>
+              <div class="cred-tags">
+                <span class="cred-tag">MBA</span>
+                <span class="cred-tag">Operations</span>
+                <span class="cred-tag">Strategy</span>
+              </div>
+            </div>
 
-     <div class="capabilities">
+            <div class="capability">
+              <p class="mini-label">Metodología</p>
+              <h3>Enfoque práctico de ejecución</h3>
+              <p>Mejora continua aplicada.</p>
+              <div class="cred-tags">
+                <span class="cred-tag">Lean</span>
+                <span class="cred-tag">Kaizen</span>
+                <span class="cred-tag">Process</span>
+              </div>
+            </div>
 
-       <div class="capability">
-          <p class="mini-label">Formación</p>
-          <h3>Formación ejecutiva internacional</h3>
-          <p>MBA, operaciones y especialización empresarial.</p>
-          <div class="cred-tags">
-            <span class="cred-tag">MBA</span>
-            <span class="cred-tag">Operations</span>
-            <span class="cred-tag">Strategy</span>
-          </div>
-        </div>
-
-        <div class="capability">
-           <p class="mini-label">Metodología</p>
-           <h3>Enfoque práctico de ejecución</h3>
-           <p>Mejora continua aplicada.</p>
-           <div class="cred-tags">
-             <span class="cred-tag">Lean</span>
-             <span class="cred-tag">Kaizen</span>
-             <span class="cred-tag">Process</span>
-           </div>
-         </div>
-
-         <div class="capability">
-            <p class="mini-label">Alcance</p>
-            <h3>Presencia en múltiples mercados</h3>
-            <p>Trabajo con empresas en América y Europa.</p>
-            <div class="cred-tags">
-              <span class="cred-tag">USA</span>
-              <span class="cred-tag">Europa</span>
-              <span class="cred-tag">LatAm</span>
+            <div class="capability">
+              <p class="mini-label">Alcance</p>
+              <h3>Presencia en múltiples mercados</h3>
+              <p>Trabajo con empresas en América y Europa.</p>
+              <div class="cred-tags">
+                <span class="cred-tag">USA</span>
+                <span class="cred-tag">Europa</span>
+                <span class="cred-tag">LatAm</span>
+              </div>
             </div>
           </div>
-        </div> 
+        </div>
       </section>
 
       <section class="section" id="servicios" aria-labelledby="servicios-title">
@@ -1184,15 +1259,43 @@
 
                 <div class="form-grid">
                   <input id="name" name="name" placeholder="Nombre" autocomplete="name" required />
-                  <input id="email" name="email" type="email" placeholder="Email" autocomplete="email" inputmode="email" required />
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="Email"
+                    autocomplete="email"
+                    inputmode="email"
+                    required
+                  />
                 </div>
 
                 <div class="form-grid">
-                  <input id="industry" name="industry" placeholder="Empresa / Industria" autocomplete="organization" required />
-                  <input id="teamSize" name="teamSize" type="number" min="1" step="1" inputmode="numeric" placeholder="Tamaño del equipo" autocomplete="off" />
+                  <input
+                    id="industry"
+                    name="industry"
+                    placeholder="Empresa / Industria"
+                    autocomplete="organization"
+                    required
+                  />
+                  <input
+                    id="teamSize"
+                    name="teamSize"
+                    type="number"
+                    min="1"
+                    step="1"
+                    inputmode="numeric"
+                    placeholder="Tamaño del equipo"
+                    autocomplete="off"
+                  />
                 </div>
 
-                <textarea id="pain" name="pain" rows="4" placeholder="Describa brevemente su principal necesidad o reto actual"></textarea>
+                <textarea
+                  id="pain"
+                  name="pain"
+                  rows="4"
+                  placeholder="Describa brevemente su principal necesidad o reto actual"
+                ></textarea>
 
                 <div class="form-grid">
                   <select id="country" name="country" autocomplete="country-name">
@@ -1237,7 +1340,9 @@
 
                 <button type="submit" class="btn">Iniciar diagnóstico</button>
 
-                <p class="fine">No enviamos comunicaciones masivas. Solo contacto directo y seguimiento estructurado.</p>
+                <p class="fine">
+                  No enviamos comunicaciones masivas. Solo contacto directo y seguimiento estructurado.
+                </p>
                 <p id="formStatus" class="fine" aria-live="polite"></p>
               </form>
             </div>
