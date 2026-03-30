@@ -645,6 +645,190 @@
         transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
       }
 
+      /* Services Accordion */
+      .services-accordion {
+        display: grid;
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .service-accordion-item {
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        background: #ffffff;
+        box-shadow: var(--shadow-soft);
+        overflow: hidden;
+        transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+      }
+
+      .service-accordion-item.is-open {
+        border-color: rgba(20, 73, 130, 0.18);
+        box-shadow: 0 18px 42px rgba(15, 55, 99, 0.08);
+      }
+
+      .service-trigger {
+        width: 100%;
+        border: 0;
+        background: transparent;
+        text-align: left;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 16px;
+        align-items: start;
+        cursor: pointer;
+        color: inherit;
+      }
+
+      .service-trigger:focus-visible {
+        outline: 2px solid rgba(20, 73, 130, 0.18);
+        outline-offset: -2px;
+      }
+
+      .service-trigger-copy h3 {
+        margin: 0;
+        font-size: 1.18rem;
+        line-height: 1.18;
+        letter-spacing: -0.03em;
+      }
+
+      .service-trigger-copy p {
+        margin: 10px 0 0;
+        max-width: 56ch;
+        font-size: 14px;
+        line-height: 1.68;
+        color: rgba(30, 29, 29, 0.74);
+      }
+
+      .service-trigger-arrow {
+        width: 36px;
+        height: 36px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--primary);
+        font-size: 18px;
+        line-height: 1;
+        transition: transform 0.28s ease, background-color 0.22s ease, border-color 0.22s ease;
+      }
+
+      .service-accordion-item.is-open .service-trigger-arrow {
+        transform: rotate(45deg);
+        background: #ffffff;
+        border-color: rgba(20, 73, 130, 0.18);
+      }
+
+      .service-panel {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      .service-accordion-item.is-open .service-panel {
+        grid-template-rows: 1fr;
+      }
+
+      .service-panel-inner {
+        overflow: hidden;
+      }
+
+      .service-panel-content {
+        padding: 0 20px 20px;
+        border-top: 1px solid var(--border-soft);
+        opacity: 0;
+        transform: translateY(-8px);
+        transition: opacity 0.28s ease, transform 0.28s ease;
+      }
+
+      .service-accordion-item.is-open .service-panel-content {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .service-detail-grid {
+        display: grid;
+        gap: 18px;
+        padding-top: 18px;
+      }
+
+      .service-detail-copy h4,
+      .service-detail-includes h4 {
+        margin: 0 0 8px;
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--primary);
+      }
+
+      .service-detail-copy p {
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.72;
+        color: rgba(30, 29, 29, 0.76);
+      }
+
+      .service-includes {
+        margin: 0;
+        padding-left: 18px;
+        display: grid;
+        gap: 8px;
+      }
+
+      .service-includes li {
+        font-size: 14px;
+        line-height: 1.65;
+        color: rgba(30, 29, 29, 0.74);
+      }
+
+      .service-result {
+        margin-top: 16px;
+        padding: 14px 16px;
+        border-radius: 18px;
+        background: var(--surface);
+        border: 1px solid var(--border-soft);
+      }
+
+      .service-result strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--primary);
+      }
+
+      .service-result p {
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.68;
+        color: rgba(30, 29, 29, 0.76);
+      }
+
+      .service-actions {
+        margin-top: 18px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .service-start {
+        min-height: 42px;
+        padding: 10px 16px;
+      }
+
+      .service-footnote {
+        font-size: 12px;
+        line-height: 1.55;
+        color: rgba(30, 29, 29, 0.58);
+      }
+
       .clients-strip {
         padding: 20px 0 28px;
       }
@@ -873,10 +1057,6 @@
           padding: 74px 0;
         }
 
-        .grid-3 {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-        }
-
         .capabilities {
           grid-template-columns: repeat(3, minmax(0, 1fr));
           gap: 32px;
@@ -899,6 +1079,11 @@
           width: 1px;
           height: 100%;
           background: var(--border-soft);
+        }
+
+        .service-detail-grid {
+          grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+          gap: 26px;
         }
 
         .form-grid {
@@ -989,6 +1174,16 @@
         .capabilities .capability:hover .cred-tag {
           border-color: rgba(20, 73, 130, 0.18);
           background: #ffffff;
+        }
+
+        .service-accordion-item:hover {
+          border-color: rgba(20, 73, 130, 0.16);
+          box-shadow: 0 18px 42px rgba(15, 55, 99, 0.08);
+        }
+
+        .service-trigger:hover .service-trigger-arrow {
+          background: #ffffff;
+          border-color: rgba(20, 73, 130, 0.18);
         }
       }
     </style>
@@ -1153,42 +1348,352 @@
           <div class="section-header">
             <p class="section-label">Servicios</p>
             <h2 id="servicios-title">Áreas clave para fortalecer su negocio.</h2>
-            <p class="section-intro">
-              Seleccione el área que mejor se alinee con su necesidad.
-            </p>
-
-            <div class="services-list">
-
-              <div class="service-item">
-                <h3>Transformación y modernización empresarial</h3>
-                <p>Estructura digital, automatización y uso aplicado de inteligencia artificial.</p>
-             </div>
-
-             <div class="service-item">
-               <h3>Estructuración financiera y preparación de capital</h3>
-               <p>Orden financiero para crecer con mayor claridad y capacidad de decisión.</p>
-             </div>
-
-             <div class="service-item">
-               <h3>Gestión de riesgos y cumplimiento</h3>
-               <p>Mayor control, continuidad y marco de gobierno para la organización.</p>
-            </div>
-
-           <div class="service-item">
-             <h3>Estrategia y estructuración inmobiliaria</h3>
-             <p>Criterio claro para decisiones, activos y proyectos inmobiliarios.</p>
-           </div>
-
-          <div class="service-item">
-            <h3>Estrategia patrimonial y de activos</h3>
-            <p>Protección, organización y visión de largo plazo para activos estratégicos.</p>
+            <p class="section-intro">Seleccione el área que mejor se alinee con su necesidad.</p>
           </div>
 
-          <div class="service-item">
-            <h3>Optimización operativa</h3>
-            <p>Procesos más eficientes, medibles y sostenibles en el tiempo.</p>
-          </div>
+          <div class="services-accordion" id="servicesAccordion">
+            <article class="service-accordion-item is-open" data-service="transformacion-modernizacion">
+              <button
+                class="service-trigger"
+                type="button"
+                aria-expanded="true"
+                aria-controls="service-panel-transformacion"
+                id="service-trigger-transformacion"
+              >
+                <div class="service-trigger-copy">
+                  <h3>Transformación y modernización empresarial</h3>
+                  <p>Estructura digital, automatización y uso aplicado de inteligencia artificial.</p>
+                </div>
+                <span class="service-trigger-arrow" aria-hidden="true">+</span>
+              </button>
 
+              <div
+                class="service-panel"
+                id="service-panel-transformacion"
+                role="region"
+                aria-labelledby="service-trigger-transformacion"
+              >
+                <div class="service-panel-inner">
+                  <div class="service-panel-content">
+                    <div class="service-detail-grid">
+                      <div class="service-detail-copy">
+                        <h4>Qué resuelve</h4>
+                        <p>
+                          Integra tecnología, automatización y capacidades de IA para mejorar la operación,
+                          reducir fricción y fortalecer la toma de decisiones.
+                        </p>
+
+                        <div class="service-result">
+                          <strong>Resultado</strong>
+                          <p>Mayor eficiencia operativa y mejor capacidad de ejecución.</p>
+                        </div>
+                      </div>
+
+                      <div class="service-detail-includes">
+                        <h4>Qué incluye</h4>
+                        <ul class="service-includes">
+                          <li>Diagnóstico digital y operativo</li>
+                          <li>Automatización de procesos clave</li>
+                          <li>Integración de herramientas</li>
+                          <li>Aplicación práctica de IA</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="service-actions">
+                      <a href="#diagnostico" class="btn service-start" data-service-origin="transformacion-modernizacion">Iniciar</a>
+                      <span class="service-footnote">Este servicio conecta con un formulario unificado para evaluar el siguiente paso.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="service-accordion-item" data-service="finanzas-capital">
+              <button
+                class="service-trigger"
+                type="button"
+                aria-expanded="false"
+                aria-controls="service-panel-finanzas"
+                id="service-trigger-finanzas"
+              >
+                <div class="service-trigger-copy">
+                  <h3>Estructuración financiera y preparación de capital</h3>
+                  <p>Orden financiero para crecer con mayor claridad y capacidad de decisión.</p>
+                </div>
+                <span class="service-trigger-arrow" aria-hidden="true">+</span>
+              </button>
+
+              <div
+                class="service-panel"
+                id="service-panel-finanzas"
+                role="region"
+                aria-labelledby="service-trigger-finanzas"
+              >
+                <div class="service-panel-inner">
+                  <div class="service-panel-content">
+                    <div class="service-detail-grid">
+                      <div class="service-detail-copy">
+                        <h4>Qué resuelve</h4>
+                        <p>
+                          Organiza la base financiera del negocio para mejorar visibilidad, control y preparación
+                          frente a crecimiento, inversión o financiamiento.
+                        </p>
+
+                        <div class="service-result">
+                          <strong>Resultado</strong>
+                          <p>Mayor claridad financiera y mejor capacidad de decisión.</p>
+                        </div>
+                      </div>
+
+                      <div class="service-detail-includes">
+                        <h4>Qué incluye</h4>
+                        <ul class="service-includes">
+                          <li>Diagnóstico financiero inicial</li>
+                          <li>Estructura de costos y flujo</li>
+                          <li>Proyecciones y preparación de capital</li>
+                          <li>Base para crecimiento o inversión</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="service-actions">
+                      <a href="#diagnostico" class="btn service-start" data-service-origin="finanzas-capital">Iniciar</a>
+                      <span class="service-footnote">Este servicio conecta con un formulario unificado para evaluar el siguiente paso.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="service-accordion-item" data-service="riesgos-cumplimiento">
+              <button
+                class="service-trigger"
+                type="button"
+                aria-expanded="false"
+                aria-controls="service-panel-riesgos"
+                id="service-trigger-riesgos"
+              >
+                <div class="service-trigger-copy">
+                  <h3>Gestión de riesgos y cumplimiento</h3>
+                  <p>Mayor control, continuidad y marco de gobierno para la organización.</p>
+                </div>
+                <span class="service-trigger-arrow" aria-hidden="true">+</span>
+              </button>
+
+              <div
+                class="service-panel"
+                id="service-panel-riesgos"
+                role="region"
+                aria-labelledby="service-trigger-riesgos"
+              >
+                <div class="service-panel-inner">
+                  <div class="service-panel-content">
+                    <div class="service-detail-grid">
+                      <div class="service-detail-copy">
+                        <h4>Qué resuelve</h4>
+                        <p>
+                          Define riesgos, controles y criterios de cumplimiento para fortalecer continuidad,
+                          estabilidad y capacidad de gobierno.
+                        </p>
+
+                        <div class="service-result">
+                          <strong>Resultado</strong>
+                          <p>Mayor control, continuidad y confianza operativa.</p>
+                        </div>
+                      </div>
+
+                      <div class="service-detail-includes">
+                        <h4>Qué incluye</h4>
+                        <ul class="service-includes">
+                          <li>Identificación de riesgos clave</li>
+                          <li>Diseño de controles y criterios</li>
+                          <li>Base de cumplimiento y gobierno</li>
+                          <li>Priorización de acciones críticas</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="service-actions">
+                      <a href="#diagnostico" class="btn service-start" data-service-origin="riesgos-cumplimiento">Iniciar</a>
+                      <span class="service-footnote">Este servicio conecta con un formulario unificado para evaluar el siguiente paso.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="service-accordion-item" data-service="inmobiliario">
+              <button
+                class="service-trigger"
+                type="button"
+                aria-expanded="false"
+                aria-controls="service-panel-inmobiliario"
+                id="service-trigger-inmobiliario"
+              >
+                <div class="service-trigger-copy">
+                  <h3>Estrategia y estructuración inmobiliaria</h3>
+                  <p>Criterio claro para decisiones, activos y proyectos inmobiliarios.</p>
+                </div>
+                <span class="service-trigger-arrow" aria-hidden="true">+</span>
+              </button>
+
+              <div
+                class="service-panel"
+                id="service-panel-inmobiliario"
+                role="region"
+                aria-labelledby="service-trigger-inmobiliario"
+              >
+                <div class="service-panel-inner">
+                  <div class="service-panel-content">
+                    <div class="service-detail-grid">
+                      <div class="service-detail-copy">
+                        <h4>Qué resuelve</h4>
+                        <p>
+                          Aporta criterio financiero y estratégico para ordenar decisiones sobre activos,
+                          proyectos y oportunidades inmobiliarias.
+                        </p>
+
+                        <div class="service-result">
+                          <strong>Resultado</strong>
+                          <p>Mejores decisiones sobre activos y proyectos inmobiliarios.</p>
+                        </div>
+                      </div>
+
+                      <div class="service-detail-includes">
+                        <h4>Qué incluye</h4>
+                        <ul class="service-includes">
+                          <li>Evaluación de activos y proyectos</li>
+                          <li>Análisis de inversión y viabilidad</li>
+                          <li>Estructuración de decisiones inmobiliarias</li>
+                          <li>Soporte para prioridades y opciones</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="service-actions">
+                      <a href="#diagnostico" class="btn service-start" data-service-origin="inmobiliario">Iniciar</a>
+                      <span class="service-footnote">Este servicio conecta con un formulario unificado para evaluar el siguiente paso.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="service-accordion-item" data-service="patrimonio-activos">
+              <button
+                class="service-trigger"
+                type="button"
+                aria-expanded="false"
+                aria-controls="service-panel-patrimonio"
+                id="service-trigger-patrimonio"
+              >
+                <div class="service-trigger-copy">
+                  <h3>Estrategia patrimonial y de activos</h3>
+                  <p>Protección, organización y visión de largo plazo para activos estratégicos.</p>
+                </div>
+                <span class="service-trigger-arrow" aria-hidden="true">+</span>
+              </button>
+
+              <div
+                class="service-panel"
+                id="service-panel-patrimonio"
+                role="region"
+                aria-labelledby="service-trigger-patrimonio"
+              >
+                <div class="service-panel-inner">
+                  <div class="service-panel-content">
+                    <div class="service-detail-grid">
+                      <div class="service-detail-copy">
+                        <h4>Qué resuelve</h4>
+                        <p>
+                          Organiza y protege activos con una visión clara de largo plazo, facilitando decisiones
+                          sobre resguardo, estructura y continuidad patrimonial.
+                        </p>
+
+                        <div class="service-result">
+                          <strong>Resultado</strong>
+                          <p>Mayor seguridad y claridad sobre el patrimonio y los activos.</p>
+                        </div>
+                      </div>
+
+                      <div class="service-detail-includes">
+                        <h4>Qué incluye</h4>
+                        <ul class="service-includes">
+                          <li>Diagnóstico patrimonial inicial</li>
+                          <li>Estructuración y orden de activos</li>
+                          <li>Criterios de protección y continuidad</li>
+                          <li>Enfoque de largo plazo</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="service-actions">
+                      <a href="#diagnostico" class="btn service-start" data-service-origin="patrimonio-activos">Iniciar</a>
+                      <span class="service-footnote">Este servicio conecta con un formulario unificado para evaluar el siguiente paso.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="service-accordion-item" data-service="optimizacion-operativa">
+              <button
+                class="service-trigger"
+                type="button"
+                aria-expanded="false"
+                aria-controls="service-panel-operaciones"
+                id="service-trigger-operaciones"
+              >
+                <div class="service-trigger-copy">
+                  <h3>Optimización operativa</h3>
+                  <p>Procesos más eficientes, medibles y sostenibles en el tiempo.</p>
+                </div>
+                <span class="service-trigger-arrow" aria-hidden="true">+</span>
+              </button>
+
+              <div
+                class="service-panel"
+                id="service-panel-operaciones"
+                role="region"
+                aria-labelledby="service-trigger-operaciones"
+              >
+                <div class="service-panel-inner">
+                  <div class="service-panel-content">
+                    <div class="service-detail-grid">
+                      <div class="service-detail-copy">
+                        <h4>Qué resuelve</h4>
+                        <p>
+                          Mejora la operación a través de procesos más claros, medibles y consistentes, reduciendo
+                          fricción y aumentando capacidad de seguimiento.
+                        </p>
+
+                        <div class="service-result">
+                          <strong>Resultado</strong>
+                          <p>Operaciones más eficientes, medibles y sostenibles.</p>
+                        </div>
+                      </div>
+
+                      <div class="service-detail-includes">
+                        <h4>Qué incluye</h4>
+                        <ul class="service-includes">
+                          <li>Diagnóstico operativo inicial</li>
+                          <li>Rediseño de procesos prioritarios</li>
+                          <li>Definición de métricas y control</li>
+                          <li>Plan de mejora e implementación</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="service-actions">
+                      <a href="#diagnostico" class="btn service-start" data-service-origin="optimizacion-operativa">Iniciar</a>
+                      <span class="service-footnote">Este servicio conecta con un formulario unificado para evaluar el siguiente paso.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -1238,6 +1743,7 @@
                 <input type="hidden" name="category" value="strategic-assessment" />
                 <input type="hidden" id="requestType" name="requestType" value="evaluation" />
                 <input type="hidden" id="demoVertical" name="demoVertical" value="home" />
+                <input type="hidden" id="serviceOrigin" name="serviceOrigin" value="home" />
 
                 <div class="form-grid">
                   <input id="name" name="name" placeholder="Nombre" autocomplete="name" required />
@@ -1419,9 +1925,70 @@
           closeMobileMenu();
         }
       });
+
+      const serviceItems = Array.from(document.querySelectorAll(".service-accordion-item"));
+
+      function setServiceOrigin(serviceKey) {
+        const hiddenOrigin = document.getElementById("serviceOrigin");
+        const hiddenVertical = document.getElementById("demoVertical");
+        const hiddenType = document.getElementById("requestType");
+
+        if (hiddenOrigin) hiddenOrigin.value = serviceKey;
+        if (hiddenVertical) hiddenVertical.value = serviceKey;
+        if (hiddenType) hiddenType.value = "service-interest";
+      }
+
+      function openService(item) {
+        serviceItems.forEach((service) => {
+          const button = service.querySelector(".service-trigger");
+          const isTarget = service === item;
+
+          service.classList.toggle("is-open", isTarget);
+          if (button) {
+            button.setAttribute("aria-expanded", String(isTarget));
+          }
+        });
+      }
+
+      serviceItems.forEach((item) => {
+        const trigger = item.querySelector(".service-trigger");
+        if (!trigger) return;
+
+        trigger.addEventListener("click", () => {
+          const isOpen = item.classList.contains("is-open");
+          if (isOpen) {
+            item.classList.remove("is-open");
+            trigger.setAttribute("aria-expanded", "false");
+          } else {
+            openService(item);
+          }
+        });
+      });
+
+      document.querySelectorAll("[data-service-origin]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const serviceKey = button.getAttribute("data-service-origin") || "home";
+          setServiceOrigin(serviceKey);
+        });
+      });
+
+      document.querySelectorAll('a[href="#diagnostico"]').forEach((link) => {
+        if (!link.hasAttribute("data-service-origin")) {
+          link.addEventListener("click", () => {
+            const hiddenOrigin = document.getElementById("serviceOrigin");
+            const hiddenVertical = document.getElementById("demoVertical");
+            const hiddenType = document.getElementById("requestType");
+
+            if (hiddenOrigin && hiddenOrigin.value === "") hiddenOrigin.value = "home";
+            if (hiddenVertical && hiddenVertical.value === "") hiddenVertical.value = "home";
+            if (hiddenType && hiddenType.value === "") hiddenType.value = "evaluation";
+          });
+        }
+      });
     </script>
   </body>
 </html>
+
 
 
 
