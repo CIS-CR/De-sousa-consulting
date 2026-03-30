@@ -467,13 +467,6 @@
         text-transform: uppercase;
       }
 
-      .mini-copy {
-        margin-top: 8px;
-        font-size: 14px;
-        line-height: 1.65;
-        color: rgba(30, 29, 29, 0.72);
-      }
-
       .hero-metrics {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -541,53 +534,19 @@
         color: rgba(30, 29, 29, 0.76);
       }
 
-      .grid-4,
       .grid-3 {
         display: grid;
         gap: 16px;
         margin-top: 24px;
       }
 
-      .feature-card,
       .vertical-card,
-      .timeline-card,
       .cred-card {
         border: 1px solid var(--border);
         border-radius: 22px;
         background: #ffffff;
         padding: 20px;
         box-shadow: var(--shadow-soft);
-      }
-
-      .feature-icon {
-        width: 44px;
-        height: 44px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 16px;
-        color: var(--primary);
-        background: var(--surface-2);
-      }
-
-      .feature-card h3,
-      .vertical-card h3,
-      .timeline-card h3,
-      .cred-card h3 {
-        margin: 16px 0 0;
-        font-size: 22px;
-        line-height: 1.12;
-        letter-spacing: -0.03em;
-      }
-
-      .feature-card p,
-      .vertical-card p,
-      .timeline-card p,
-      .cred-card p {
-        margin: 10px 0 0;
-        font-size: 14px;
-        line-height: 1.7;
-        color: rgba(30, 29, 29, 0.74);
       }
 
       .cred-grid {
@@ -619,6 +578,22 @@
         gap: 16px;
       }
 
+      .vertical-card h3,
+      .cred-card h3 {
+        margin: 0;
+        font-size: 22px;
+        line-height: 1.12;
+        letter-spacing: -0.03em;
+      }
+
+      .vertical-card p,
+      .cred-card p {
+        margin: 10px 0 0;
+        font-size: 14px;
+        line-height: 1.7;
+        color: rgba(30, 29, 29, 0.74);
+      }
+
       .vertical-arrow {
         width: 36px;
         height: 36px;
@@ -633,59 +608,60 @@
         font-size: 18px;
       }
 
-      .timeline-desktop {
+      .clients-strip {
+        padding: 20px 0 28px;
+      }
+
+      .clients-label {
+        margin: 0 0 14px;
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--primary);
+      }
+
+      .clients-slider {
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x proximity;
+        padding-bottom: 4px;
+      }
+
+      .clients-slider::-webkit-scrollbar {
         display: none;
-        gap: 14px;
-        margin-top: 24px;
       }
 
-      .timeline-mobile {
-        display: grid;
-        gap: 14px;
-        margin-top: 24px;
-      }
-
-      .timeline-step {
+      .clients-track {
         display: flex;
-        gap: 12px;
-        align-items: flex-start;
-        border: 1px solid var(--border);
-        border-radius: 22px;
-        background: #ffffff;
-        padding: 16px;
-        box-shadow: var(--shadow-soft);
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 14px;
+        width: max-content;
+        align-items: center;
       }
 
-      .step-num {
-        width: 38px;
-        height: 38px;
-        flex: 0 0 38px;
-        display: inline-flex;
+      .client-item {
+        flex: 0 0 auto;
+        width: 150px;
+        height: 90px;
+        display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 50%;
-        background: var(--primary);
-        color: #ffffff;
-        font-size: 12px;
-        font-weight: 700;
+        border-radius: 14px;
+        background: #eef2f6;
+        border: 1px solid var(--border-soft);
+        scroll-snap-align: start;
+        padding: 10px;
       }
 
-      .timeline-step h3,
-      .timeline-card h3 {
-        font-size: 20px;
-      }
-
-      .timeline-card .step-label {
-        margin: 0;
-        color: var(--primary);
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-      }
-
-      .timeline-connector {
-        display: none;
+      .client-item img {
+        width: auto;
+        height: auto;
+        max-width: 82%;
+        max-height: 68%;
+        object-fit: contain;
+        display: block;
       }
 
       .cta-section {
@@ -787,129 +763,155 @@
           display: none;
         }
       }
-@media (min-width: 860px) {
-  .wrap {
-    width: min(var(--container), calc(100% - 48px));
-  }
 
-  .desktop-only {
-    display: inline-flex;
-  }
+      @media (min-width: 860px) {
+        .wrap {
+          width: min(var(--container), calc(100% - 48px));
+        }
 
-  .menu-toggle {
-    display: none;
-  }
+        .desktop-only {
+          display: inline-flex;
+        }
 
-  .site-nav {
-    display: inline-flex;
-  }
+        .menu-toggle {
+          display: none;
+        }
 
-  .brand-logo {
-    max-width: 260px;
-  }
+        .site-nav {
+          display: inline-flex;
+        }
 
-  .brand-logo-image {
-    height: 44px;
-  }
+        .brand-logo {
+          max-width: 260px;
+        }
 
-  .header-inner {
-    min-height: 82px;
-    gap: 18px;
-  }
+        .brand-logo-image {
+          height: 44px;
+        }
 
-  .hero {
-    padding: 44px 0 28px;
-  }
+        .header-inner {
+          min-height: 82px;
+          gap: 18px;
+        }
 
-  .hero-grid {
-    grid-template-columns: 1.02fr 0.98fr;
-    gap: 44px;
-    min-height: 520px;
-  }
+        .hero {
+          padding: 44px 0 28px;
+        }
 
-  h1 {
-    font-size: clamp(3.2rem, 5vw, 4.35rem);
-    max-width: 10ch;
-  }
+        .hero-grid {
+          grid-template-columns: 1.02fr 0.98fr;
+          gap: 44px;
+          min-height: 520px;
+        }
 
-  .lead {
-    font-size: 17px;
-    max-width: 40ch;
-  }
+        h1 {
+          font-size: clamp(3.2rem, 5vw, 4.35rem);
+          max-width: 10ch;
+        }
 
-  .cta-row {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
+        .lead {
+          font-size: 17px;
+          max-width: 40ch;
+        }
 
-  .cta-row .btn {
-    width: auto;
-  }
+        .cta-row {
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
 
-  .hero-visual {
-    min-height: 500px;
-    border-radius: 30px;
-  }
+        .cta-row .btn {
+          width: auto;
+        }
 
-  .hero-image-placeholder {
-    padding: 22px;
-  }
+        .hero-visual {
+          min-height: 500px;
+          border-radius: 30px;
+        }
 
-  .section {
-    padding: 74px 0;
-  }
+        .hero-image-placeholder {
+          padding: 22px;
+        }
 
-  .grid-4 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+        .section {
+          padding: 74px 0;
+        }
 
-  .grid-3,
-  .cred-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+        .grid-3,
+        .cred-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
 
-  .form-grid {
-    grid-template-columns: 1fr 1fr;
-  }
+        .form-grid {
+          grid-template-columns: 1fr 1fr;
+        }
 
-  .cta-panel {
-    padding: 38px 28px;
-  }
-}
+        .cta-panel {
+          padding: 38px 28px;
+        }
 
-@media (min-width: 1120px) {
-  .grid-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
+        .clients-strip {
+          padding: 36px 0 44px;
+        }
 
-  .grid-3,
-  .cred-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+        .clients-label {
+          margin-bottom: 18px;
+        }
 
-  .timeline-desktop {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
+        .clients-slider {
+          overflow-x: auto;
+          overflow-y: hidden;
+          -webkit-overflow-scrolling: touch;
+        }
 
-  .timeline-mobile {
-    display: none;
-  }
+        .clients-track {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          gap: 20px;
+          width: max-content;
+          align-items: center;
+        }
 
-  .timeline-item {
-    position: relative;
-  }
+        .client-item {
+          width: 210px;
+          height: 110px;
+          padding: 14px;
+          border-radius: 14px;
+          background: #ffffff;
+        }
 
-  .timeline-connector {
-    display: block;
-    position: absolute;
-    top: 50%;
-    right: -7px;
-    width: 14px;
-    height: 1px;
-    background: var(--highlight);
-  }
-}
+        .client-item img {
+          max-width: 78%;
+          max-height: 58%;
+          object-fit: contain;
+          opacity: 0.9;
+          filter: grayscale(100%);
+          transition: 0.25s ease;
+        }
+
+        .client-item img:hover {
+          opacity: 1;
+          filter: grayscale(0%);
+        }
+      }
+
+      @media (min-width: 1120px) {
+        .grid-3,
+        .cred-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .client-item {
+          width: 220px;
+          height: 116px;
+          padding: 14px;
+        }
+
+        .client-item img {
+          max-width: 76%;
+          max-height: 56%;
+        }
+      }
     </style>
   </head>
 
@@ -923,8 +925,7 @@
         <nav class="site-nav desktop-only" aria-label="Navegación principal">
           <a href="#top">Inicio</a>
           <a href="#credibilidad">Nosotros</a>
-          <a href="#verticales">Servicios</a>
-          <a href="#modelo">Metodología</a>
+          <a href="#servicios">Servicios</a>
           <a href="#diagnostico">Contacto</a>
         </nav>
 
@@ -970,8 +971,7 @@
           <nav class="mobile-nav" aria-label="Navegación principal móvil">
             <a href="#top">Inicio</a>
             <a href="#credibilidad">Nosotros</a>
-            <a href="#verticales">Verticales</a>
-            <a href="#modelo">Metodología</a>
+            <a href="#servicios">Servicios</a>
             <a href="#diagnostico">Contacto</a>
           </nav>
 
@@ -987,12 +987,12 @@
         <div class="wrap hero-grid">
           <div class="hero-copy">
             <p class="eyebrow">Firma consultora</p>
-            <h1 id="hero-title">Tu aliado para crecer con claridad y control.</h1>
+            <h1 id="hero-title">Estructuramos empresas para crecer con claridad y control.</h1>
             <p class="lead">Integramos finanzas, operaciones y tecnología bajo un modelo organizado y ejecutable.</p>
 
             <div class="cta-row">
               <a class="btn" href="#diagnostico">Iniciar diagnóstico</a>
-              <a class="btn secondary" href="#verticales">Explorar Servicios</a>
+              <a class="btn secondary" href="#servicios">Explorar servicios</a>
             </div>
 
             <p class="hero-note">
@@ -1008,12 +1008,12 @@
                 <div class="hero-image-card">
                   <div class="hero-metrics">
                     <div class="hero-metric">
-                      <strong>ESTRUCTURA</strong>
+                      <strong>Estructura</strong>
                       <span>Organización clara de servicios, prioridades y decisiones.</span>
                     </div>
 
                     <div class="hero-metric">
-                      <strong>CONTROL</strong>
+                      <strong>Control</strong>
                       <span>Mayor visibilidad sobre procesos, riesgos y ejecución.</span>
                     </div>
                   </div>
@@ -1024,76 +1024,13 @@
         </div>
       </section>
 
-      <section class="section" id="que-hacemos" aria-labelledby="que-hacemos-title">
-        <div class="wrap">
-          <div class="section-header">
-            <p class="section-label">Qué hacemos</p>
-            <h2 id="que-hacemos-title">Capacidades para ordenar y ejecutar.</h2>
-            <p class="section-intro">
-              Convertimos complejidad empresarial en modelos claros, medibles y ejecutables.
-            </p>
-          </div>
-
-          <div class="grid-4">
-            <article class="feature-card">
-              <div class="feature-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7">
-                  <path d="M4 19h16"></path>
-                  <path d="M7 19V9"></path>
-                  <path d="M12 19V5"></path>
-                  <path d="M17 19v-7"></path>
-                </svg>
-              </div>
-              <h3>Estructuración empresarial</h3>
-              <p>Definimos bases organizativas, prioridades y rutas de ejecución con mayor claridad.</p>
-            </article>
-
-            <article class="feature-card">
-              <div class="feature-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7">
-                  <path d="M5 12h14"></path>
-                  <path d="M13 5l7 7-7 7"></path>
-                  <path d="M4 5h5"></path>
-                  <path d="M4 19h5"></path>
-                </svg>
-              </div>
-              <h3>Optimización operativa</h3>
-              <p>Convertimos procesos dispersos en modelos más ordenados, medibles y sostenibles.</p>
-            </article>
-
-            <article class="feature-card">
-              <div class="feature-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7">
-                  <path d="M12 3v18"></path>
-                  <path d="M17 7.5c0-1.933-2.239-3.5-5-3.5s-5 1.567-5 3.5 2.239 3.5 5 3.5 5 1.567 5 3.5-2.239 3.5-5 3.5-5-1.567-5-3.5"></path>
-                </svg>
-              </div>
-              <h3>Planeamiento financiero</h3>
-              <p>Estructuramos decisiones financieras con visión estratégica y foco en preparación empresarial.</p>
-            </article>
-
-            <article class="feature-card">
-              <div class="feature-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7">
-                  <rect x="4" y="4" width="16" height="16" rx="3"></rect>
-                  <path d="M9 9h6v6H9z"></path>
-                  <path d="M9 2v2M15 2v2M9 20v2M15 20v2M20 9h2M20 15h2M2 9h2M2 15h2"></path>
-                </svg>
-              </div>
-              <h3>Transformación digital</h3>
-              <p>Integramos herramientas, estructura y automatización con una lógica empresarial clara.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
       <section class="section alt" id="credibilidad" aria-labelledby="credibilidad-title">
         <div class="wrap">
           <div class="section-header">
-            <p class="section-label">Experiencia aplicada en el mundo real</p>
-            <h2 id="credibilidad-title">Criterio y formación para una mejor ejecución.</h2>
+            <p class="section-label">Experiencia y metodología</p>
+            <h2 id="credibilidad-title">Experiencia aplicada y ejecución estructurada.</h2>
             <p class="section-intro">
-              De Sousa Consulting integra experiencia empresarial con formación orientada a operaciones, dirección y mejora continua, bajo un enfoque de ejecución estructurada.
+              Combinamos experiencia empresarial con formación ejecutiva y una metodología basada en mejora continua para ordenar, ejecutar y sostener decisiones en el tiempo.
             </p>
           </div>
 
@@ -1101,7 +1038,7 @@
             <article class="cred-card">
               <p class="mini-label">Formación</p>
               <h3>Formación ejecutiva y especialización internacional.</h3>
-              <p>Maestría en Gerencia de Operaciones, Executive MBA y formación en emprendimiento espacial, complementado con estudios avanzados en gestión y liderazgo empresarial.</p>
+              <p>Maestría en Gerencia de Operaciones, Executive MBA y formación internacional en emprendimiento y gestión empresarial.</p>
             </article>
 
             <article class="cred-card">
@@ -1111,36 +1048,36 @@
             </article>
 
             <article class="cred-card">
-              <p class="mini-label">Experiencia regional</p>
-              <h3>Trabajo con corporativos y pymes</h3>
-              <p>Experiencia con organizaciones de distintas industrias en Estados Unidos, Europa y Latinoamérica, incluyendo compañías de referencia y empresas en crecimiento.</p>
+              <p class="mini-label">Experiencia</p>
+              <h3>Trabajo con corporativos y pymes.</h3>
+              <p>Experiencia con organizaciones de distintas industrias en Estados Unidos, Europa y Latinoamérica.</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section" id="verticales" aria-labelledby="verticales-title">
+      <section class="section" id="servicios" aria-labelledby="servicios-title">
         <div class="wrap">
           <div class="section-header">
             <p class="section-label">Servicios</p>
-            <h2 id="verticales-title">Conoce nuestros servicios.</h2>
+            <h2 id="servicios-title">Servicios estructurados para resolver necesidades clave.</h2>
             <p class="section-intro">
-              Cada servicio responde a una necesidad específica del negocio, bajo una misma lógica de trabajo que permite mayor claridad, control y ejecución.
+              Cada servicio responde a un área crítica del negocio bajo una misma lógica de trabajo.
             </p>
           </div>
 
           <div class="grid-3">
             <a class="vertical-card" href="/verticales/transformacion-digital-ia/">
               <div class="vertical-top">
-                <h3>Transformación Digital y Habilitación con Inteligencia Artificial</h3>
+                <h3>Transformación digital e inteligencia artificial</h3>
                 <span class="vertical-arrow" aria-hidden="true">→</span>
               </div>
-              <p>Estructuras digitales, automatización y capacidades de IA aplicadas al negocio.</p>
+              <p>Automatización, estructura digital y capacidades de IA aplicadas al negocio.</p>
             </a>
 
             <a class="vertical-card" href="/verticales/estructuracion-financiera/">
               <div class="vertical-top">
-                <h3>Estructuración Financiera y Planeamiento de Éxito</h3>
+                <h3>Estructuración financiera</h3>
                 <span class="vertical-arrow" aria-hidden="true">→</span>
               </div>
               <p>Orden financiero para crecer con preparación y mayor capacidad de decisión.</p>
@@ -1148,15 +1085,15 @@
 
             <a class="vertical-card" href="/verticales/gobierno-riesgos/">
               <div class="vertical-top">
-                <h3>Gobierno Corporativo y Gestión Integral de Riesgos</h3>
+                <h3>Gobierno corporativo y riesgos</h3>
                 <span class="vertical-arrow" aria-hidden="true">→</span>
               </div>
-              <p>Mayor control, gobierno y continuidad para organizaciones en crecimiento.</p>
+              <p>Mayor control, continuidad y gobierno para organizaciones en crecimiento.</p>
             </a>
 
             <a class="vertical-card" href="/verticales/asesoria-inmobiliaria/">
               <div class="vertical-top">
-                <h3>Asesoría Estratégica Inmobiliaria</h3>
+                <h3>Asesoría inmobiliaria</h3>
                 <span class="vertical-arrow" aria-hidden="true">→</span>
               </div>
               <p>Criterio estructurado para decisiones, activos y proyectos inmobiliarios.</p>
@@ -1164,7 +1101,7 @@
 
             <a class="vertical-card" href="/verticales/planeacion-patrimonial/">
               <div class="vertical-top">
-                <h3>Planeación Patrimonial y Gestión de Activos</h3>
+                <h3>Planeación patrimonial</h3>
                 <span class="vertical-arrow" aria-hidden="true">→</span>
               </div>
               <p>Protección, estructura y visión de largo plazo para activos estratégicos.</p>
@@ -1172,7 +1109,7 @@
 
             <a class="vertical-card" href="/verticales/optimizacion-operativa/">
               <div class="vertical-top">
-                <h3>Programas de Optimización Operativa</h3>
+                <h3>Optimización operativa</h3>
                 <span class="vertical-arrow" aria-hidden="true">→</span>
               </div>
               <p>Procesos más eficientes, medibles y sostenibles en el tiempo.</p>
@@ -1211,114 +1148,14 @@
         </div>
       </section>
 
-      <section class="section alt" id="modelo" aria-labelledby="modelo-title">
-        <div class="wrap">
-          <div class="section-header">
-            <p class="section-label">Modelo de trabajo</p>
-            <h2 id="modelo-title">Un proceso claro para convertir necesidad empresarial en una ruta de ejecución.</h2>
-            <p class="section-intro">
-              Trabajamos bajo una lógica estructurada que permite diagnosticar, validar, ordenar e implementar sin depender de improvisación o consultoría abierta indefinida.
-            </p>
-          </div>
-
-          <div class="timeline-desktop" role="list" aria-label="Fases del modelo de trabajo">
-            <div class="timeline-item" role="listitem">
-              <article class="timeline-card">
-                <p class="step-label">01</p>
-                <h3>Diagnóstico</h3>
-                <p>Entendemos contexto, retos, prioridades y puntos de fricción.</p>
-              </article>
-              <span class="timeline-connector" aria-hidden="true"></span>
-            </div>
-
-            <div class="timeline-item" role="listitem">
-              <article class="timeline-card">
-                <p class="step-label">02</p>
-                <h3>Validación</h3>
-                <p>Confirmamos alcance, hipótesis y oportunidades de mayor impacto.</p>
-              </article>
-              <span class="timeline-connector" aria-hidden="true"></span>
-            </div>
-
-            <div class="timeline-item" role="listitem">
-              <article class="timeline-card">
-                <p class="step-label">03</p>
-                <h3>Estructuración</h3>
-                <p>Diseñamos el marco de trabajo, prioridades, entregables y ruta de acción.</p>
-              </article>
-              <span class="timeline-connector" aria-hidden="true"></span>
-            </div>
-
-            <div class="timeline-item" role="listitem">
-              <article class="timeline-card">
-                <p class="step-label">04</p>
-                <h3>Implementación</h3>
-                <p>Ponemos en marcha decisiones, herramientas y capacidades definidas.</p>
-              </article>
-              <span class="timeline-connector" aria-hidden="true"></span>
-            </div>
-
-            <div class="timeline-item" role="listitem">
-              <article class="timeline-card">
-                <p class="step-label">05</p>
-                <h3>Seguimiento</h3>
-                <p>Revisamos adopción, ajustes y continuidad operativa de la solución.</p>
-              </article>
-            </div>
-          </div>
-
-          <div class="timeline-mobile">
-            <div class="timeline-step">
-              <span class="step-num">01</span>
-              <div>
-                <h3>Diagnóstico</h3>
-                <p>Entendemos contexto, retos, prioridades y puntos de fricción.</p>
-              </div>
-            </div>
-
-            <div class="timeline-step">
-              <span class="step-num">02</span>
-              <div>
-                <h3>Validación</h3>
-                <p>Confirmamos alcance, hipótesis y oportunidades de mayor impacto.</p>
-              </div>
-            </div>
-
-            <div class="timeline-step">
-              <span class="step-num">03</span>
-              <div>
-                <h3>Estructuración</h3>
-                <p>Diseñamos el marco de trabajo, prioridades, entregables y ruta de acción.</p>
-              </div>
-            </div>
-
-            <div class="timeline-step">
-              <span class="step-num">04</span>
-              <div>
-                <h3>Implementación</h3>
-                <p>Ponemos en marcha decisiones, herramientas y capacidades definidas.</p>
-              </div>
-            </div>
-
-            <div class="timeline-step">
-              <span class="step-num">05</span>
-              <div>
-                <h3>Seguimiento</h3>
-                <p>Revisamos adopción, ajustes y continuidad operativa de la solución.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section class="cta-section" id="diagnostico" aria-labelledby="diagnostico-title">
         <div class="wrap">
           <div class="cta-panel">
             <div class="section-header">
-              <p class="section-label">INICIO DEL PROCESO</p>
-              <h2 id="diagnostico-title">Inicie con un diagnóstico estructurado y defina su ruta de crecimiento.</h2>
+              <p class="section-label">Inicio del proceso</p>
+              <h2 id="diagnostico-title">Inicie con un diagnóstico estructurado.</h2>
               <p class="section-intro">
-                Inicie el proceso compartiendo su necesidad. Recibirá una evaluación inicial y una propuesta de siguiente paso.
+                Comparta información básica sobre su organización y necesidad. Recibirá una evaluación inicial y una propuesta de siguiente paso.
               </p>
             </div>
 
@@ -1381,7 +1218,7 @@
 
                 <div class="cf-turnstile" data-sitekey="0x4AAAAAACo2kg_YUeI2tGEs"></div>
 
-                <button type="submit" class="btn">Enviar información</button>
+                <button type="submit" class="btn">Iniciar diagnóstico</button>
 
                 <p class="fine">No enviamos comunicaciones masivas. Solo contacto directo y seguimiento estructurado.</p>
                 <p id="formStatus" class="fine" aria-live="polite"></p>
