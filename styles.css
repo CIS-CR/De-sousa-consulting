@@ -807,3 +807,30 @@ textarea {
     height: 100%;
     background: var(--border-soft);
   }
+  /* ===== Capabilities Hover (Desktop only) ===== */
+
+@media (hover: hover) and (pointer: fine) {
+
+  .capability {
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .capabilities:hover .capability {
+    opacity: 0.55;
+  }
+
+  .capabilities .capability:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+
+  .capabilities .capability:hover h3 {
+    color: var(--primary);
+  }
+
+  .capabilities .capability:hover .cred-tag {
+    border-color: rgba(20, 73, 130, 0.18);
+    background: #ffffff;
+  }
+
+}
