@@ -728,3 +728,30 @@ textarea {
   font-weight: 600;
   line-height: 1;
 }
+/* ===== Capabilities (Consulting Style) ===== */
+
+.capabilities {
+  display: grid;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.capability {
+  max-width: 520px;
+}
+
+.capability h3 {
+  font-size: 1.25rem;
+  margin: 6px 0 8px;
+}
+
+.capability p {
+  color: var(--text-muted);
+  max-width: 42ch;
+}
+
+/* separación tipo consultora */
+.capability:not(:last-child) {
+  border-bottom: 1px solid var(--border-soft);
+  padding-bottom: 28px;
+}
