@@ -755,3 +755,55 @@ textarea {
   border-bottom: 1px solid var(--border-soft);
   padding-bottom: 28px;
 }
+/* Capabilities */
+.capabilities {
+  display: grid;
+  gap: 32px;
+  margin-top: 36px;
+}
+
+.capability {
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border-soft);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.capability h3 {
+  margin: 8px 0 10px;
+  font-size: 1.22rem;
+  line-height: 1.25;
+}
+
+.capability p {
+  margin: 0;
+  max-width: 34ch;
+}
+
+.capability .mini-label {
+  display: inline-block;
+  margin-bottom: 2px;
+}
+
+@media (min-width: 860px) {
+  .capabilities {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px;
+    align-items: start;
+  }
+
+  .capability {
+    padding-bottom: 0;
+    border-bottom: none;
+    min-height: 220px;
+    position: relative;
+  }
+
+  .capability:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -20px;
+    width: 1px;
+    height: 100%;
+    background: var(--border-soft);
+  }
