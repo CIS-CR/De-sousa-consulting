@@ -518,17 +518,17 @@ h2 {
 }
 
 .form-card {
-  margin-top: 26px;
-  max-width: 780px;
+  margin-top: 18px;
+  max-width: 760px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 26px;
   background: rgba(255, 255, 255, 0.08);
-  padding: 20px;
+  padding: 14px;
 }
 
 .form {
   display: grid;
-  gap: 12px;
+  gap: 10px;
 }
 
 .form-grid {
