@@ -573,18 +573,82 @@ textarea {
 }
 
 .foot {
-  padding: 0 0 36px;
+  padding: 24px 0 40px;
+  background: #ffffff;
 }
 
-.foot-inner {
-  padding-top: 24px;
+.foot-shell {
   border-top: 1px solid var(--border-soft);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  font-size: 12px;
-  color: rgba(30, 29, 29, 0.58);
+  padding-top: 20px;
+  display: grid;
+  gap: 16px;
 }
+
+.foot-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.foot-logo-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.foot-logo {
+  width: auto;
+  height: 32px;
+  object-fit: contain;
+}
+
+.foot-name {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(30, 29, 29, 0.72);
+}
+
+.foot-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 18px;
+}
+
+.foot-nav a,
+.foot-contact a {
+  text-decoration: none;
+  font-size: 13px;
+  color: rgba(30, 29, 29, 0.62);
+  transition: color 0.18s ease;
+}
+
+.foot-nav a:hover,
+.foot-contact a:hover {
+  color: var(--primary);
+}
+
+.foot-contact {
+  font-size: 13px;
+}
+
+@media (min-width: 860px) {
+  .foot {
+    padding: 28px 0 44px;
+}
+
+ .foot-shell {
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .foot-nav {
+    justify-content: center;
+  }
+
+  .foot-contact {
+    justify-self: end;
+  }
 
 @media (min-width: 860px) {
   .site-nav {
