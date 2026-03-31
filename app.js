@@ -7,9 +7,9 @@
   const countryOtherInput = document.getElementById("countryOther");
 
   const ENDPOINT =
-    window.FBOS_ENDPOINT ||
-    window.FBOS_CONFIG?.endpoint ||
-    "/api/demos/implementations/submit";
+  window.FBOS_ENDPOINT ||
+  window.FBOS_CONFIG?.endpoint ||
+  "https://api.fbos.org/api/demos/implementations/submit";
 
   const DEFAULT_SOURCE = "desousa-home";
   const DEFAULT_CATEGORY = "strategic-assessment";
