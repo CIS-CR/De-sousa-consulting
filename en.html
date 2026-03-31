@@ -7,25 +7,1194 @@
 
     <meta
       name="description"
-      content="Strategic structuring for companies seeking clarity, control, and scalable growth."
+      content="Strategic structuring for companies seeking growth with clarity, control, and scalability."
     />
     <meta name="theme-color" content="#144982" />
 
     <link rel="icon" type="image/png" href="/assets/favicon-desousa.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/styles.css" />
 
+    <meta property="og:title" content="De Sousa Consulting — Strategic Structuring" />
+    <meta
+      property="og:description"
+      content="Strategic structuring for companies seeking growth with clarity, control, and scalability."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="De Sousa Consulting" />
+    <meta property="og:url" content="https://desousaconsulting.com/" />
+    <meta property="og:image" content="https://desousaconsulting.com/assets/og-desousa.jpg" />
+    <link rel="canonical" href="https://desousaconsulting.com/en.html" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="De Sousa Consulting — Strategic Structuring" />
+    <meta
+      name="twitter:description"
+      content="Structure, judgment, and execution for higher-level business decisions."
+    />
+    <meta name="twitter:image" content="https://desousaconsulting.com/assets/og-desousa.jpg" />
+
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script defer src="/config.js"></script>
     <script defer src="/app.js"></script>
+
+    <style>
+      :root {
+        --primary: #144982;
+        --primary-dark: #0f3763;
+        --highlight: #abc1d7;
+        --neutral-dark: #1e1d1d;
+        --neutral-light: #d9d9d9;
+        --accent: #c8a96a;
+        --accent-soft: #f5efe1;
+        --surface: #f7f9fc;
+        --surface-2: #f3f6fa;
+        --surface-3: #eef3f8;
+        --border: rgba(20, 73, 130, 0.12);
+        --border-soft: rgba(20, 73, 130, 0.08);
+        --shadow-soft: 0 12px 30px rgba(15, 55, 99, 0.05);
+        --shadow-medium: 0 20px 50px rgba(15, 55, 99, 0.08);
+        --radius-card: 24px;
+        --radius-panel: 30px;
+        --radius-pill: 999px;
+        --container: 1180px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--neutral-dark);
+        background: #ffffff;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      body.menu-open {
+        overflow: hidden;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .wrap {
+        width: min(var(--container), calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Playfair Display", Georgia, serif;
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border-soft);
+      }
+
+      .header-inner {
+        min-height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+        color: var(--primary);
+        min-width: 0;
+        flex-shrink: 1;
+      }
+
+      .brand-logo {
+        max-width: 220px;
+      }
+
+      .brand-logo-image {
+        display: block;
+        width: auto;
+        height: 52px;
+        max-width: 100%;
+        object-fit: contain;
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-left: auto;
+      }
+
+      .desktop-only {
+        display: none;
+      }
+
+      .site-nav {
+        display: none;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .site-nav a {
+        text-decoration: none;
+        font-size: 14px;
+        color: rgba(30, 29, 29, 0.76);
+        transition: color 0.2s ease;
+      }
+
+      .site-nav a:hover {
+        color: var(--primary);
+      }
+
+      .language-switcher {
+        position: relative;
+      }
+
+      .lang-toggle {
+        min-height: 34px;
+        min-width: 54px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 0 10px;
+        border-radius: var(--radius-pill);
+        border: 1px solid var(--border);
+        background: #ffffff;
+        color: var(--neutral-dark);
+        font: inherit;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+      }
+
+      .lang-toggle:hover {
+        background: var(--surface);
+        border-color: rgba(200, 169, 106, 0.35);
+      }
+
+      .lang-caret {
+        font-size: 11px;
+        color: var(--primary);
+      }
+
+      .lang-menu {
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        min-width: 180px;
+        padding: 8px;
+        border-radius: 18px;
+        border: 1px solid var(--border);
+        background: #ffffff;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .lang-menu button {
+        width: 100%;
+        border: 0;
+        background: transparent;
+        color: var(--neutral-dark);
+        text-align: left;
+        font: inherit;
+        font-size: 14px;
+        padding: 11px 12px;
+        border-radius: 12px;
+        cursor: pointer;
+      }
+
+      .lang-menu button:hover {
+        background: var(--surface);
+      }
+
+      .menu-toggle {
+        width: 36px;
+        height: 36px;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        background: #ffffff;
+        cursor: pointer;
+        transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+      }
+
+      .menu-toggle:hover {
+        background: var(--surface);
+        border-color: rgba(20, 73, 130, 0.18);
+      }
+
+      .menu-toggle span {
+        width: 16px;
+        height: 2px;
+        border-radius: 999px;
+        background: var(--neutral-dark);
+        display: block;
+      }
+
+      .mobile-menu {
+        border-top: 1px solid var(--border-soft);
+        background: rgba(255, 255, 255, 0.98);
+      }
+
+      .mobile-menu-inner {
+        padding: 10px 0 16px;
+      }
+
+      .mobile-nav {
+        display: grid;
+      }
+
+      .mobile-nav a {
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 600;
+        padding: 14px 2px;
+        border-bottom: 1px solid var(--border-soft);
+        color: rgba(30, 29, 29, 0.88);
+      }
+
+      .mobile-menu-footer {
+        padding-top: 14px;
+      }
+
+      .btn {
+        min-height: 46px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 18px;
+        border-radius: var(--radius-pill);
+        border: 1px solid var(--accent);
+        background: var(--accent);
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1;
+        transition: transform 0.18s ease, filter 0.18s ease, background-color 0.18s ease,
+          border-color 0.18s ease;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+        filter: brightness(0.96);
+      }
+
+      .btn.secondary {
+        background: #ffffff;
+        color: var(--primary);
+        border-color: var(--border);
+      }
+
+      .btn.secondary:hover {
+        background: var(--surface);
+        filter: none;
+      }
+
+      .btn.header-cta {
+        min-height: 34px;
+        padding: 8px 12px;
+        font-size: 12px;
+        line-height: 1;
+      }
+
+      .btn.full {
+        width: 100%;
+      }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        padding: 6px 0 18px;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 85% 12%, rgba(171, 193, 215, 0.26), transparent 36%),
+          radial-gradient(circle at 10% 24%, rgba(20, 73, 130, 0.05), transparent 32%);
+        pointer-events: none;
+      }
+
+      .hero-grid {
+        position: relative;
+        display: grid;
+        gap: 22px;
+        align-items: center;
+      }
+
+      .hero-copy {
+        order: 1;
+      }
+
+      .hero-visual-wrap {
+        order: 2;
+      }
+
+      .eyebrow {
+        margin: 0 0 10px;
+        color: var(--primary);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        max-width: 11ch;
+        font-size: clamp(2.35rem, 10vw, 3rem);
+        line-height: 0.98;
+        letter-spacing: -0.045em;
+      }
+
+      .lead {
+        margin: 12px 0 0;
+        max-width: 34ch;
+        font-size: 15px;
+        line-height: 1.65;
+        color: rgba(30, 29, 29, 0.75);
+      }
+
+      .cta-row {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .cta-row .btn {
+        width: 100%;
+      }
+
+      .hero-note {
+        margin: 14px 0 0;
+        font-size: 12px;
+        line-height: 1.6;
+        color: rgba(30, 29, 29, 0.58);
+      }
+
+      .hero-visual {
+        width: 100%;
+        min-height: 240px;
+        border-radius: 26px;
+        background:
+          linear-gradient(135deg, rgba(20, 73, 130, 0.08), rgba(171, 193, 215, 0.24)),
+          #f5f8fc;
+        border: 1px solid var(--border);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .hero-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .hero-visual::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(20, 73, 130, 0.08);
+      }
+
+      .hero-image-placeholder {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 18px;
+        z-index: 2;
+      }
+
+      .hero-image-card {
+        width: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        background: rgba(255, 255, 255, 0.84);
+        border-radius: 20px;
+        padding: 14px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .hero-image-card p {
+        margin: 0;
+      }
+
+      .mini-label {
+        color: var(--primary);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
+      .hero-metrics {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 0;
+      }
+
+      .hero-metric {
+        border-radius: 16px;
+        background: #ffffff;
+        padding: 12px;
+        border: 1px solid rgba(20, 73, 130, 0.08);
+      }
+
+      .hero-metric strong {
+        display: block;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--primary);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .hero-metric span {
+        display: block;
+        margin-top: 8px;
+        font-size: 12px;
+        line-height: 1.5;
+        color: rgba(30, 29, 29, 0.74);
+      }
+
+      .section {
+        padding: 56px 0;
+      }
+
+      .section.alt {
+        background: var(--surface);
+      }
+
+      .section-header {
+        max-width: 680px;
+      }
+
+      .section-label {
+        margin: 0 0 12px;
+        color: var(--primary);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: clamp(2rem, 8vw, 2.6rem);
+        line-height: 1.04;
+        letter-spacing: -0.035em;
+      }
+
+      .section-intro {
+        margin: 14px 0 0;
+        max-width: 58ch;
+        font-size: 15px;
+        line-height: 1.72;
+        color: rgba(30, 29, 29, 0.76);
+      }
+
+      .grid-3 {
+        display: grid;
+        gap: 16px;
+        margin-top: 24px;
+      }
+
+      .vertical-card {
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        background: #ffffff;
+        padding: 20px;
+        box-shadow: var(--shadow-soft);
+        text-decoration: none;
+        transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+      }
+
+      .vertical-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(200, 169, 106, 0.45);
+        box-shadow: 0 18px 42px rgba(15, 55, 99, 0.1);
+      }
+
+      .vertical-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .vertical-card h3 {
+        margin: 0;
+        font-size: 22px;
+        line-height: 1.12;
+        letter-spacing: -0.03em;
+      }
+
+      .vertical-card p {
+        margin: 10px 0 0;
+        font-size: 14px;
+        line-height: 1.7;
+        color: rgba(30, 29, 29, 0.74);
+      }
+
+      .vertical-arrow {
+        width: 36px;
+        height: 36px;
+        flex: 0 0 36px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--primary);
+        font-size: 18px;
+      }
+
+      .capabilities {
+        display: grid;
+        gap: 28px;
+        margin-top: 34px;
+      }
+
+      .capability {
+        padding-bottom: 28px;
+        border-bottom: 1px solid var(--border-soft);
+      }
+
+      .capability h3 {
+        margin: 8px 0 10px;
+        font-size: 1.15rem;
+        line-height: 1.28;
+      }
+
+      .capability p {
+        margin: 0;
+        max-width: 34ch;
+        font-size: 14px;
+        line-height: 1.7;
+        color: rgba(30, 29, 29, 0.74);
+      }
+
+      .capability .mini-label {
+        display: inline-block;
+        margin-bottom: 2px;
+      }
+
+      .cred-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+
+      .cred-tag {
+        display: inline-flex;
+        align-items: center;
+        min-height: 28px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--primary);
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        line-height: 1;
+        transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+      }
+
+      .services-accordion {
+        display: grid;
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .service-accordion-item {
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        background: #ffffff;
+        box-shadow: var(--shadow-soft);
+        overflow: hidden;
+        transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+      }
+
+      .service-accordion-item.is-open {
+        border-color: rgba(20, 73, 130, 0.18);
+        box-shadow: 0 18px 42px rgba(15, 55, 99, 0.08);
+      }
+
+      .service-trigger {
+        width: 100%;
+        border: 0;
+        background: transparent;
+        text-align: left;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 16px;
+        align-items: start;
+        cursor: pointer;
+        color: inherit;
+      }
+
+      .service-trigger:focus-visible {
+        outline: 2px solid rgba(20, 73, 130, 0.18);
+        outline-offset: -2px;
+      }
+
+      .service-trigger-copy h3 {
+        margin: 0;
+        font-size: 1.18rem;
+        line-height: 1.18;
+        letter-spacing: -0.03em;
+      }
+
+      .service-trigger-copy p {
+        margin: 10px 0 0;
+        max-width: 56ch;
+        font-size: 14px;
+        line-height: 1.68;
+        color: rgba(30, 29, 29, 0.74);
+      }
+
+      .service-trigger-arrow {
+        width: 36px;
+        height: 36px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--primary);
+        font-size: 18px;
+        line-height: 1;
+        transition: transform 0.28s ease, background-color 0.22s ease, border-color 0.22s ease;
+      }
+
+      .service-accordion-item.is-open .service-trigger-arrow {
+        transform: rotate(45deg);
+        background: #ffffff;
+        border-color: rgba(20, 73, 130, 0.18);
+      }
+
+      .service-panel {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      .service-accordion-item.is-open .service-panel {
+        grid-template-rows: 1fr;
+      }
+
+      .service-panel-inner {
+        overflow: hidden;
+      }
+
+      .service-panel-content {
+        padding: 0 20px 20px;
+        border-top: 1px solid var(--border-soft);
+        opacity: 0;
+        transform: translateY(-8px);
+        transition: opacity 0.28s ease, transform 0.28s ease;
+      }
+
+      .service-accordion-item.is-open .service-panel-content {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .service-detail-grid {
+        display: grid;
+        gap: 18px;
+        padding-top: 18px;
+      }
+
+      .service-detail-copy h4,
+      .service-detail-includes h4 {
+        margin: 0 0 8px;
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--primary);
+      }
+
+      .service-detail-copy p {
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.72;
+        color: rgba(30, 29, 29, 0.76);
+      }
+
+      .service-includes {
+        margin: 0;
+        padding-left: 18px;
+        display: grid;
+        gap: 8px;
+      }
+
+      .service-includes li {
+        font-size: 14px;
+        line-height: 1.65;
+        color: rgba(30, 29, 29, 0.74);
+      }
+
+      .service-result {
+        margin-top: 16px;
+        padding: 14px 16px;
+        border-radius: 18px;
+        background: var(--surface);
+        border: 1px solid var(--border-soft);
+      }
+
+      .service-result strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--primary);
+      }
+
+      .service-result p {
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.68;
+        color: rgba(30, 29, 29, 0.76);
+      }
+
+      .service-actions {
+        margin-top: 18px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .service-start {
+        min-height: 42px;
+        padding: 10px 16px;
+      }
+
+      .service-footnote {
+        font-size: 12px;
+        line-height: 1.55;
+        color: rgba(30, 29, 29, 0.58);
+      }
+
+      .clients-strip {
+        padding: 20px 0 28px;
+      }
+
+      .clients-label {
+        margin: 0 0 14px;
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--primary);
+      }
+
+      .clients-slider {
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x proximity;
+        padding-bottom: 4px;
+      }
+
+      .clients-slider::-webkit-scrollbar {
+        display: none;
+      }
+
+      .clients-track {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 14px;
+        width: max-content;
+        align-items: center;
+      }
+
+      .client-item {
+        flex: 0 0 auto;
+        width: 150px;
+        height: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 14px;
+        background: #eef2f6;
+        border: 1px solid var(--border-soft);
+        scroll-snap-align: start;
+        padding: 10px;
+      }
+
+      .client-item img {
+        width: auto;
+        height: auto;
+        max-width: 82%;
+        max-height: 68%;
+        object-fit: contain;
+        display: block;
+      }
+
+      .cta-section {
+        padding: 0 0 72px;
+      }
+
+      .cta-panel {
+        border: 1px solid rgba(20, 73, 130, 0.12);
+        border-radius: 28px;
+        background: var(--primary);
+        color: #ffffff;
+        padding: 28px 18px;
+        box-shadow: 0 20px 50px rgba(15, 55, 99, 0.14);
+      }
+
+      .cta-panel .section-label {
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      .cta-panel h2 {
+        color: #ffffff;
+      }
+
+      .cta-panel .section-intro {
+        color: rgba(255, 255, 255, 0.82);
+      }
+
+      .form-card {
+        margin-top: 20px;
+        max-width: 840px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.08);
+        padding: 16px;
+      }
+
+      .form {
+        display: grid;
+        gap: 12px;
+      }
+
+      .form-grid {
+        display: grid;
+        gap: 12px;
+      }
+
+      input,
+      textarea,
+      select {
+        width: 100%;
+        padding: 13px 14px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: #ffffff;
+        color: var(--neutral-dark);
+        font: inherit;
+        transition: border-color 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      input:focus,
+      textarea:focus,
+      select:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px rgba(200, 169, 106, 0.18);
+      }
+
+      textarea {
+        resize: vertical;
+      }
+
+      .fine {
+        margin: 2px 0 0;
+        font-size: 12px;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      #formStatus {
+        min-height: 18px;
+      }
+
+      .foot {
+        padding: 0 0 32px;
+      }
+
+      .foot-inner {
+        padding-top: 22px;
+        border-top: 1px solid var(--border-soft);
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        font-size: 12px;
+        color: rgba(30, 29, 29, 0.58);
+      }
+
+      @media (max-width: 859px) {
+        .btn.header-cta {
+          display: none;
+        }
+      }
+
+      @media (min-width: 860px) {
+        .wrap {
+          width: min(var(--container), calc(100% - 48px));
+        }
+
+        .desktop-only {
+          display: inline-flex;
+        }
+
+        .menu-toggle {
+          display: none;
+        }
+
+        .site-nav {
+          display: inline-flex;
+        }
+
+        .brand-logo {
+          max-width: 260px;
+        }
+
+        .brand-logo-image {
+          height: 52px;
+        }
+
+        .header-inner {
+          min-height: 82px;
+          gap: 18px;
+        }
+
+        .hero {
+          padding: 44px 0 28px;
+        }
+
+        .hero-grid {
+          grid-template-columns: 1.02fr 0.98fr;
+          gap: 44px;
+          min-height: 520px;
+        }
+
+        h1 {
+          font-size: clamp(3.2rem, 5vw, 4.35rem);
+          max-width: 10ch;
+        }
+
+        .lead {
+          font-size: 17px;
+          max-width: 40ch;
+        }
+
+        .cta-row {
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+
+        .cta-row .btn {
+          width: auto;
+        }
+
+        .hero-visual {
+          min-height: 500px;
+          border-radius: 30px;
+        }
+
+        .hero-image-placeholder {
+          padding: 22px;
+        }
+
+        .section {
+          padding: 74px 0;
+        }
+
+        .capabilities {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 32px;
+          align-items: start;
+        }
+
+        .capability {
+          min-width: 0;
+          min-height: 220px;
+          padding: 0 22px 0 0;
+          border-bottom: none;
+          position: relative;
+        }
+
+        .capability:not(:last-child)::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: -16px;
+          width: 1px;
+          height: 100%;
+          background: var(--border-soft);
+        }
+
+        .service-detail-grid {
+          grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+          gap: 26px;
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .cta-panel {
+          padding: 38px 28px;
+        }
+
+        .clients-strip {
+          padding: 36px 0 44px;
+        }
+
+        .clients-label {
+          margin-bottom: 18px;
+        }
+
+        .clients-slider {
+          overflow-x: auto;
+          overflow-y: hidden;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .clients-track {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          gap: 20px;
+          width: max-content;
+          align-items: center;
+        }
+
+        .client-item {
+          width: 210px;
+          height: 110px;
+          padding: 14px;
+          border-radius: 14px;
+          background: #ffffff;
+        }
+
+        .client-item img {
+          max-width: 78%;
+          max-height: 58%;
+          object-fit: contain;
+          opacity: 0.9;
+          filter: grayscale(100%);
+          transition: 0.25s ease;
+        }
+
+        .client-item img:hover {
+          opacity: 1;
+          filter: grayscale(0%);
+        }
+      }
+
+      @media (min-width: 1120px) {
+        .client-item {
+          width: 220px;
+          height: 116px;
+          padding: 14px;
+        }
+
+        .client-item img {
+          max-width: 76%;
+          max-height: 56%;
+        }
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        .capability {
+          transition: transform 0.25s ease, opacity 0.25s ease;
+        }
+
+        .capabilities:hover .capability {
+          opacity: 0.55;
+        }
+
+        .capabilities .capability:hover {
+          opacity: 1;
+          transform: translateY(-2px);
+        }
+
+        .capabilities .capability:hover h3 {
+          color: var(--primary);
+        }
+
+        .capabilities .capability:hover .cred-tag {
+          border-color: rgba(20, 73, 130, 0.18);
+          background: #ffffff;
+        }
+
+        .service-accordion-item:hover {
+          border-color: rgba(20, 73, 130, 0.16);
+          box-shadow: 0 18px 42px rgba(15, 55, 99, 0.08);
+        }
+
+        .service-trigger:hover .service-trigger-arrow {
+          background: #ffffff;
+          border-color: rgba(20, 73, 130, 0.18);
+        }
+      }
+    </style>
   </head>
 
   <body>
     <header class="site-header">
       <div class="wrap header-inner">
-        <a href="/index.html" class="brand brand-logo">
-          <img src="/assets/logo-desousa.png" class="brand-logo-image" />
+        <a href="#top" class="brand brand-logo" aria-label="De Sousa Consulting - Home">
+          <img src="/assets/logo-desousa.png" alt="De Sousa Consulting" class="brand-logo-image" />
         </a>
 
-        <nav class="site-nav desktop-only">
+        <nav class="site-nav desktop-only" aria-label="Primary navigation">
           <a href="#top">Home</a>
           <a href="#credibilidad">About</a>
           <a href="#servicios">Services</a>
@@ -33,23 +1202,65 @@
         </nav>
 
         <div class="header-actions">
-          <a href="/index.html" class="lang-toggle">ES</a>
+          <div class="language-switcher">
+            <button
+              class="lang-toggle"
+              id="langToggle"
+              type="button"
+              aria-expanded="false"
+              aria-controls="langMenu"
+            >
+              <span id="langLabel">EN</span>
+              <span class="lang-caret">▾</span>
+            </button>
+
+            <div class="lang-menu" id="langMenu" hidden>
+              <button type="button" data-lang="es" data-label="ES">Español</button>
+              <button type="button" data-lang="pt" data-label="PT">Português</button>
+              <button type="button" data-lang="en-GB" data-label="EN">English (UK)</button>
+            </div>
+          </div>
+
           <a href="#diagnostico" class="btn header-cta desktop-only">Start assessment</a>
+
+          <button
+            class="menu-toggle"
+            id="menuToggle"
+            type="button"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobileMenu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-menu" id="mobileMenu" hidden>
+        <div class="wrap mobile-menu-inner">
+          <nav class="mobile-nav" aria-label="Primary mobile navigation">
+            <a href="#top">Home</a>
+            <a href="#credibilidad">About</a>
+            <a href="#servicios">Services</a>
+            <a href="#diagnostico">Contact</a>
+          </nav>
+
+          <div class="mobile-menu-footer">
+            <a href="#diagnostico" class="btn full">Start assessment</a>
+          </div>
         </div>
       </div>
     </header>
 
     <main id="top">
-      <!-- HERO -->
-      <section class="hero">
+      <section class="hero" aria-labelledby="hero-title">
         <div class="wrap hero-grid">
           <div class="hero-copy">
             <p class="eyebrow">Consulting firm</p>
-            <h1>Clarity and control for growth.</h1>
-
-            <p class="lead">
-              We integrate finance, operations, and technology into an organized and executable model.
-            </p>
+            <h1 id="hero-title">Clarity and control for growth.</h1>
+            <p class="lead">We integrate finance, operations, and technology through an organized and executable model.</p>
 
             <div class="cta-row">
               <a class="btn" href="#diagnostico">Start assessment</a>
@@ -57,21 +1268,40 @@
             </div>
 
             <p class="hero-note">
-              Share your needs and we will define the next steps for your organization.
+              Share your needs and let us define the next steps for your organization.
             </p>
+          </div>
+
+          <div class="hero-visual-wrap" aria-label="Main visual area of the homepage">
+            <div class="hero-visual">
+              <img src="/assets/hero-desousa.png" alt="Business structure" class="hero-image" />
+
+              <div class="hero-image-placeholder">
+                <div class="hero-image-card">
+                  <div class="hero-metrics">
+                    <div class="hero-metric">
+                      <strong>Structure</strong>
+                      <span>Clear organization of services, priorities, and decisions.</span>
+                    </div>
+
+                    <div class="hero-metric">
+                      <strong>Control</strong>
+                      <span>Greater visibility across processes, risks, and execution.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- EXPERIENCE -->
-      <section class="section alt" id="credibilidad">
+      <section class="section alt" id="credibilidad" aria-labelledby="credibilidad-title">
         <div class="wrap">
           <div class="section-header">
             <p class="section-label">Track record</p>
-            <h2>Applied experience.</h2>
-            <p class="section-intro">
-              Executive education, practical execution, and international exposure.
-            </p>
+            <h2 id="credibilidad-title">Applied experience.</h2>
+            <p class="section-intro">Executive education, practical execution, and international reach.</p>
           </div>
 
           <div class="capabilities">
@@ -79,144 +1309,530 @@
               <p class="mini-label">Education</p>
               <h3>International executive education</h3>
               <p>MBA, operations, and business specialization.</p>
+              <div class="cred-tags">
+                <span class="cred-tag">MBA</span>
+                <span class="cred-tag">Operations</span>
+                <span class="cred-tag">Strategy</span>
+              </div>
             </div>
 
             <div class="capability">
               <p class="mini-label">Methodology</p>
-              <h3>Execution-focused approach</h3>
+              <h3>Practical execution approach</h3>
               <p>Applied continuous improvement.</p>
+              <div class="cred-tags">
+                <span class="cred-tag">Lean</span>
+                <span class="cred-tag">Kaizen</span>
+                <span class="cred-tag">Process</span>
+              </div>
             </div>
 
             <div class="capability">
-              <p class="mini-label">Scope</p>
+              <p class="mini-label">Reach</p>
               <h3>Presence across multiple markets</h3>
-              <p>Work with companies in the Americas and Europe.</p>
+              <p>Work with companies across the Americas and Europe.</p>
+              <div class="cred-tags">
+                <span class="cred-tag">USA</span>
+                <span class="cred-tag">Europe</span>
+                <span class="cred-tag">LatAm</span>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SERVICES -->
-      <section class="section" id="servicios">
+      <section class="section" id="servicios" aria-labelledby="servicios-title">
         <div class="wrap">
           <div class="section-header">
             <p class="section-label">Services</p>
-            <h2>Key areas to strengthen your business.</h2>
-            <p class="section-intro">
-              Select the area that best aligns with your needs.
-            </p>
+            <h2 id="servicios-title">Key areas to strengthen your business.</h2>
+            <p class="section-intro">Select the area that best aligns with your needs.</p>
           </div>
 
-          <div class="services-accordion">
-            <article class="service-accordion-item is-open">
-              <button class="service-trigger">
+          <div class="services-accordion" id="servicesAccordion">
+            <article class="service-accordion-item is-open" data-service="transformacion-modernizacion">
+              <button
+                class="service-trigger"
+                type="button"
+                aria-expanded="true"
+                aria-controls="service-panel-transformacion"
+                id="service-trigger-transformacion"
+              >
                 <div class="service-trigger-copy">
-                  <h3>Digital Transformation & AI Enablement</h3>
-                  <p>Digital structure, automation, and applied AI capabilities.</p>
+                  <h3>Business transformation and modernization</h3>
+                  <p>Digital structure, automation, and applied use of artificial intelligence.</p>
                 </div>
-                <span class="service-trigger-arrow">+</span>
+                <span class="service-trigger-arrow" aria-hidden="true">+</span>
               </button>
 
-              <div class="service-panel">
+              <div
+                class="service-panel"
+                id="service-panel-transformacion"
+                role="region"
+                aria-labelledby="service-trigger-transformacion"
+              >
                 <div class="service-panel-inner">
                   <div class="service-panel-content">
-                    <p>
-                      Integrates technology, automation, and AI to improve operations,
-                      reduce friction, and strengthen decision-making.
-                    </p>
+                    <div class="service-detail-grid">
+                      <div class="service-detail-copy">
+                        <h4>What it solves</h4>
+                        <p>
+                          Integrates technology, automation, and AI capabilities to improve operations,
+                          reduce friction, and strengthen decision-making.
+                        </p>
 
-                    <a href="#diagnostico" class="btn service-start">
-                      Start
-                    </a>
+                        <div class="service-result">
+                          <strong>Outcome</strong>
+                          <p>Greater operational efficiency and stronger execution capacity.</p>
+                        </div>
+                      </div>
+
+                      <div class="service-detail-includes">
+                        <h4>What it includes</h4>
+                        <ul class="service-includes">
+                          <li>Digital and operational assessment</li>
+                          <li>Automation of key processes</li>
+                          <li>Tool integration</li>
+                          <li>Practical application of AI</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="service-actions">
+                      <a href="#diagnostico" class="btn service-start" data-service-origin="transformacion-modernizacion">Start</a>
+                      <span class="service-footnote">This service connects to a unified form to define the next step.</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </article>
 
-            <article class="service-accordion-item">
-              <button class="service-trigger">
+            <article class="service-accordion-item" data-service="finanzas-capital">
+              <button
+                class="service-trigger"
+                type="button"
+                aria-expanded="false"
+                aria-controls="service-panel-finanzas"
+                id="service-trigger-finanzas"
+              >
                 <div class="service-trigger-copy">
-                  <h3>Financial Structuring & Capital Readiness</h3>
-                  <p>Financial clarity for better growth decisions.</p>
+                  <h3>Financial structuring and capital readiness</h3>
+                  <p>Financial order to grow with greater clarity and decision-making capacity.</p>
                 </div>
-                <span class="service-trigger-arrow">+</span>
+                <span class="service-trigger-arrow" aria-hidden="true">+</span>
               </button>
+
+              <div
+                class="service-panel"
+                id="service-panel-finanzas"
+                role="region"
+                aria-labelledby="service-trigger-finanzas"
+              >
+                <div class="service-panel-inner">
+                  <div class="service-panel-content">
+                    <div class="service-detail-grid">
+                      <div class="service-detail-copy">
+                        <h4>What it solves</h4>
+                        <p>
+                          Organizes the financial foundation of the business to improve visibility, control, and readiness
+                          for growth, investment, or financing.
+                        </p>
+
+                        <div class="service-result">
+                          <strong>Outcome</strong>
+                          <p>Greater financial clarity and stronger decision-making capacity.</p>
+                        </div>
+                      </div>
+
+                      <div class="service-detail-includes">
+                        <h4>What it includes</h4>
+                        <ul class="service-includes">
+                          <li>Initial financial assessment</li>
+                          <li>Cost and cash flow structure</li>
+                          <li>Projections and capital readiness</li>
+                          <li>Foundation for growth or investment</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="service-actions">
+                      <a href="#diagnostico" class="btn service-start" data-service-origin="finanzas-capital">Start</a>
+                      <span class="service-footnote">This service connects to a unified form to define the next step.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </article>
 
-            <article class="service-accordion-item">
-              <button class="service-trigger">
+            <article class="service-accordion-item" data-service="riesgos-cumplimiento">
+              <button
+                class="service-trigger"
+                type="button"
+                aria-expanded="false"
+                aria-controls="service-panel-riesgos"
+                id="service-trigger-riesgos"
+              >
                 <div class="service-trigger-copy">
-                  <h3>Risk Management & Compliance</h3>
-                  <p>Control, continuity, and governance framework.</p>
+                  <h3>Risk management and compliance</h3>
+                  <p>Greater control, continuity, and governance framework for the organization.</p>
                 </div>
-                <span class="service-trigger-arrow">+</span>
+                <span class="service-trigger-arrow" aria-hidden="true">+</span>
               </button>
+
+              <div
+                class="service-panel"
+                id="service-panel-riesgos"
+                role="region"
+                aria-labelledby="service-trigger-riesgos"
+              >
+                <div class="service-panel-inner">
+                  <div class="service-panel-content">
+                    <div class="service-detail-grid">
+                      <div class="service-detail-copy">
+                        <h4>What it solves</h4>
+                        <p>
+                          Defines risks, controls, and compliance criteria to strengthen continuity,
+                          stability, and governance capacity.
+                        </p>
+
+                        <div class="service-result">
+                          <strong>Outcome</strong>
+                          <p>Greater control, continuity, and operational confidence.</p>
+                        </div>
+                      </div>
+
+                      <div class="service-detail-includes">
+                        <h4>What it includes</h4>
+                        <ul class="service-includes">
+                          <li>Identification of key risks</li>
+                          <li>Design of controls and criteria</li>
+                          <li>Compliance and governance framework</li>
+                          <li>Prioritization of critical actions</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="service-actions">
+                      <a href="#diagnostico" class="btn service-start" data-service-origin="riesgos-cumplimiento">Start</a>
+                      <span class="service-footnote">This service connects to a unified form to define the next step.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </article>
 
-            <article class="service-accordion-item">
-              <button class="service-trigger">
+            <article class="service-accordion-item" data-service="inmobiliario">
+              <button
+                class="service-trigger"
+                type="button"
+                aria-expanded="false"
+                aria-controls="service-panel-inmobiliario"
+                id="service-trigger-inmobiliario"
+              >
                 <div class="service-trigger-copy">
-                  <h3>Real Estate Strategy</h3>
-                  <p>Structured decision-making for real estate assets.</p>
+                  <h3>Real estate strategy and structuring</h3>
+                  <p>Clear judgment for decisions, assets, and real estate projects.</p>
                 </div>
-                <span class="service-trigger-arrow">+</span>
+                <span class="service-trigger-arrow" aria-hidden="true">+</span>
               </button>
+
+              <div
+                class="service-panel"
+                id="service-panel-inmobiliario"
+                role="region"
+                aria-labelledby="service-trigger-inmobiliario"
+              >
+                <div class="service-panel-inner">
+                  <div class="service-panel-content">
+                    <div class="service-detail-grid">
+                      <div class="service-detail-copy">
+                        <h4>What it solves</h4>
+                        <p>
+                          Brings financial and strategic judgment to organize decisions around assets,
+                          projects, and real estate opportunities.
+                        </p>
+
+                        <div class="service-result">
+                          <strong>Outcome</strong>
+                          <p>Better decisions regarding real estate assets and projects.</p>
+                        </div>
+                      </div>
+
+                      <div class="service-detail-includes">
+                        <h4>What it includes</h4>
+                        <ul class="service-includes">
+                          <li>Assessment of assets and projects</li>
+                          <li>Investment and feasibility analysis</li>
+                          <li>Structuring of real estate decisions</li>
+                          <li>Support for priorities and options</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="service-actions">
+                      <a href="#diagnostico" class="btn service-start" data-service-origin="inmobiliario">Start</a>
+                      <span class="service-footnote">This service connects to a unified form to define the next step.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </article>
 
-            <article class="service-accordion-item">
-              <button class="service-trigger">
+            <article class="service-accordion-item" data-service="patrimonio-activos">
+              <button
+                class="service-trigger"
+                type="button"
+                aria-expanded="false"
+                aria-controls="service-panel-patrimonio"
+                id="service-trigger-patrimonio"
+              >
                 <div class="service-trigger-copy">
-                  <h3>Wealth & Asset Strategy</h3>
-                  <p>Long-term structure and protection of assets.</p>
+                  <h3>Wealth and asset strategy</h3>
+                  <p>Protection, organization, and long-term vision for strategic assets.</p>
                 </div>
-                <span class="service-trigger-arrow">+</span>
+                <span class="service-trigger-arrow" aria-hidden="true">+</span>
               </button>
+
+              <div
+                class="service-panel"
+                id="service-panel-patrimonio"
+                role="region"
+                aria-labelledby="service-trigger-patrimonio"
+              >
+                <div class="service-panel-inner">
+                  <div class="service-panel-content">
+                    <div class="service-detail-grid">
+                      <div class="service-detail-copy">
+                        <h4>What it solves</h4>
+                        <p>
+                          Organizes and protects assets with a clear long-term perspective, supporting decisions
+                          around preservation, structure, and continuity.
+                        </p>
+
+                        <div class="service-result">
+                          <strong>Outcome</strong>
+                          <p>Greater security and clarity around wealth and assets.</p>
+                        </div>
+                      </div>
+
+                      <div class="service-detail-includes">
+                        <h4>What it includes</h4>
+                        <ul class="service-includes">
+                          <li>Initial wealth assessment</li>
+                          <li>Asset organization and structuring</li>
+                          <li>Protection and continuity criteria</li>
+                          <li>Long-term approach</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="service-actions">
+                      <a href="#diagnostico" class="btn service-start" data-service-origin="patrimonio-activos">Start</a>
+                      <span class="service-footnote">This service connects to a unified form to define the next step.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </article>
 
-            <article class="service-accordion-item">
-              <button class="service-trigger">
+            <article class="service-accordion-item" data-service="optimizacion-operativa">
+              <button
+                class="service-trigger"
+                type="button"
+                aria-expanded="false"
+                aria-controls="service-panel-operaciones"
+                id="service-trigger-operaciones"
+              >
                 <div class="service-trigger-copy">
-                  <h3>Operational Optimization</h3>
-                  <p>More efficient, measurable, and scalable operations.</p>
+                  <h3>Operational optimization</h3>
+                  <p>More efficient, measurable, and sustainable processes over time.</p>
                 </div>
-                <span class="service-trigger-arrow">+</span>
+                <span class="service-trigger-arrow" aria-hidden="true">+</span>
               </button>
+
+              <div
+                class="service-panel"
+                id="service-panel-operaciones"
+                role="region"
+                aria-labelledby="service-trigger-operaciones"
+              >
+                <div class="service-panel-inner">
+                  <div class="service-panel-content">
+                    <div class="service-detail-grid">
+                      <div class="service-detail-copy">
+                        <h4>What it solves</h4>
+                        <p>
+                          Improves operations through clearer, measurable, and more consistent processes,
+                          reducing friction and increasing follow-through capacity.
+                        </p>
+
+                        <div class="service-result">
+                          <strong>Outcome</strong>
+                          <p>More efficient, measurable, and sustainable operations.</p>
+                        </div>
+                      </div>
+
+                      <div class="service-detail-includes">
+                        <h4>What it includes</h4>
+                        <ul class="service-includes">
+                          <li>Initial operational assessment</li>
+                          <li>Redesign of priority processes</li>
+                          <li>Definition of metrics and control</li>
+                          <li>Improvement and implementation plan</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="service-actions">
+                      <a href="#diagnostico" class="btn service-start" data-service-origin="optimizacion-operativa">Start</a>
+                      <span class="service-footnote">This service connects to a unified form to define the next step.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </article>
           </div>
         </div>
       </section>
 
-      <!-- FORM -->
-      <section class="cta-section" id="diagnostico">
+      <section class="clients-strip" aria-label="Selected clients">
+        <div class="wrap">
+          <p class="clients-label">Selected clients</p>
+
+          <div class="clients-slider">
+            <div class="clients-track">
+              <div class="client-item">
+                <img src="/assets/client1.png" alt="Client 1" />
+              </div>
+
+              <div class="client-item">
+                <img src="/assets/client2.png" alt="Client 2" />
+              </div>
+
+              <div class="client-item">
+                <img src="/assets/client3.png" alt="Client 3" />
+              </div>
+
+              <div class="client-item">
+                <img src="/assets/client4.png" alt="Client 4" />
+              </div>
+
+              <div class="client-item">
+                <img src="/assets/client5.png" alt="Client 5" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-section" id="diagnostico" aria-labelledby="diagnostico-title">
         <div class="wrap">
           <div class="cta-panel">
             <div class="section-header">
               <p class="section-label">Start the process</p>
-              <h2>Tell us about your needs</h2>
+              <h2 id="diagnostico-title">Tell us about your needs</h2>
               <p class="section-intro">
-                Share basic information and we will guide the next steps.
+                Share basic information about your situation and we will outline the next steps.
               </p>
             </div>
 
             <div class="form-card">
-              <form class="form">
+              <form id="leadForm" class="form">
+                <input type="hidden" name="category" value="strategic-assessment" />
+                <input type="hidden" id="requestType" name="requestType" value="evaluation" />
+                <input type="hidden" id="demoVertical" name="demoVertical" value="home" />
+                <input type="hidden" id="serviceOrigin" name="serviceOrigin" value="home" />
+                <p id="selectedServiceNote" class="selected-service-note" hidden>
+                  Selected service: <strong id="selectedServiceLabel">General</strong>
+                </p>
+
                 <div class="form-grid">
-                  <input placeholder="Name" />
-                  <input placeholder="Email" />
+                  <input id="name" name="name" placeholder="Name" autocomplete="name" required />
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="Email"
+                    autocomplete="email"
+                    inputmode="email"
+                    required
+                  />
                 </div>
 
                 <div class="form-grid">
-                  <input placeholder="Company / Industry" />
-                  <input placeholder="Team size" />
+                  <input
+                    id="industry"
+                    name="industry"
+                    placeholder="Company / Industry"
+                    autocomplete="organization"
+                    required
+                  />
+                  <input
+                    id="teamSize"
+                    name="teamSize"
+                    type="number"
+                    min="1"
+                    step="1"
+                    inputmode="numeric"
+                    placeholder="Team size"
+                    autocomplete="off"
+                  />
                 </div>
 
-                <textarea placeholder="Describe your main need or challenge"></textarea>
+                <textarea
+                  id="pain"
+                  name="pain"
+                  rows="3"
+                  placeholder="Briefly describe your main need or current challenge"
+                ></textarea>
 
-                <button class="btn">Start assessment</button>
+                <div class="form-grid">
+                  <select id="country" name="country" autocomplete="country-name">
+                    <option value="">Country</option>
+                    <option value="Argentina">Argentina</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Bolivia">Bolivia</option>
+                    <option value="Brasil">Brazil</option>
+                    <option value="Canadá">Canada</option>
+                    <option value="Chile">Chile</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="Costa Rica">Costa Rica</option>
+                    <option value="Ecuador">Ecuador</option>
+                    <option value="El Salvador">El Salvador</option>
+                    <option value="España">Spain</option>
+                    <option value="Estados Unidos">United States</option>
+                    <option value="Guatemala">Guatemala</option>
+                    <option value="Honduras">Honduras</option>
+                    <option value="México">Mexico</option>
+                    <option value="Nicaragua">Nicaragua</option>
+                    <option value="Panamá">Panama</option>
+                    <option value="Paraguay">Paraguay</option>
+                    <option value="Perú">Peru</option>
+                    <option value="Puerto Rico">Puerto Rico</option>
+                    <option value="República Dominicana">Dominican Republic</option>
+                    <option value="Uruguay">Uruguay</option>
+                    <option value="Venezuela">Venezuela</option>
+                    <option value="Otro">Other</option>
+                  </select>
+
+                  <input
+                    id="countryOther"
+                    name="countryOther"
+                    type="text"
+                    placeholder="Specify your country"
+                    autocomplete="off"
+                    hidden
+                  />
+                </div>
+
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAACo2kg_YUeI2tGEs"></div>
+
+                <button type="submit" class="btn">Start assessment</button>
 
                 <p class="fine">
-                  No mass emails. Direct contact and structured follow-up only.
+                  We do not send mass communications. Only direct contact and structured follow-up.
                 </p>
+                <p id="formStatus" class="fine" aria-live="polite"></p>
               </form>
             </div>
           </div>
@@ -225,13 +1841,202 @@
     </main>
 
     <footer class="foot">
-      <div class="wrap foot-inner">
-        <span>De Sousa Consulting</span>
-        <a href="mailto:info@desousaconsulting.com">
-          info@desousaconsulting.com
-        </a>
+      <div class="wrap foot-shell">
+        <div class="foot-brand">
+          <a href="#top" class="foot-logo-link" aria-label="De Sousa Consulting - Home">
+            <img src="/assets/logo-desousa.png" alt="De Sousa Consulting" class="foot-logo" />
+          </a>
+          <p class="foot-name">De Sousa Consulting</p>
+        </div>
+
+        <nav class="foot-nav" aria-label="Secondary navigation">
+          <a href="#top">Home</a>
+          <a href="#credibilidad">About</a>
+          <a href="#servicios">Services</a>
+          <a href="#diagnostico">Contact</a>
+        </nav>
+
+        <div class="foot-contact">
+          <a href="mailto:info@desousaconsulting.com">info@desousaconsulting.com</a>
+        </div>
       </div>
     </footer>
+
+    <script>
+      const menuToggle = document.getElementById("menuToggle");
+      const mobileMenu = document.getElementById("mobileMenu");
+
+      const langToggle = document.getElementById("langToggle");
+      const langMenu = document.getElementById("langMenu");
+      const langLabel = document.getElementById("langLabel");
+
+      function closeMobileMenu() {
+        if (!menuToggle || !mobileMenu) return;
+        menuToggle.setAttribute("aria-expanded", "false");
+        mobileMenu.hidden = true;
+        document.body.classList.remove("menu-open");
+      }
+
+      function openMobileMenu() {
+        if (!menuToggle || !mobileMenu) return;
+        menuToggle.setAttribute("aria-expanded", "true");
+        mobileMenu.hidden = false;
+        document.body.classList.add("menu-open");
+      }
+
+      menuToggle?.addEventListener("click", () => {
+        const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+        if (isOpen) {
+          closeMobileMenu();
+        } else {
+          openMobileMenu();
+        }
+      });
+
+      document.querySelectorAll(".mobile-nav a, .mobile-menu-footer a").forEach((link) => {
+        link.addEventListener("click", () => {
+          closeMobileMenu();
+        });
+      });
+
+      langToggle?.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const isOpen = langToggle.getAttribute("aria-expanded") === "true";
+        langToggle.setAttribute("aria-expanded", String(!isOpen));
+        if (langMenu) {
+          langMenu.hidden = isOpen;
+        }
+      });
+
+      document.querySelectorAll(".lang-menu button").forEach((button) => {
+        button.addEventListener("click", () => {
+          const lang = button.getAttribute("data-lang") || "es";
+          const label = button.getAttribute("data-label") || "ES";
+
+          document.documentElement.setAttribute("lang", lang);
+          if (langLabel) {
+            langLabel.textContent = label;
+          }
+
+          langToggle?.setAttribute("aria-expanded", "false");
+          if (langMenu) {
+            langMenu.hidden = true;
+          }
+
+          console.log("Selected language:", lang);
+        });
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!event.target.closest(".language-switcher")) {
+          langToggle?.setAttribute("aria-expanded", "false");
+          if (langMenu) {
+            langMenu.hidden = true;
+          }
+        }
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth >= 860) {
+          closeMobileMenu();
+        }
+      });
+
+      const serviceItems = Array.from(document.querySelectorAll(".service-accordion-item"));
+
+      function getServiceLabel(serviceKey) {
+        const serviceLabels = {
+          "transformacion-modernizacion": "Business transformation and modernization",
+          "finanzas-capital": "Financial structuring and capital readiness",
+          "riesgos-cumplimiento": "Risk management and compliance",
+          "inmobiliario": "Real estate strategy and structuring",
+          "patrimonio-activos": "Wealth and asset strategy",
+          "optimizacion-operativa": "Operational optimization",
+          "home": "General"
+        };
+
+        return serviceLabels[serviceKey] || "General";
+      }
+
+      function updateSelectedServiceNote(serviceKey) {
+        const note = document.getElementById("selectedServiceNote");
+        const label = document.getElementById("selectedServiceLabel");
+
+        if (!note || !label) return;
+
+        const serviceLabel = getServiceLabel(serviceKey);
+
+        if (serviceKey && serviceKey !== "home") {
+          label.textContent = serviceLabel;
+          note.hidden = false;
+        } else {
+          label.textContent = "General";
+          note.hidden = true;
+        }
+      }
+
+      function setServiceOrigin(serviceKey) {
+        const hiddenOrigin = document.getElementById("serviceOrigin");
+        const hiddenVertical = document.getElementById("demoVertical");
+        const hiddenType = document.getElementById("requestType");
+
+        if (hiddenOrigin) hiddenOrigin.value = serviceKey;
+        if (hiddenVertical) hiddenVertical.value = serviceKey;
+        if (hiddenType) hiddenType.value = "service-interest";
+
+        updateSelectedServiceNote(serviceKey);
+      }
+
+      function openService(item) {
+        serviceItems.forEach((service) => {
+          const button = service.querySelector(".service-trigger");
+          const isTarget = service === item;
+
+          service.classList.toggle("is-open", isTarget);
+          if (button) {
+            button.setAttribute("aria-expanded", String(isTarget));
+          }
+        });
+      }
+
+      serviceItems.forEach((item) => {
+        const trigger = item.querySelector(".service-trigger");
+        if (!trigger) return;
+
+        trigger.addEventListener("click", () => {
+          const isOpen = item.classList.contains("is-open");
+          if (isOpen) {
+            item.classList.remove("is-open");
+            trigger.setAttribute("aria-expanded", "false");
+          } else {
+            openService(item);
+          }
+        });
+      });
+
+      document.querySelectorAll("[data-service-origin]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const serviceKey = button.getAttribute("data-service-origin") || "home";
+          setServiceOrigin(serviceKey);
+        });
+      });
+
+      document.querySelectorAll('a[href="#diagnostico"]').forEach((link) => {
+        if (!link.hasAttribute("data-service-origin")) {
+          link.addEventListener("click", () => {
+            const hiddenOrigin = document.getElementById("serviceOrigin");
+            const hiddenVertical = document.getElementById("demoVertical");
+            const hiddenType = document.getElementById("requestType");
+
+            if (hiddenOrigin) hiddenOrigin.value = "home";
+            if (hiddenVertical) hiddenVertical.value = "home";
+            if (hiddenType) hiddenType.value = "evaluation";
+
+            updateSelectedServiceNote("home");
+          });
+        }
+      });
+    </script>
   </body>
 </html>
 
