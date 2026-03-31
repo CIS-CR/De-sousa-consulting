@@ -1931,6 +1931,37 @@
 
       const serviceItems = Array.from(document.querySelectorAll(".service-accordion-item"));
 
+      function getServiceLabel(serviceKey) {
+        const serviceLabels = {
+          "transformacion-modernizacion": "Transformación y modernización empresarial",
+          "finanzas-capital": "Estructuración financiera y preparación de capital",
+          "riesgos-cumplimiento": "Gestión de riesgos y cumplimiento",
+          "inmobiliario": "Estrategia y estructuración inmobiliaria",
+          "patrimonio-activos": "Estrategia patrimonial y de activos",
+          "optimizacion-operativa": "Optimización operativa",
+          "home": "General"
+        };
+
+        return serviceLabels[serviceKey] || "General";
+      }
+
+      function updateSelectedServiceNote(serviceKey) {
+        const note = document.getElementById("selectedServiceNote");
+        const label = document.getElementById("selectedServiceLabel");
+
+        if (!note || !label) return;
+
+        const serviceLabel = getServiceLabel(serviceKey);
+
+        if (serviceKey && serviceKey !== "home") {
+          label.textContent = serviceLabel;
+          note.hidden = false;
+        } else {
+          label.textContent = "General";
+          note.hidden = true;
+        }
+      }
+
       function setServiceOrigin(serviceKey) {
         const hiddenOrigin = document.getElementById("serviceOrigin");
         const hiddenVertical = document.getElementById("demoVertical");
@@ -1939,9 +1970,11 @@
         if (hiddenOrigin) hiddenOrigin.value = serviceKey;
         if (hiddenVertical) hiddenVertical.value = serviceKey;
         if (hiddenType) hiddenType.value = "service-interest";
-      }
 
-      function openService(item) {
+        updateSelectedServiceNote(serviceKey);
+       }
+
+       function openService(item) {
         serviceItems.forEach((service) => {
           const button = service.querySelector(".service-trigger");
           const isTarget = service === item;
