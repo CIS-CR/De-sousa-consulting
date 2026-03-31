@@ -962,4 +962,33 @@ tbody tr:hover{
   .btn.btn-small#refreshBtn{
     width:100%;
   }
+   .comments-textarea,
+.comments-by {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--text);
+  border-radius: 14px;
+  padding: 12px 14px;
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.45;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.02);
+}
+
+.comments-textarea::placeholder,
+.comments-by::placeholder {
+  color: #94a3b8;
+}
+
+.comments-textarea:hover,
+.comments-by:hover {
+  border-color: rgba(20, 73, 130, 0.22);
+}
+
+.comments-textarea:focus,
+.comments-by:focus {
+  outline: none;
+  border-color: rgba(20, 73, 130, 0.45);
+  box-shadow: 0 0 0 4px rgba(20, 73, 130, 0.10);
 }
