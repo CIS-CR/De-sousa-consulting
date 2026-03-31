@@ -2015,9 +2015,11 @@
             const hiddenVertical = document.getElementById("demoVertical");
             const hiddenType = document.getElementById("requestType");
 
-            if (hiddenOrigin && hiddenOrigin.value === "") hiddenOrigin.value = "home";
-            if (hiddenVertical && hiddenVertical.value === "") hiddenVertical.value = "home";
-            if (hiddenType && hiddenType.value === "") hiddenType.value = "evaluation";
+            if (hiddenOrigin) hiddenOrigin.value = "home";
+            if (hiddenVertical) hiddenVertical.value = "home";
+            if (hiddenType) hiddenType.value = "evaluation";
+
+            updateSelectedServiceNote("home");
           });
         }
       });
