@@ -26,16 +26,21 @@
           </div>
         </header>
 
-        <nav class="sd-nav">
-          <a class="sd-nav__item" href="/" target="_blank" rel="noopener">
+        <nav class="sd-nav" aria-label="Navegación del módulo">
+          <a
+            class="sd-nav__item"
+            href="/index.html"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Landing
-        </a>
+          </a>
 
-          <a class="sd-nav__item is-active" href="/canvas/">
+          <a class="sd-nav__item is-active" href="/canvas/index.html">
             Canvas
           </a>
 
-          <a class="sd-nav__item" href="/history/">
+          <a class="sd-nav__item" href="/history/index.html">
             Historial
           </a>
         </nav>
@@ -165,14 +170,13 @@
       </div>
     </div>
 
-    <!-- Config -->
     <script>
       window.FBOS_CANVAS_CONFIG = {
         useMultiDemo: true,
         demos: {
           desousa: {
             demo: "implementations",
-            scanPath: "/desousa-consulting/job.html",
+            scanPath: "/canvas/index.html",
             states: ["Nuevas", "Validadas", "Asignadas", "En ejecución", "En revisión", "Cerradas"],
             actionLabel: {
               Nuevas: "Revisar",
