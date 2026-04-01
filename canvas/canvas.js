@@ -1,10 +1,9 @@
-// desousa-consulting/canvas.js
+// canvas/canvas.js
 // - UI en Español (De Sousa Consulting)
 // - Demo-aware para /api/demos/implementations/*
 // - Alineado al intake de landing / one pager
 // - Soporta confirm modal
 // - Soporta comments (POST /comment + fallback history)
-// - Reutiliza estados backend sin tocar worker
 
 const API_BASE = "https://api.fbos.org";
 const DEMO_SLUG = "implementations";
@@ -43,6 +42,22 @@ const ACTION_LABEL = {
   "En ejecución": "Seguimiento",
   "En revisión": "Cerrar",
   Cerradas: "Cerrada",
+};
+
+const SERVICE_LABEL_MAP = {
+  "transformacion-modernizacion": "Transformación y modernización empresarial",
+  "transformacion-digital-ia": "Transformación y modernización empresarial",
+  "transformacion-digital": "Transformación y modernización empresarial",
+  "estructuracion-financiera-capital": "Estructuración financiera y preparación de capital",
+  "estructuracion-financiera": "Estructuración financiera y preparación de capital",
+  "riesgos-cumplimiento": "Gestión de riesgos y cumplimiento",
+  "gobierno-riesgos": "Gestión de riesgos y cumplimiento",
+  "estrategia-estructuracion-inmobiliaria": "Estrategia y estructuración inmobiliaria",
+  "asesoria-inmobiliaria": "Estrategia y estructuración inmobiliaria",
+  "estrategia-patrimonial-activos": "Estrategia patrimonial y de activos",
+  "planeacion-patrimonial": "Estrategia patrimonial y de activos",
+  "optimizacion-operativa": "Optimización operativa",
+  "home": "General",
 };
 
 const DEFAULT_VISIBLE_PER_STATE = 3;
@@ -446,6 +461,23 @@ function getCardRequestType(a) {
   return p.requestType || "evaluation";
 }
 
+function getServiceOrigin(a) {
+  const p = getPayload(a);
+  return p.demoVertical || p.serviceOrigin || "";
+}
+
+function getServiceLabel(value) {
+  return SERVICE_LABEL_MAP[value] || value || "";
+}
+
+function getCategoryDisplay(a) {
+  const p = getPayload(a);
+  const category = a.category || p.category || "—";
+  const serviceLabel = getServiceLabel(getServiceOrigin(a));
+
+  return serviceLabel ? `${category} · ${serviceLabel}` : category;
+}
+
 function sectionHtml(stateName, actions, inlineMsgById) {
   const total = actions.length;
   const title = STATE_LABEL[stateName] || stateName;
@@ -475,6 +507,7 @@ function sectionHtml(stateName, actions, inlineMsgById) {
       const requestType = getCardRequestType(a);
       const email = p.customer_email || a.customer_email || "";
       const msg = inlineMsgById[id];
+      const categoryDisplay = getCategoryDisplay(a);
 
       return `
         <article class="action-card" data-id="${escapeHtml(id)}">
@@ -487,7 +520,8 @@ function sectionHtml(stateName, actions, inlineMsgById) {
           </div>
 
           <h3 class="action-title">${escapeHtml(title)}</h3>
-          ${subtitle ? `<p class="action-desc"><strong>${escapeHtml(subtitle)}</strong></p>` : ""}
+          <p class="action-desc"><strong>${escapeHtml(categoryDisplay)}</strong></p>
+          ${subtitle ? `<p class="action-desc">${escapeHtml(subtitle)}</p>` : ""}
           ${email ? `<p class="action-desc">${escapeHtml(email)}</p>` : ""}
           ${desc ? `<p class="action-desc">${escapeHtml(desc)}</p>` : ""}
 
@@ -1021,12 +1055,19 @@ async function showJobDetails(actionId) {
     if (!res.ok || !out?.success || !a) throw new Error(out?.error || "Failed");
 
     const payload = a.payload || {};
+    const category = a.category || payload.category || "—";
+    const requestType = payload.requestType || "evaluation";
+    const serviceOrigin = payload.demoVertical || payload.serviceOrigin || "—";
+    const serviceLabel = getServiceLabel(serviceOrigin);
+    const categoryDisplay =
+      serviceLabel && serviceLabel !== "—"
+        ? `${category} · ${serviceLabel}`
+        : category;
+
     if (elState) elState.textContent = `Estado: ${STATE_LABEL[a.state] || a.state || "—"}`;
-    if (elCategory) elCategory.textContent = payload.category || a.category || "—";
+    if (elCategory) elCategory.textContent = categoryDisplay;
     if (elUrgency) {
-      const requestType = payload.requestType || "evaluation";
-      elUrgency.textContent =
-        requestType === "demo" ? "Demo" : "Evaluación";
+      elUrgency.textContent = requestType === "demo" ? "Demo" : "Evaluación";
     }
     if (elDamage) {
       const name = payload.customer_name || a.customer_name || "—";
@@ -1038,7 +1079,6 @@ async function showJobDetails(actionId) {
       const detailParts = [];
       if (payload.industry) detailParts.push(`Empresa / industria: ${payload.industry}`);
       if (payload.teamSize) detailParts.push(`Tamaño del equipo: ${payload.teamSize}`);
-      if (payload.demoVertical) detailParts.push(`Origen: ${payload.demoVertical}`);
       if (payload.description) detailParts.push(payload.description);
       elDesc.textContent = detailParts.join(" · ") || "—";
     }
