@@ -49,8 +49,8 @@ const DEFAULT_VISIBLE_PER_STATE = 3;
 const COLLAPSED_VISIBLE_CERRADAS = 3;
 const MAX_VISIBLE_CERRADAS = 6;
 
-const HISTORY_URL = "/desousa-consulting/history/";
-const JOB_URL = "/desousa-consulting/job.html";
+const HISTORY_URL = "/history/index.html";
+const JOB_URL = "/canvas/index.html";
 
 const visibleByState = Object.fromEntries(FLOW_STATES.map((s) => [s, DEFAULT_VISIBLE_PER_STATE]));
 const isExpandedByState = Object.fromEntries(FLOW_STATES.map((s) => [s, false]));
