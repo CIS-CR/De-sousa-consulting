@@ -992,3 +992,81 @@ tbody tr:hover{
   border-color: rgba(20, 73, 130, 0.45);
   box-shadow: 0 0 0 4px rgba(20, 73, 130, 0.10);
 }
+ /* =========================================
+   FIX INPUTS COMENTARIOS (FORZADO)
+========================================= */
+
+.comments-composer {
+  padding: 14px;
+  border: 1px solid rgba(20, 73, 130, 0.12);
+  border-radius: 16px;
+  background: #f8fafc;
+}
+
+/* INPUT NOMBRE */
+.comments-by {
+  width: 100% !important;
+  height: 44px !important;
+  padding: 0 14px !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(20, 73, 130, 0.18) !important;
+  background: #ffffff !important;
+  color: #1e1d1d !important;
+  font-size: 14px !important;
+  font-weight: 500;
+  outline: none;
+  box-shadow: none;
+  appearance: none;
+}
+
+/* TEXTAREA COMENTARIO */
+.comments-textarea {
+  width: 100% !important;
+  min-height: 90px !important;
+  padding: 12px 14px !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(20, 73, 130, 0.18) !important;
+  background: #ffffff !important;
+  color: #1e1d1d !important;
+  font-size: 14px !important;
+  line-height: 1.45;
+  resize: vertical;
+  outline: none;
+  box-shadow: none;
+  appearance: none;
+}
+
+/* PLACEHOLDER */
+.comments-textarea::placeholder,
+.comments-by::placeholder {
+  color: #94a3b8 !important;
+  opacity: 1;
+}
+
+/* HOVER */
+.comments-textarea:hover,
+.comments-by:hover {
+  border-color: rgba(20, 73, 130, 0.35) !important;
+}
+
+/* FOCUS (ESTILO APPLE / LINEAR) */
+.comments-textarea:focus,
+.comments-by:focus {
+  border-color: #144982 !important;
+  box-shadow: 0 0 0 3px rgba(20, 73, 130, 0.12) !important;
+  background: #ffffff !important;
+}
+
+/* ERROR MESSAGE */
+.inline-msg {
+  margin-top: 6px;
+  font-size: 12px;
+}
+
+.inline-msg--error {
+  color: #991b1b;
+  background: rgba(239, 68, 68, 0.10);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  padding: 8px 10px;
+  border-radius: 10px;
+}
