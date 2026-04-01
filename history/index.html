@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Bethencourt Properties — Historial</title>
+
+    <link rel="icon" type="image/png" href="/assets/fbos-logo.png" />
+    
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/bethencourt-properties/styles.css" />
+
+    <style>
+      /* 🔒 NO CAMBIAR — estilos ya validados */
+      .history-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 10px;
+      }
+
+      .history-actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .history-search {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin: 10px 0 14px;
+      }
+
+      .hint {
+        font-size: 12px;
+        color: #64748b;
+        line-height: 1.35;
+      }
+
+      #countLabel {
+        font-weight: 900 !important;
+        font-size: 18px !important;
+        letter-spacing: -0.01em;
+      }
+
+      #searchInput {
+        width: 100%;
+        height: 44px;
+        padding: 0 14px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: #fff;
+        font-weight: 700;
+        color: var(--text);
+      }
+
+      #searchInput::placeholder {
+        color: #94a3b8;
+        font-weight: 700;
+      }
+
+      #searchInput:focus {
+        outline: none;
+        border-color: rgba(10, 61, 98, 0.45);
+        box-shadow: 0 0 0 4px rgba(10, 61, 98, 0.12);
+      }
+
+      .table-wrap {
+        width: 100%;
+        overflow: auto;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 720px;
+      }
+
+      thead th {
+        text-align: left;
+        font-size: 12px;
+        color: #475569;
+        background: #f8fafc;
+        padding: 12px;
+        border-bottom: 1px solid var(--line);
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+      }
+
+      tbody td {
+        padding: 12px;
+        border-bottom: 1px solid #eef2f7;
+        vertical-align: top;
+        font-size: 14px;
+      }
+
+      tbody tr:hover {
+        background: #fbfdff;
+      }
+
+      .mono {
+        font-variant-numeric: tabular-nums;
+        font-feature-settings: "tnum";
+        font-weight: 900;
+        color: #0b1f3a;
+        letter-spacing: 0.01em;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        font-size: 12px;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+
+      .pill-muted {
+        background: #f1f5f9;
+        color: #475569;
+        border-color: #cbd5e1;
+      }
+
+      .empty-box {
+        padding: 14px;
+        border-radius: 14px;
+        background: rgba(15, 23, 42, 0.03);
+        color: #64748b;
+        font-weight: 800;
+        font-size: 13px;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+      }
+
+      @media (max-width: 420px) {
+        .history-top {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .history-actions {
+          justify-content: flex-end;
+        }
+
+        .btn.btn-small#refreshBtn {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="fbos-board">
+    <main class="wrap">
+      <section class="card">
+        <header class="header">
+          <div class="brand brand--demo">
+            <div class="fbos-logo-slot">
+              <img src="/assets/fbos-logo.png" alt="FBOS Logo" />
+            </div>
+            <div>
+              <h1>Bethencourt Properties</h1>
+              <p>Property management</p>
+            </div>
+          </div>
+        </header>
+
+        <nav class="sd-nav" aria-label="Navegación del demo">
+          <a class="sd-nav__item" href="/bethencourt-properties/">Formulario</a>
+          <a class="sd-nav__item" href="/bethencourt-properties/canvas/">Canvas</a>
+          <a class="sd-nav__item is-active" href="/bethencourt-properties/history/">Historial</a>
+        </nav>
+
+        <div class="history-top">
+          <div>
+            <div id="countLabel">Cerradas (—)</div>
+            <div class="hint">
+              Busca por ID, categoría, urgencia, ubicación o texto.
+            </div>
+          </div>
+
+          <div class="history-actions">
+            <button class="btn btn-small" id="refreshBtn" type="button">
+              Actualizar
+            </button>
+          </div>
+        </div>
+
+        <div class="history-search">
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="Buscar… (ej. FBOS-00009, Plomería, Urgente, Escazú)"
+            autocomplete="off"
+          />
+          <div id="status" class="status"></div>
+        </div>
+
+        <div id="content"></div>
+
+        <footer class="footer">
+          <small>FBOS Bethencourt Properties History v0.1</small>
+        </footer>
+      </section>
+    </main>
+
+    <!-- MODAL -->
+    <div class="label-modal" id="historyModal" aria-hidden="true">
+      <div class="label-card" role="document">
+        <div class="label-head">
+          <strong>Ticket</strong>
+          <button
+            type="button"
+            class="label-close"
+            id="historyCloseBtn"
+            aria-label="Cerrar"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div class="label-body" id="historyModalBody"></div>
+      </div>
+    </div>
+
+    <script src="/bethencourt-properties/history.js"></script>
+  </body>
+</html>
