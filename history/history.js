@@ -1,236 +1,176 @@
-<!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>De Sousa Consulting — Historial</title>
+// history/history.js — De Sousa Consulting
 
-    <link rel="icon" type="image/png" href="/assets/fbos-logo.png" />
+const API_BASE = "https://api.fbos.org";
+const DEMO_SLUG = "implementations";
 
-    <link rel="stylesheet" href="/styles.css" />
-    <link rel="stylesheet" href="/canvas/styles.css" />
+const ENDPOINT_ACTIONS = `${API_BASE}/api/demos/${DEMO_SLUG}/actions?limit=50`;
+const ENDPOINT_CLOSED = `${API_BASE}/api/demos/${DEMO_SLUG}/actions/closed?limit=50`;
 
-    <style>
-      .history-top {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 12px;
-        margin-bottom: 10px;
-      }
+const CLOSED_STATE = "Cerradas";
 
-      .history-actions {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-      }
+const els = {
+  countLabel: document.getElementById("countLabel"),
+  refreshBtn: document.getElementById("refreshBtn"),
+  searchInput: document.getElementById("searchInput"),
+  status: document.getElementById("status"),
+  content: document.getElementById("content"),
+};
 
-      .history-search {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 10px;
-        margin: 10px 0 14px;
-      }
+const modal = {
+  root: document.getElementById("historyModal"),
+  body: document.getElementById("historyModalBody"),
+  closeBtn: document.getElementById("historyCloseBtn"),
+};
 
-      .hint {
-        font-size: 12px;
-        color: #64748b;
-        line-height: 1.35;
-      }
+let allClosed = [];
 
-      #countLabel {
-        font-weight: 900 !important;
-        font-size: 18px !important;
-        letter-spacing: -0.01em;
-      }
+function escapeHtml(str) {
+  return String(str ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
 
-      #searchInput {
-        width: 100%;
-        height: 44px;
-        padding: 0 14px;
-        border-radius: 14px;
-        border: 1px solid var(--line);
-        background: #fff;
-        font-weight: 700;
-        color: var(--text);
-      }
+function parseTs(ts) {
+  const t = Date.parse(ts);
+  return Number.isFinite(t) ? t : 0;
+}
 
-      #searchInput::placeholder {
-        color: #94a3b8;
-        font-weight: 700;
-      }
+function fmtDate(ts) {
+  const t = parseTs(ts);
+  if (!t) return "—";
+  const d = new Date(t);
+  return d.toLocaleString("es-CR", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
 
-      #searchInput:focus {
-        outline: none;
-        border-color: rgba(20, 73, 130, 0.45);
-        box-shadow: 0 0 0 4px rgba(20, 73, 130, 0.12);
-      }
+function setStatus(kind, text) {
+  els.status.className = "status " + (kind === "err" ? "err" : "ok");
+  els.status.textContent = text || "";
+}
 
-      .table-wrap {
-        width: 100%;
-        overflow: auto;
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        background: #fff;
-        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
-      }
+function normalizeQuery(q) {
+  const s = String(q || "").trim();
+  if (!s) return "";
+  if (/^fbos-\d+$/i.test(s)) return s.toUpperCase();
+  return s;
+}
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        min-width: 720px;
-      }
+function filterRows(query) {
+  const q = normalizeQuery(query).toLowerCase();
+  if (!q) return allClosed;
 
-      thead th {
-        text-align: left;
-        font-size: 12px;
-        color: #475569;
-        background: #f8fafc;
-        padding: 12px;
-        border-bottom: 1px solid var(--line);
-        position: sticky;
-        top: 0;
-        z-index: 1;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
-      }
+  return allClosed.filter((a) => {
+    const p = a.payload || {};
 
-      tbody td {
-        padding: 12px;
-        border-bottom: 1px solid #eef2f7;
-        vertical-align: top;
-        font-size: 14px;
-      }
+    const hay = [
+      a.action_id,
+      a.category,
+      a.description,
+      a.location,
+      p.customer_name,
+      p.customer_email,
+      p.industry,
+      p.teamSize,
+      p.pain,
+    ]
+      .map((x) => String(x || "").toLowerCase())
+      .join(" ");
 
-      tbody tr:hover {
-        background: #fbfdff;
-      }
+    return hay.includes(q);
+  });
+}
 
-      .mono {
-        font-variant-numeric: tabular-nums;
-        font-feature-settings: "tnum";
-        font-weight: 900;
-        color: #0b1f3a;
-        letter-spacing: 0.01em;
-      }
+function renderTable(rows) {
+  els.countLabel.textContent = `Cerradas (${rows.length})`;
 
-      .pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 6px 10px;
-        border-radius: 999px;
-        border: 1px solid transparent;
-        font-size: 12px;
-        font-weight: 800;
-        white-space: nowrap;
-      }
+  if (!rows.length) {
+    els.content.innerHTML = `<div class="empty-box">No hay solicitudes cerradas.</div>`;
+    return;
+  }
 
-      .pill-muted {
-        background: #f1f5f9;
-        color: #475569;
-        border-color: #cbd5e1;
-      }
+  const html = rows
+    .map((a) => {
+      const p = a.payload || {};
 
-      .empty-box {
-        padding: 14px;
-        border-radius: 14px;
-        background: rgba(15, 23, 42, 0.03);
-        color: #64748b;
-        font-weight: 800;
-        font-size: 13px;
-        border: 1px solid rgba(148, 163, 184, 0.35);
-      }
+      return `
+        <tr>
+          <td><strong>${escapeHtml(a.action_id)}</strong></td>
+          <td>${escapeHtml(a.category || "")}</td>
+          <td>${escapeHtml(p.customer_name || "")}</td>
+          <td>${escapeHtml(a.location || "")}</td>
+          <td>${escapeHtml(fmtDate(a.created_at))}</td>
+          <td>${escapeHtml(fmtDate(a.updated_at))}</td>
+        </tr>
+      `;
+    })
+    .join("");
 
-      @media (max-width: 420px) {
-        .history-top {
-          flex-direction: column;
-          align-items: stretch;
-        }
-
-        .history-actions {
-          justify-content: flex-end;
-        }
-
-        .btn.btn-small#refreshBtn {
-          width: 100%;
-        }
-      }
-    </style>
-  </head>
-
-  <body class="fbos-board">
-    <main class="wrap">
-      <section class="card">
-        <header class="header">
-          <div class="brand brand--demo">
-            <div class="fbos-logo-slot">
-              <img src="/assets/fbos-logo.png" alt="FBOS Logo" />
-            </div>
-            <div>
-              <h1>De Sousa Consulting</h1>
-              <p>Historial operativo</p>
-            </div>
-          </div>
-        </header>
-
-        <nav class="sd-nav" aria-label="Navegación del módulo">
-          <a class="sd-nav__item" href="/">Landing</a>
-          <a class="sd-nav__item" href="/canvas/">Canvas</a>
-          <a class="sd-nav__item is-active" href="/history/">Historial</a>
-        </nav>
-
-        <div class="history-top">
-          <div>
-            <div id="countLabel">Cerradas (—)</div>
-            <div class="hint">
-              Busca por ID, categoría, país, solicitante o texto.
-            </div>
-          </div>
-
-          <div class="history-actions">
-            <button class="btn btn-small" id="refreshBtn" type="button">
-              Actualizar
-            </button>
-          </div>
-        </div>
-
-        <div class="history-search">
-          <input
-            id="searchInput"
-            type="text"
-            placeholder="Buscar… (ej. FBOS-00016, strategic-assessment, Costa Rica, Colin)"
-            autocomplete="off"
-          />
-          <div id="status" class="status"></div>
-        </div>
-
-        <div id="content"></div>
-
-        <footer class="footer">
-          <small>FBOS De Sousa Consulting History v0.1</small>
-        </footer>
-      </section>
-    </main>
-
-    <div class="label-modal" id="historyModal" aria-hidden="true">
-      <div class="label-card" role="document">
-        <div class="label-head">
-          <strong>Solicitud</strong>
-          <button
-            type="button"
-            class="label-close"
-            id="historyCloseBtn"
-            aria-label="Cerrar"
-          >
-            ✕
-          </button>
-        </div>
-
-        <div class="label-body" id="historyModalBody"></div>
-      </div>
+  els.content.innerHTML = `
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Categoría</th>
+            <th>Cliente</th>
+            <th>País</th>
+            <th>Creado</th>
+            <th>Cerrado</th>
+          </tr>
+        </thead>
+        <tbody>${html}</tbody>
+      </table>
     </div>
+  `;
+}
 
-    <script src="/history/history.js"></script>
-  </body>
-</html>
+async function fetchClosed() {
+  els.refreshBtn.disabled = true;
+  els.refreshBtn.textContent = "Cargando…";
+
+  try {
+    const res = await fetch(ENDPOINT_ACTIONS);
+    const data = await res.json();
+
+    if (!data.success) throw new Error("Error API");
+
+    const actions = data.actions || [];
+
+    const closed = actions.filter(
+      (a) => String(a.state || "").trim() === CLOSED_STATE
+    );
+
+    allClosed = closed.sort(
+      (a, b) => parseTs(b.updated_at) - parseTs(a.updated_at)
+    );
+
+    renderTable(filterRows(els.searchInput.value));
+  } catch (err) {
+    setStatus("err", "No se pudo cargar el historial");
+    console.error(err);
+  } finally {
+    els.refreshBtn.disabled = false;
+    els.refreshBtn.textContent = "Actualizar";
+  }
+}
+
+function attach() {
+  els.refreshBtn.addEventListener("click", fetchClosed);
+
+  els.searchInput.addEventListener("input", () => {
+    renderTable(filterRows(els.searchInput.value));
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  attach();
+  fetchClosed();
+});
