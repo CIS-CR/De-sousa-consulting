@@ -651,6 +651,43 @@
         transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
       }
 
+      .credibility-strip {
+        margin-top: 36px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .credibility-strip a {
+        width: min(100%, 860px);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 14px 18px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.65);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        line-height: 1.55;
+        color: rgba(30, 29, 29, 0.85);
+        text-align: center;
+        transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .credibility-strip a:hover {
+        transform: translateY(-1px);
+        border-color: rgba(0, 0, 0, 0.16);
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      .linkedin-icon {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+      }
+
       /* Services Accordion */
       .services-accordion {
         display: grid;
@@ -988,6 +1025,14 @@
       @media (max-width: 859px) {
         .btn.header-cta {
           display: none;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .credibility-strip a {
+          width: 100%;
+          align-items: flex-start;
+          text-align: center;
         }
       }
 
@@ -1370,6 +1415,18 @@
                 <span class="cred-tag">LatAm</span>
               </div>
             </div>
+          </div>
+
+          <div class="credibility-strip">
+            <a
+              href="https://www.linkedin.com/in/vasco-de-sousa-bb548043/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Abrir perfil de LinkedIn de Vasco de Sousa"
+            >
+              <img src="/icons/linkedin.svg" alt="LinkedIn" class="linkedin-icon" loading="lazy" />
+              <span>Si quieres conocer más sobre mi trayectoria, te invito a explorar mi perfil de LinkedIn.</span>
+            </a>
           </div>
         </div>
       </section>
