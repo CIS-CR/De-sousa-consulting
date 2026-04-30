@@ -77,7 +77,18 @@
     return null;
   }
 
-  function buildPayload() {
+  function getTurnstileToken() {
+    try {
+      const formData = new FormData(form);
+      const token = String(formData.get("cf-turnstile-response") || "").trim();
+      if (token) return token;
+    } catch {}
+
+    const tokenInput = form.querySelector('input[name="cf-turnstile-response"]');
+    return String(tokenInput?.value || "").trim();
+  }
+
+  function buildPayload(turnstileToken = "") {
     const country = getFieldValue("country");
     const countryOther = getFieldValue("countryOther");
 
@@ -86,7 +97,7 @@
         ? countryOther
         : country;
 
-    return {
+    const payload = {
       name: getFieldValue("name"),
       email: getFieldValue("email"),
       industry: getFieldValue("industry"),
@@ -100,6 +111,15 @@
       client_ts: new Date().toISOString(),
       user_agent: navigator.userAgent,
     };
+
+    if (turnstileToken) {
+      payload.turnstile_token = turnstileToken;
+      payload.cf_turnstile_response = turnstileToken;
+      payload.turnstile_response = turnstileToken;
+      payload["cf-turnstile-response"] = turnstileToken;
+    }
+
+    return payload;
   }
 
   async function submitForm(payload) {
@@ -147,6 +167,15 @@
 
     if (selectedServiceNote) selectedServiceNote.hidden = true;
     if (selectedServiceLabel) selectedServiceLabel.textContent = "General";
+
+    try {
+      if (window.turnstile && typeof window.turnstile.reset === "function") {
+        const turnstileNode = form.querySelector(".cf-turnstile");
+        const widgetId = turnstileNode?.dataset?.widgetId || "";
+        if (widgetId) window.turnstile.reset(widgetId);
+        else window.turnstile.reset();
+      }
+    } catch {}
   }
 
   async function handleSubmit(event) {
@@ -168,9 +197,14 @@
         submitButton.textContent = "Enviando...";
       }
 
+      const turnstileToken = getTurnstileToken();
+      if (!turnstileToken) {
+        throw new Error("Por favor complete la verificación de seguridad.");
+      }
+
       setStatus("Enviando información...", "loading");
 
-      const payload = buildPayload();
+      const payload = buildPayload(turnstileToken);
       const result = await submitForm(payload);
 
       setStatus(
