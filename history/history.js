@@ -76,9 +76,19 @@ function normalizeServiceKey(value) {
 
 function getCategoryDisplay(a) {
   const p = a?.payload || {};
+  const serviceSelected = String(
+    p?.service_selected ||
+    p?.serviceSelected ||
+    a?.service_selected ||
+    ""
+  ).trim();
+  if (serviceSelected) return serviceSelected;
+
   const category = a?.category || p?.category || "";
   const key = normalizeServiceKey(category);
-  return SERVICE_LABEL_MAP[key] || category || "—";
+  if (SERVICE_LABEL_MAP[key]) return SERVICE_LABEL_MAP[key];
+  if (category && key !== "strategic-assessment") return category;
+  return "General";
 }
 
 function setStatus(kind, text) {

@@ -484,12 +484,25 @@ function getServiceLabel(value) {
   return SERVICE_LABEL_MAP[key] || "";
 }
 
+function getPersistedServiceSelected(a) {
+  const p = getPayload(a);
+  return String(
+    p.service_selected ||
+    p.serviceSelected ||
+    a.service_selected ||
+    ""
+  ).trim();
+}
+
 function getCategoryRaw(a) {
   const p = getPayload(a);
   return a.category || p.category || "";
 }
 
 function getPreselectedServiceLabel(a) {
+  const persisted = getPersistedServiceSelected(a);
+  if (persisted) return persisted;
+
   const serviceLabel = getServiceLabel(getServiceOrigin(a));
   if (serviceLabel && serviceLabel !== "General") return serviceLabel;
 
@@ -505,7 +518,12 @@ function getCategoryDisplay(a) {
 
   const category = getCategoryRaw(a);
   const categoryLabel = getServiceLabel(category);
-  return categoryLabel || category || "—";
+  if (categoryLabel && categoryLabel !== "General") return categoryLabel;
+
+  const normalizedCategory = normalizeServiceKey(category);
+  if (category && normalizedCategory !== "strategic-assessment") return category;
+
+  return "General";
 }
 
 function sectionHtml(stateName, actions, inlineMsgById) {

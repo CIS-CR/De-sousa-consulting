@@ -14,6 +14,23 @@
   const DEFAULT_SOURCE = "desousa-home";
   const DEFAULT_CATEGORY = "strategic-assessment";
   const DEFAULT_REQUEST_TYPE = "evaluation";
+  const SERVICE_SELECTED_MAP = {
+    "transformacion-modernizacion": "Transformación y modernización empresarial",
+    "transformacion-digital-ia": "Transformación y modernización empresarial",
+    "transformacion-digital": "Transformación y modernización empresarial",
+    "finanzas-capital": "Estructuración financiera y preparación de capital",
+    "estructuracion-financiera-capital": "Estructuración financiera y preparación de capital",
+    "estructuracion-financiera": "Estructuración financiera y preparación de capital",
+    "riesgos-cumplimiento": "Gestión de riesgos y cumplimiento",
+    "gobierno-riesgos": "Gestión de riesgos y cumplimiento",
+    "inmobiliario": "Estrategia y estructuración inmobiliaria",
+    "estrategia-estructuracion-inmobiliaria": "Estrategia y estructuración inmobiliaria",
+    "asesoria-inmobiliaria": "Estrategia y estructuración inmobiliaria",
+    "patrimonio-activos": "Estrategia patrimonial y de activos",
+    "estrategia-patrimonial-activos": "Estrategia patrimonial y de activos",
+    "planeacion-patrimonial": "Estrategia patrimonial y de activos",
+    "optimizacion-operativa": "Optimización operativa",
+  };
 
   function setStatus(message, type = "info") {
     if (!statusEl) return;
@@ -46,6 +63,34 @@
   function getFieldValue(id) {
     const el = document.getElementById(id);
     return el ? String(el.value || "").trim() : "";
+  }
+
+  function normalizeServiceKey(value) {
+    return String(value || "").trim().toLowerCase();
+  }
+
+  function getServiceLabelFromUI() {
+    const selectedLabel = document.getElementById("selectedServiceLabel");
+    const value = String(selectedLabel?.textContent || "").trim();
+    if (!value) return "";
+
+    const normalized = value.toLowerCase();
+    if (normalized === "general" || normalized === "geral") return "";
+    return value;
+  }
+
+  function resolveServiceSelected(serviceOrigin, category) {
+    const fromUI = getServiceLabelFromUI();
+    if (fromUI) return fromUI;
+
+    const serviceKey = normalizeServiceKey(serviceOrigin);
+    const categoryKey = normalizeServiceKey(category);
+
+    return (
+      SERVICE_SELECTED_MAP[serviceKey] ||
+      SERVICE_SELECTED_MAP[categoryKey] ||
+      ""
+    );
   }
 
   function validateEmail(email) {
@@ -100,6 +145,7 @@
     const requestType = getFieldValue("requestType") || DEFAULT_REQUEST_TYPE;
     const demoVertical = getFieldValue("demoVertical") || "home";
     const serviceOrigin = getFieldValue("serviceOrigin") || demoVertical;
+    const serviceSelected = resolveServiceSelected(serviceOrigin, category);
 
     const resolvedCountry =
       country === "Otro" || country === "Other" || country === "Outro"
@@ -114,6 +160,8 @@
       pain,
       country: resolvedCountry,
       category,
+      service_selected: serviceSelected,
+      serviceSelected,
       requestType,
       demoVertical,
       serviceOrigin,
