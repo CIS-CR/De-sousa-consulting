@@ -91,6 +91,14 @@
   function buildPayload(turnstileToken = "") {
     const country = getFieldValue("country");
     const countryOther = getFieldValue("countryOther");
+    const name = getFieldValue("name");
+    const email = getFieldValue("email");
+    const industry = getFieldValue("industry");
+    const teamSize = getFieldValue("teamSize");
+    const pain = getFieldValue("pain");
+    const category = getFieldValue("category") || DEFAULT_CATEGORY;
+    const requestType = getFieldValue("requestType") || DEFAULT_REQUEST_TYPE;
+    const demoVertical = getFieldValue("demoVertical") || "home";
 
     const resolvedCountry =
       country === "Otro" || country === "Other" || country === "Outro"
@@ -98,18 +106,23 @@
         : country;
 
     const payload = {
-      name: getFieldValue("name"),
-      email: getFieldValue("email"),
-      industry: getFieldValue("industry"),
-      teamSize: getFieldValue("teamSize"),
-      pain: getFieldValue("pain"),
+      name,
+      email,
+      industry,
+      teamSize,
+      pain,
       country: resolvedCountry,
-      category: getFieldValue("category") || DEFAULT_CATEGORY,
-      requestType: getFieldValue("requestType") || DEFAULT_REQUEST_TYPE,
-      demoVertical: getFieldValue("demoVertical") || "home",
+      category,
+      requestType,
+      demoVertical,
       source: DEFAULT_SOURCE,
       client_ts: new Date().toISOString(),
       user_agent: navigator.userAgent,
+      customer_name: name,
+      customer_email: email,
+      description: pain,
+      location: resolvedCountry,
+      request_type: requestType,
     };
 
     if (turnstileToken) {
