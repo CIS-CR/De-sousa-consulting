@@ -2012,6 +2012,9 @@
             button.setAttribute("aria-expanded", String(isTarget));
           }
         });
+
+        const serviceKey = item?.getAttribute("data-service") || "home";
+        setServiceOrigin(serviceKey);
       }
 
       serviceItems.forEach((item) => {

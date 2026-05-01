@@ -2081,7 +2081,7 @@
         updateSelectedServiceNote(serviceKey);
        }
 
-       function openService(item) {
+      function openService(item) {
         serviceItems.forEach((service) => {
           const button = service.querySelector(".service-trigger");
           const isTarget = service === item;
@@ -2091,6 +2091,9 @@
             button.setAttribute("aria-expanded", String(isTarget));
           }
         });
+
+        const serviceKey = item?.getAttribute("data-service") || "home";
+        setServiceOrigin(serviceKey);
       }
 
       serviceItems.forEach((item) => {
