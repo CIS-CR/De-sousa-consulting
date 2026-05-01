@@ -7,6 +7,25 @@ const ENDPOINT_ACTIONS = `${API_BASE}/api/demos/${DEMO_SLUG}/actions?limit=50`;
 const ENDPOINT_CLOSED = `${API_BASE}/api/demos/${DEMO_SLUG}/actions/closed?limit=50`;
 
 const CLOSED_STATE = "Cerradas";
+const SERVICE_LABEL_MAP = {
+  "transformacion-modernizacion": "Transformación y modernización empresarial",
+  "transformacion-digital-ia": "Transformación y modernización empresarial",
+  "transformacion-digital": "Transformación y modernización empresarial",
+  "finanzas-capital": "Estructuración financiera y preparación de capital",
+  "estructuracion-financiera-capital": "Estructuración financiera y preparación de capital",
+  "estructuracion-financiera": "Estructuración financiera y preparación de capital",
+  "riesgos-cumplimiento": "Gestión de riesgos y cumplimiento",
+  "gobierno-riesgos": "Gestión de riesgos y cumplimiento",
+  "inmobiliario": "Estrategia y estructuración inmobiliaria",
+  "estrategia-estructuracion-inmobiliaria": "Estrategia y estructuración inmobiliaria",
+  "asesoria-inmobiliaria": "Estrategia y estructuración inmobiliaria",
+  "patrimonio-activos": "Estrategia patrimonial y de activos",
+  "estrategia-patrimonial-activos": "Estrategia patrimonial y de activos",
+  "planeacion-patrimonial": "Estrategia patrimonial y de activos",
+  "optimizacion-operativa": "Optimización operativa",
+  "strategic-assessment": "General",
+  "home": "General",
+};
 
 const els = {
   countLabel: document.getElementById("countLabel"),
@@ -51,6 +70,17 @@ function fmtDate(ts) {
   });
 }
 
+function normalizeServiceKey(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
+function getCategoryDisplay(a) {
+  const p = a?.payload || {};
+  const category = a?.category || p?.category || "";
+  const key = normalizeServiceKey(category);
+  return SERVICE_LABEL_MAP[key] || category || "—";
+}
+
 function setStatus(kind, text) {
   els.status.className = "status " + (kind === "err" ? "err" : "ok");
   els.status.textContent = text || "";
@@ -69,10 +99,12 @@ function filterRows(query) {
 
   return allClosed.filter((a) => {
     const p = a.payload || {};
+    const categoryDisplay = getCategoryDisplay(a);
 
     const hay = [
       a.action_id,
       a.category,
+      categoryDisplay,
       a.description,
       a.location,
       p.customer_name,
@@ -99,11 +131,12 @@ function renderTable(rows) {
   const html = rows
     .map((a) => {
       const p = a.payload || {};
+      const categoryDisplay = getCategoryDisplay(a);
 
       return `
         <tr>
           <td><strong>${escapeHtml(a.action_id)}</strong></td>
-          <td>${escapeHtml(a.category || "")}</td>
+          <td>${escapeHtml(categoryDisplay)}</td>
           <td>${escapeHtml(p.customer_name || "")}</td>
           <td>${escapeHtml(a.location || "")}</td>
           <td>${escapeHtml(fmtDate(a.created_at))}</td>

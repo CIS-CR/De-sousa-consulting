@@ -373,6 +373,12 @@
   border-color: #cbd5e1;
 }
 
+.badge-service{
+  background: rgba(20, 73, 130, 0.08);
+  color: #0f3763;
+  border-color: rgba(20, 73, 130, 0.14);
+}
+
 /* =========================
    CANVAS EVIDENCE
 ========================= */

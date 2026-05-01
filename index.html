@@ -2067,10 +2067,16 @@
         const hiddenOrigin = document.getElementById("serviceOrigin");
         const hiddenVertical = document.getElementById("demoVertical");
         const hiddenType = document.getElementById("requestType");
+        const hiddenCategory = document.querySelector('input[name="category"]');
 
         if (hiddenOrigin) hiddenOrigin.value = serviceKey;
         if (hiddenVertical) hiddenVertical.value = serviceKey;
         if (hiddenType) hiddenType.value = "service-interest";
+        if (hiddenCategory) {
+          hiddenCategory.value = serviceKey && serviceKey !== "home"
+            ? serviceKey
+            : "strategic-assessment";
+        }
 
         updateSelectedServiceNote(serviceKey);
        }
@@ -2115,10 +2121,12 @@
             const hiddenOrigin = document.getElementById("serviceOrigin");
             const hiddenVertical = document.getElementById("demoVertical");
             const hiddenType = document.getElementById("requestType");
+            const hiddenCategory = document.querySelector('input[name="category"]');
 
             if (hiddenOrigin) hiddenOrigin.value = "home";
             if (hiddenVertical) hiddenVertical.value = "home";
             if (hiddenType) hiddenType.value = "evaluation";
+            if (hiddenCategory) hiddenCategory.value = "strategic-assessment";
 
             updateSelectedServiceNote("home");
           });

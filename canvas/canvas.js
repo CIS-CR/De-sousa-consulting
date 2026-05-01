@@ -48,15 +48,19 @@ const SERVICE_LABEL_MAP = {
   "transformacion-modernizacion": "Transformación y modernización empresarial",
   "transformacion-digital-ia": "Transformación y modernización empresarial",
   "transformacion-digital": "Transformación y modernización empresarial",
+  "finanzas-capital": "Estructuración financiera y preparación de capital",
   "estructuracion-financiera-capital": "Estructuración financiera y preparación de capital",
   "estructuracion-financiera": "Estructuración financiera y preparación de capital",
   "riesgos-cumplimiento": "Gestión de riesgos y cumplimiento",
   "gobierno-riesgos": "Gestión de riesgos y cumplimiento",
+  "inmobiliario": "Estrategia y estructuración inmobiliaria",
   "estrategia-estructuracion-inmobiliaria": "Estrategia y estructuración inmobiliaria",
   "asesoria-inmobiliaria": "Estrategia y estructuración inmobiliaria",
+  "patrimonio-activos": "Estrategia patrimonial y de activos",
   "estrategia-patrimonial-activos": "Estrategia patrimonial y de activos",
   "planeacion-patrimonial": "Estrategia patrimonial y de activos",
   "optimizacion-operativa": "Optimización operativa",
+  "strategic-assessment": "General",
   "home": "General",
 };
 
@@ -233,6 +237,11 @@ function requestTypeBadge(value) {
   if (v === "evaluation") label = "Evaluación";
   if (v === "demo") label = "Demo";
   return `<span class="badge badge-urgency-low">${escapeHtml(label)}</span>`;
+}
+
+function serviceBadge(label) {
+  if (!label) return "";
+  return `<span class="badge badge-service">${escapeHtml(label)}</span>`;
 }
 
 function parseActionNumber(actionId) {
@@ -466,16 +475,37 @@ function getServiceOrigin(a) {
   return p.demoVertical || p.serviceOrigin || "";
 }
 
+function normalizeServiceKey(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
 function getServiceLabel(value) {
-  return SERVICE_LABEL_MAP[value] || value || "";
+  const key = normalizeServiceKey(value);
+  return SERVICE_LABEL_MAP[key] || "";
+}
+
+function getCategoryRaw(a) {
+  const p = getPayload(a);
+  return a.category || p.category || "";
+}
+
+function getPreselectedServiceLabel(a) {
+  const serviceLabel = getServiceLabel(getServiceOrigin(a));
+  if (serviceLabel && serviceLabel !== "General") return serviceLabel;
+
+  const categoryLabel = getServiceLabel(getCategoryRaw(a));
+  if (categoryLabel && categoryLabel !== "General") return categoryLabel;
+
+  return "";
 }
 
 function getCategoryDisplay(a) {
-  const p = getPayload(a);
-  const category = a.category || p.category || "—";
-  const serviceLabel = getServiceLabel(getServiceOrigin(a));
+  const serviceLabel = getPreselectedServiceLabel(a);
+  if (serviceLabel) return serviceLabel;
 
-  return serviceLabel ? `${category} · ${serviceLabel}` : category;
+  const category = getCategoryRaw(a);
+  const categoryLabel = getServiceLabel(category);
+  return categoryLabel || category || "—";
 }
 
 function sectionHtml(stateName, actions, inlineMsgById) {
@@ -508,6 +538,7 @@ function sectionHtml(stateName, actions, inlineMsgById) {
       const email = p.customer_email || a.customer_email || "";
       const msg = inlineMsgById[id];
       const categoryDisplay = getCategoryDisplay(a);
+      const preselectedServiceLabel = getPreselectedServiceLabel(a);
 
       return `
         <article class="action-card" data-id="${escapeHtml(id)}">
@@ -516,6 +547,7 @@ function sectionHtml(stateName, actions, inlineMsgById) {
             <div class="badges">
               ${stateBadge(state)}
               ${requestTypeBadge(requestType)}
+              ${serviceBadge(preselectedServiceLabel)}
             </div>
           </div>
 
@@ -1055,14 +1087,8 @@ async function showJobDetails(actionId) {
     if (!res.ok || !out?.success || !a) throw new Error(out?.error || "Failed");
 
     const payload = a.payload || {};
-    const category = a.category || payload.category || "—";
     const requestType = payload.requestType || "evaluation";
-    const serviceOrigin = payload.demoVertical || payload.serviceOrigin || "—";
-    const serviceLabel = getServiceLabel(serviceOrigin);
-    const categoryDisplay =
-      serviceLabel && serviceLabel !== "—"
-        ? `${category} · ${serviceLabel}`
-        : category;
+    const categoryDisplay = getCategoryDisplay(a);
 
     if (elState) elState.textContent = `Estado: ${STATE_LABEL[a.state] || a.state || "—"}`;
     if (elCategory) elCategory.textContent = categoryDisplay;

@@ -99,6 +99,7 @@
     const category = getFieldValue("category") || DEFAULT_CATEGORY;
     const requestType = getFieldValue("requestType") || DEFAULT_REQUEST_TYPE;
     const demoVertical = getFieldValue("demoVertical") || "home";
+    const serviceOrigin = getFieldValue("serviceOrigin") || demoVertical;
 
     const resolvedCountry =
       country === "Otro" || country === "Other" || country === "Outro"
@@ -115,6 +116,7 @@
       category,
       requestType,
       demoVertical,
+      serviceOrigin,
       source: DEFAULT_SOURCE,
       client_ts: new Date().toISOString(),
       user_agent: navigator.userAgent,
