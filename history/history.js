@@ -1,7 +1,7 @@
 // history/history.js — De Sousa Consulting
 
-const API_BASE = "https://api.fbos.org";
-const DEMO_SLUG = "implementations";
+const API_BASE = window.FBOS_CONFIG?.apiBase || "https://api.fbos.org";
+const DEMO_SLUG = window.FBOS_CONFIG?.demoSlug || "de-sousa-consulting";
 
 const ENDPOINT_ACTIONS = `${API_BASE}/api/demos/${DEMO_SLUG}/actions?limit=50`;
 const ENDPOINT_CLOSED = `${API_BASE}/api/demos/${DEMO_SLUG}/actions/closed?limit=50`;

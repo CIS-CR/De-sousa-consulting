@@ -1,12 +1,12 @@
 // canvas/canvas.js
 // - UI en Español (De Sousa Consulting)
-// - Demo-aware para /api/demos/implementations/*
+// - Demo-aware para /api/demos/:slug/*
 // - Alineado al intake de landing / one pager
 // - Soporta confirm modal
 // - Soporta comments (POST /comment + fallback history)
 
-const API_BASE = "https://api.fbos.org";
-const DEMO_SLUG = "implementations";
+const API_BASE = window.FBOS_CONFIG?.apiBase || "https://api.fbos.org";
+const DEMO_SLUG = window.FBOS_CONFIG?.demoSlug || "de-sousa-consulting";
 
 const ENDPOINT_ACTIONS = `${API_BASE}/api/demos/${DEMO_SLUG}/actions?limit=50`;
 const ENDPOINT_CLOSED = `${API_BASE}/api/demos/${DEMO_SLUG}/actions/closed?limit=6`;

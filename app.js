@@ -9,7 +9,7 @@
   const ENDPOINT =
   window.FBOS_ENDPOINT ||
   window.FBOS_CONFIG?.endpoint ||
-  "https://api.fbos.org/api/demos/implementations/submit";
+  "https://api.fbos.org/api/demos/de-sousa-consulting/submit";
 
   const DEFAULT_SOURCE = "desousa-home";
   const DEFAULT_CATEGORY = "strategic-assessment";
