@@ -1,9 +1,10 @@
 (() => {
   if (!("serviceWorker" in navigator)) return;
+  const SW_URL = "/sw.js?v=20260502";
 
   window.addEventListener("load", () => {
     navigator.serviceWorker
-      .register("/sw.js")
+      .register(SW_URL)
       .then((reg) => {
         reg.update().catch(() => {});
 
