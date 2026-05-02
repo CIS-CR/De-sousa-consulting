@@ -7,6 +7,7 @@ const ENDPOINT_ACTIONS = `${API_BASE}/api/demos/${DEMO_SLUG}/actions?limit=50`;
 const ENDPOINT_CLOSED = `${API_BASE}/api/demos/${DEMO_SLUG}/actions/closed?limit=50`;
 
 const CLOSED_STATE = "Cerradas";
+const DISCARDED_TAG = "[descartado]";
 const SERVICE_LABEL_MAP = {
   "transformacion-modernizacion": "Transformación y modernización empresarial",
   "transformacion-digital-ia": "Transformación y modernización empresarial",
@@ -42,6 +43,7 @@ const modal = {
 };
 
 let allClosed = [];
+const discardFlagCache = new Map();
 
 function escapeHtml(str) {
   return String(str ?? "")
@@ -91,6 +93,57 @@ function getCategoryDisplay(a) {
   return "General";
 }
 
+function hasDiscardedTag(text) {
+  return /\[descartado\]/i.test(String(text || ""));
+}
+
+function isDiscardedFromAction(action = {}) {
+  const payload = action?.payload || {};
+  if (payload?.discarded === true || action?.discarded === true) return true;
+
+  const history = Array.isArray(action?.history) ? action.history : [];
+  return history.some((event) =>
+    hasDiscardedTag(event?.text || "") ||
+    hasDiscardedTag(event?.note || "")
+  );
+}
+
+async function fetchDiscardFlag(actionId) {
+  const id = String(actionId || "").trim();
+  if (!id) return false;
+  if (discardFlagCache.has(id)) return discardFlagCache.get(id);
+
+  try {
+    const res = await fetch(
+      `${API_BASE}/api/demos/${DEMO_SLUG}/actions/${encodeURIComponent(id)}`
+    );
+    const out = await res.json().catch(() => ({}));
+
+    const discarded =
+      res.ok &&
+      out?.success &&
+      out?.action &&
+      isDiscardedFromAction(out.action);
+
+    discardFlagCache.set(id, discarded === true);
+    return discarded === true;
+  } catch {
+    discardFlagCache.set(id, false);
+    return false;
+  }
+}
+
+async function enrichDiscardFlags(actions = []) {
+  const sorted = Array.isArray(actions) ? actions : [];
+  const enriched = await Promise.all(
+    sorted.map(async (action) => {
+      const discarded = await fetchDiscardFlag(action?.action_id);
+      return { ...action, _discarded: discarded };
+    })
+  );
+  return enriched;
+}
+
 function setStatus(kind, text) {
   els.status.className = "status " + (kind === "err" ? "err" : "ok");
   els.status.textContent = text || "";
@@ -115,6 +168,7 @@ function filterRows(query) {
       a.action_id,
       a.category,
       categoryDisplay,
+      a._discarded ? DISCARDED_TAG : "",
       a.description,
       a.location,
       p.customer_name,
@@ -142,11 +196,14 @@ function renderTable(rows) {
     .map((a) => {
       const p = a.payload || {};
       const categoryDisplay = getCategoryDisplay(a);
+      const tagHtml = a._discarded
+        ? ` <span class="history-discard-tag">${escapeHtml(DISCARDED_TAG)}</span>`
+        : "";
 
       return `
         <tr>
           <td><strong>${escapeHtml(a.action_id)}</strong></td>
-          <td>${escapeHtml(categoryDisplay)}</td>
+          <td>${escapeHtml(categoryDisplay)}${tagHtml}</td>
           <td>${escapeHtml(p.customer_name || "")}</td>
           <td>${escapeHtml(a.location || "")}</td>
           <td>${escapeHtml(fmtDate(a.created_at))}</td>
@@ -191,9 +248,10 @@ async function fetchClosed() {
       (a) => String(a.state || "").trim() === CLOSED_STATE
     );
 
-    allClosed = closed.sort(
+    const sortedClosed = closed.sort(
       (a, b) => parseTs(b.updated_at) - parseTs(a.updated_at)
     );
+    allClosed = await enrichDiscardFlags(sortedClosed);
 
     renderTable(filterRows(els.searchInput.value));
   } catch (err) {

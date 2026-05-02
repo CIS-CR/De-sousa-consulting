@@ -79,8 +79,11 @@ let closedCache = [];
    Confirm modal
 ========================= */
 const CONFIRM_TEXT = "¿Estás seguro que deseas mover esta solicitud?";
+const CLOSE_CONFIRM_TEXT = "¿Deseas cerrar esta solicitud o descartarla?";
 const CONFIRM_CANCEL = "Cancelar";
 const CONFIRM_OK = "Confirmar";
+const CONFIRM_DISCARD = "Descartar";
+const DISCARDED_TAG = "[descartado]";
 
 function needsConfirm(currentState, nextState) {
   const cur = String(currentState || "").trim();
@@ -131,6 +134,11 @@ function ensureConfirmModal() {
       color:#fff;
       border:1px solid rgba(10,61,98,.28);
     }
+    .fbos-confirm-btn.discard{
+      background:#fff7ed;
+      color:#9a3412;
+      border:1px solid rgba(249,115,22,.28);
+    }
     .fbos-confirm-btn:disabled{ opacity:.6; cursor:not-allowed; }
   `;
   document.head.appendChild(style);
@@ -149,6 +157,7 @@ function ensureConfirmModal() {
       </div>
       <div class="fbos-confirm-actions">
         <button type="button" class="fbos-confirm-btn cancel" id="fbosConfirmCancel">${escapeHtml(CONFIRM_CANCEL)}</button>
+        <button type="button" class="fbos-confirm-btn discard" id="fbosConfirmDiscard" style="display:none;">${escapeHtml(CONFIRM_DISCARD)}</button>
         <button type="button" class="fbos-confirm-btn confirm" id="fbosConfirmOk">${escapeHtml(CONFIRM_OK)}</button>
       </div>
     </div>
@@ -161,14 +170,22 @@ function ensureConfirmModal() {
   document.body.appendChild(overlay);
 }
 
-function openConfirmModal() {
+function openConfirmModal(opts = {}) {
+  const { allowDiscard = false } = opts;
   ensureConfirmModal();
 
   const overlay = document.getElementById("fbosConfirmModal");
+  const textEl = document.getElementById("fbosConfirmText");
   const btnCancel = document.getElementById("fbosConfirmCancel");
+  const btnDiscard = document.getElementById("fbosConfirmDiscard");
   const btnOk = document.getElementById("fbosConfirmOk");
 
-  if (!overlay || !btnCancel || !btnOk) return Promise.resolve(false);
+  if (!overlay || !textEl || !btnCancel || !btnDiscard || !btnOk) {
+    return Promise.resolve("cancel");
+  }
+
+  textEl.textContent = allowDiscard ? CLOSE_CONFIRM_TEXT : CONFIRM_TEXT;
+  btnDiscard.style.display = allowDiscard ? "inline-flex" : "none";
 
   overlay.style.display = "flex";
   overlay.setAttribute("aria-hidden", "false");
@@ -177,6 +194,7 @@ function openConfirmModal() {
   return new Promise((resolve) => {
     const cleanup = () => {
       btnCancel.removeEventListener("click", onCancel);
+      btnDiscard.removeEventListener("click", onDiscard);
       btnOk.removeEventListener("click", onOk);
       document.removeEventListener("keydown", onKey);
       overlay.style.display = "none";
@@ -185,11 +203,15 @@ function openConfirmModal() {
 
     const onCancel = () => {
       cleanup();
-      resolve(false);
+      resolve("cancel");
+    };
+    const onDiscard = () => {
+      cleanup();
+      resolve("discard");
     };
     const onOk = () => {
       cleanup();
-      resolve(true);
+      resolve("confirm");
     };
     const onKey = (e) => {
       if (e.key === "Escape") onCancel();
@@ -197,6 +219,7 @@ function openConfirmModal() {
     };
 
     btnCancel.addEventListener("click", onCancel);
+    btnDiscard.addEventListener("click", onDiscard);
     btnOk.addEventListener("click", onOk);
     document.addEventListener("keydown", onKey);
   });
@@ -704,16 +727,24 @@ function attachHandlers() {
 
     if (!actionId || !nextState) return;
 
+    const isClosingTransition =
+      String(currentState || "").trim() === "En revisión" &&
+      String(nextState || "").trim() === "Cerradas";
+    let discardJob = false;
+
     if (needsConfirm(currentState, nextState)) {
-      const ok = await openConfirmModal();
-      if (!ok) return;
+      const decision = await openConfirmModal({ allowDiscard: isClosingTransition });
+      if (decision === "cancel") return;
+      discardJob = decision === "discard";
     }
 
     btn.disabled = true;
     const prevText = btn.textContent;
     btn.textContent = "Actualizando…";
 
-    const result = await updateState(actionId, currentState, nextState);
+    const result = await updateState(actionId, currentState, nextState, {
+      discarded: discardJob,
+    });
 
     btn.textContent = prevText;
 
@@ -731,17 +762,23 @@ function attachHandlers() {
 /* =========================
    API calls
 ========================= */
-async function updateState(actionId, currentState, nextState) {
+async function updateState(actionId, currentState, nextState, opts = {}) {
+  const { discarded = false } = opts;
+
   try {
     const url = `${API_BASE}/api/demos/${DEMO_SLUG}/actions/${encodeURIComponent(actionId)}/state`;
+    const note = discarded
+      ? `${DISCARDED_TAG} UI close from ${currentState} → ${nextState}`
+      : `UI advance from ${currentState} → ${nextState}`;
 
     const res = await fetch(url, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         state: nextState,
-        note: `UI advance from ${currentState} → ${nextState}`,
-        by: "canvas",
+        note,
+        by: discarded ? "canvas-discard" : "canvas",
+        discarded: discarded === true,
       }),
     });
 
@@ -750,6 +787,12 @@ async function updateState(actionId, currentState, nextState) {
     if (!res.ok || !data?.success) {
       const msg = data?.error || (res.status === 409 ? "Transición no permitida" : `HTTP ${res.status}`);
       return { ok: false, error: msg };
+    }
+
+    if (discarded) {
+      try {
+        await postComment(actionId, DISCARDED_TAG, "canvas");
+      } catch {}
     }
 
     return { ok: true };
