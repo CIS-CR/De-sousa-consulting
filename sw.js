@@ -1,4 +1,5 @@
-const CACHE_NAME = "desousa-static-v1";
+const STATIC_CACHE = "desousa-static-v2";
+const RUNTIME_CACHE = "desousa-runtime-v2";
 const PRECACHE_URLS = [
   "/",
   "/index.html",
@@ -19,24 +20,31 @@ const PRECACHE_URLS = [
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_URLS)).catch(() => {})
+    caches.open(STATIC_CACHE).then((cache) => cache.addAll(PRECACHE_URLS)).catch(() => {})
   );
   self.skipWaiting();
 });
 
 self.addEventListener("activate", (event) => {
+  const keep = new Set([STATIC_CACHE, RUNTIME_CACHE]);
   event.waitUntil(
     caches
       .keys()
       .then((keys) =>
         Promise.all(
           keys
-            .filter((key) => key !== CACHE_NAME)
+            .filter((key) => !keep.has(key))
             .map((key) => caches.delete(key))
         )
       )
       .then(() => self.clients.claim())
   );
+});
+
+self.addEventListener("message", (event) => {
+  if (event?.data?.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
 });
 
 self.addEventListener("fetch", (event) => {
@@ -46,18 +54,41 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
 
-  event.respondWith(
-    caches.match(req).then((cached) => {
-      if (cached) return cached;
+  const isHtmlNavigation =
+    req.mode === "navigate" ||
+    (req.headers.get("accept") || "").includes("text/html");
 
-      return fetch(req)
+  if (isHtmlNavigation) {
+    event.respondWith(
+      fetch(req)
         .then((res) => {
-          if (!res || res.status !== 200) return res;
-          const copy = res.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(req, copy)).catch(() => {});
+          if (res && res.status === 200) {
+            const copy = res.clone();
+            caches.open(RUNTIME_CACHE).then((cache) => cache.put(req, copy)).catch(() => {});
+          }
           return res;
         })
-        .catch(() => caches.match("/") || caches.match("/index.html"));
+        .catch(async () => {
+          const cached = await caches.match(req);
+          if (cached) return cached;
+          return caches.match("/") || caches.match("/index.html");
+        })
+    );
+    return;
+  }
+
+  event.respondWith(
+    caches.match(req).then(async (cached) => {
+      if (cached) return cached;
+
+      const res = await fetch(req).catch(() => null);
+      if (!res || res.status !== 200) {
+        return res || (await caches.match("/")) || (await caches.match("/index.html"));
+      }
+
+      const copy = res.clone();
+      caches.open(RUNTIME_CACHE).then((cache) => cache.put(req, copy)).catch(() => {});
+      return res;
     })
   );
 });
