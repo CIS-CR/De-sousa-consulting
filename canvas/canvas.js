@@ -80,17 +80,14 @@ let closedCache = [];
 ========================= */
 const CONFIRM_TEXT = "¿Estás seguro que deseas mover esta solicitud?";
 const CLOSE_CONFIRM_TEXT = "¿Deseas cerrar esta solicitud o descartarla?";
+const ADVANCE_OR_DISCARD_TEXT = "¿Deseas avanzar esta solicitud o descartarla?";
 const CONFIRM_CANCEL = "Cancelar";
 const CONFIRM_OK = "Confirmar";
 const CONFIRM_DISCARD = "Descartar";
 const DISCARDED_TAG = "[descartado]";
 
 function needsConfirm(currentState, nextState) {
-  const cur = String(currentState || "").trim();
-  const nxt = String(nextState || "").trim();
-  if (cur === "Nuevas" && nxt === "Validadas") return true;
-  if (cur === "En revisión" && nxt === "Cerradas") return true;
-  return false;
+  return Boolean(String(nextState || "").trim());
 }
 
 function ensureConfirmModal() {
@@ -171,7 +168,7 @@ function ensureConfirmModal() {
 }
 
 function openConfirmModal(opts = {}) {
-  const { allowDiscard = false } = opts;
+  const { allowDiscard = false, message = "" } = opts;
   ensureConfirmModal();
 
   const overlay = document.getElementById("fbosConfirmModal");
@@ -184,7 +181,7 @@ function openConfirmModal(opts = {}) {
     return Promise.resolve("cancel");
   }
 
-  textEl.textContent = allowDiscard ? CLOSE_CONFIRM_TEXT : CONFIRM_TEXT;
+  textEl.textContent = message || (allowDiscard ? CLOSE_CONFIRM_TEXT : CONFIRM_TEXT);
   btnDiscard.style.display = allowDiscard ? "inline-flex" : "none";
 
   overlay.style.display = "flex";
@@ -733,7 +730,11 @@ function attachHandlers() {
     let discardJob = false;
 
     if (needsConfirm(currentState, nextState)) {
-      const decision = await openConfirmModal({ allowDiscard: isClosingTransition });
+      const allowDiscard = String(currentState || "").trim() !== "Cerradas";
+      const decision = await openConfirmModal({
+        allowDiscard,
+        message: isClosingTransition ? CLOSE_CONFIRM_TEXT : ADVANCE_OR_DISCARD_TEXT,
+      });
       if (decision === "cancel") return;
       discardJob = decision === "discard";
     }
@@ -742,7 +743,8 @@ function attachHandlers() {
     const prevText = btn.textContent;
     btn.textContent = "Actualizando…";
 
-    const result = await updateState(actionId, currentState, nextState, {
+    const targetState = discardJob ? "Cerradas" : nextState;
+    const result = await updateState(actionId, currentState, targetState, {
       discarded: discardJob,
     });
 
@@ -764,6 +766,17 @@ function attachHandlers() {
 ========================= */
 async function updateState(actionId, currentState, nextState, opts = {}) {
   const { discarded = false } = opts;
+
+  if (discarded && String(nextState || "").trim() === "Cerradas") {
+    const discardResult = await discardToClosed(actionId, currentState);
+    if (!discardResult.ok) return discardResult;
+
+    try {
+      await postComment(actionId, DISCARDED_TAG, "canvas");
+    } catch {}
+
+    return { ok: true };
+  }
 
   try {
     const url = `${API_BASE}/api/demos/${DEMO_SLUG}/actions/${encodeURIComponent(actionId)}/state`;
@@ -789,16 +802,62 @@ async function updateState(actionId, currentState, nextState, opts = {}) {
       return { ok: false, error: msg };
     }
 
-    if (discarded) {
-      try {
-        await postComment(actionId, DISCARDED_TAG, "canvas");
-      } catch {}
-    }
-
     return { ok: true };
   } catch (err) {
     return { ok: false, error: err?.message ? String(err.message) : "Error de red" };
   }
+}
+
+async function patchState(actionId, fromState, toState, note, by = "canvas") {
+  const url = `${API_BASE}/api/demos/${DEMO_SLUG}/actions/${encodeURIComponent(actionId)}/state`;
+
+  const res = await fetch(url, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      state: toState,
+      note,
+      by,
+    }),
+  });
+
+  const data = await res.json().catch(() => null);
+
+  if (!res.ok || !data?.success) {
+    const msg = data?.error || (res.status === 409 ? "Transición no permitida" : `HTTP ${res.status}`);
+    return { ok: false, error: msg };
+  }
+
+  return { ok: true };
+}
+
+async function discardToClosed(actionId, currentState) {
+  let state = String(currentState || "").trim();
+  const maxHops = 12;
+  let hops = 0;
+
+  while (state && state !== "Cerradas" && hops < maxHops) {
+    const next = NEXT_STATE[state];
+    if (!next) break;
+
+    const isLastHop = next === "Cerradas";
+    const note = isLastHop
+      ? `${DISCARDED_TAG} UI close from ${state} → ${next}`
+      : `UI discard advance from ${state} → ${next}`;
+    const by = isLastHop ? "canvas-discard" : "canvas";
+
+    const step = await patchState(actionId, state, next, note, by);
+    if (!step.ok) return step;
+
+    state = next;
+    hops += 1;
+  }
+
+  if (state !== "Cerradas") {
+    return { ok: false, error: "No se pudo descartar la solicitud hasta Cerradas." };
+  }
+
+  return { ok: true };
 }
 
 async function loadActions(opts = {}) {
