@@ -65,6 +65,11 @@
     return el ? String(el.value || "").trim() : "";
   }
 
+  function getNamedFieldValue(name) {
+    const el = form.querySelector(`[name="${name}"]`);
+    return el ? String(el.value || "").trim() : "";
+  }
+
   function normalizeServiceKey(value) {
     return String(value || "").trim().toLowerCase();
   }
@@ -141,10 +146,14 @@
     const industry = getFieldValue("industry");
     const teamSize = getFieldValue("teamSize");
     const pain = getFieldValue("pain");
-    const category = getFieldValue("category") || DEFAULT_CATEGORY;
+    const categoryFromForm = getNamedFieldValue("category");
     const requestType = getFieldValue("requestType") || DEFAULT_REQUEST_TYPE;
     const demoVertical = getFieldValue("demoVertical") || "home";
     const serviceOrigin = getFieldValue("serviceOrigin") || demoVertical;
+    const category =
+      categoryFromForm ||
+      (serviceOrigin && serviceOrigin !== "home" ? serviceOrigin : "") ||
+      DEFAULT_CATEGORY;
     const serviceSelected = resolveServiceSelected(serviceOrigin, category);
 
     const resolvedCountry =
