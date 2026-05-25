@@ -546,6 +546,16 @@ function getCategoryDisplay(a) {
   return "General";
 }
 
+function getServiceTagLabel(a) {
+  const fromPreselected = getPreselectedServiceLabel(a);
+  if (fromPreselected && fromPreselected !== "General") return fromPreselected;
+
+  const categoryDisplay = getCategoryDisplay(a);
+  if (categoryDisplay && categoryDisplay !== "General") return categoryDisplay;
+
+  return "";
+}
+
 function sectionHtml(stateName, actions, inlineMsgById) {
   const total = actions.length;
   const title = STATE_LABEL[stateName] || stateName;
@@ -576,7 +586,7 @@ function sectionHtml(stateName, actions, inlineMsgById) {
       const email = p.customer_email || a.customer_email || "";
       const msg = inlineMsgById[id];
       const categoryDisplay = getCategoryDisplay(a);
-      const preselectedServiceLabel = getPreselectedServiceLabel(a);
+      const serviceTagLabel = getServiceTagLabel(a);
 
       return `
         <article class="action-card" data-id="${escapeHtml(id)}">
@@ -585,12 +595,15 @@ function sectionHtml(stateName, actions, inlineMsgById) {
             <div class="badges">
               ${stateBadge(state)}
               ${requestTypeBadge(requestType)}
-              ${serviceBadge(preselectedServiceLabel)}
+              ${serviceBadge(serviceTagLabel)}
             </div>
           </div>
 
           <h3 class="action-title">${escapeHtml(title)}</h3>
-          <p class="action-desc"><strong>${escapeHtml(categoryDisplay)}</strong></p>
+          <p class="action-desc">
+            <strong>Categoría:</strong>
+            ${serviceTagLabel ? serviceBadge(categoryDisplay) : `<span>${escapeHtml(categoryDisplay)}</span>`}
+          </p>
           ${subtitle ? `<p class="action-desc">${escapeHtml(subtitle)}</p>` : ""}
           ${email ? `<p class="action-desc">${escapeHtml(email)}</p>` : ""}
           ${desc ? `<p class="action-desc">${escapeHtml(desc)}</p>` : ""}
@@ -1209,9 +1222,14 @@ async function showJobDetails(actionId) {
     const payload = a.payload || {};
     const requestType = payload.requestType || "evaluation";
     const categoryDisplay = getCategoryDisplay(a);
+    const serviceTagLabel = getServiceTagLabel(a);
 
     if (elState) elState.textContent = `Estado: ${STATE_LABEL[a.state] || a.state || "—"}`;
-    if (elCategory) elCategory.textContent = categoryDisplay;
+    if (elCategory) {
+      elCategory.innerHTML = serviceTagLabel
+        ? serviceBadge(categoryDisplay)
+        : escapeHtml(categoryDisplay);
+    }
     if (elUrgency) {
       elUrgency.textContent = requestType === "demo" ? "Demo" : "Evaluación";
     }
