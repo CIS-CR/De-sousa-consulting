@@ -792,6 +792,63 @@ textarea {
   font-size: 13px;
 }
 
+.fbos-powered {
+  min-height: 44px;
+  padding: 9px 12px;
+  border: 1px solid rgba(30, 29, 29, 0.1);
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.74);
+  color: rgba(30, 29, 29, 0.7) !important;
+  opacity: 0.78;
+  transition:
+    opacity 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.fbos-powered:hover,
+.fbos-powered:focus-visible {
+  opacity: 1;
+  color: var(--primary) !important;
+  border-color: rgba(137, 0, 25, 0.28);
+  background: #ffffff;
+  transform: translateY(-1px);
+}
+
+.fbos-powered:focus-visible {
+  outline: 3px solid rgba(137, 0, 25, 0.14);
+  outline-offset: 3px;
+}
+
+.fbos-logo-placeholder {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  background: var(--primary);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.fbos-powered-text {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+}
+
 /* Credibility Tags */
 
 .cred-tags {
@@ -984,6 +1041,17 @@ textarea {
     width: 1px;
     height: 100%;
     background: var(--border-soft);
+  }
+}
+
+@media (max-width: 859px) {
+  .foot-contact,
+  .fbos-powered {
+    width: 100%;
+  }
+
+  .fbos-powered {
+    text-align: center;
   }
 }
 
