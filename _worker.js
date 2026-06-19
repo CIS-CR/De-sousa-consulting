@@ -149,32 +149,64 @@ function buildEmailHtml(payload, result) {
 </html>`;
 }
 
-async function sendLeadNotification(env, payload, result) {
-  if (!env.RESEND_API_KEY) {
-    console.warn("DESOUSA_EMAIL_SKIPPED: RESEND_API_KEY is not configured");
-    return;
-  }
+function buildCustomerEmailText(payload) {
+  return [
+    `Hola ${pickFirst(payload?.name, payload?.customer_name, "")},`,
+    "",
+    "Hemos recibido correctamente su solicitud en De Sousa Consulting.",
+    "",
+    `Servicio: ${resolveService(payload)}`,
+    "",
+    "Resumen de su solicitud:",
+    pickFirst(payload?.pain, payload?.description, "Sin descripción"),
+    "",
+    "Nuestro equipo revisará la información y se pondrá en contacto con usted.",
+    "",
+    "De Sousa Consulting",
+  ].join("\n");
+}
 
-  const to = emailList(env.DESOUSA_NOTIFICATION_TO, "info@desousaconsulting.com");
-  if (!to.length) {
-    console.warn("DESOUSA_EMAIL_SKIPPED: no notification recipient configured");
-    return;
-  }
-
-  const from =
-    env.DESOUSA_RESEND_FROM || "De Sousa Consulting <noreply@fbos.org>";
+function buildCustomerEmailHtml(payload) {
+  const name = pickFirst(payload?.name, payload?.customer_name, "");
   const service = resolveService(payload);
-  const replyTo = pickFirst(payload?.email, payload?.customer_email);
-  const message = {
-    from,
-    to,
-    subject: `Nueva solicitud De Sousa Consulting - ${service}`,
-    html: buildEmailHtml(payload, result),
-    text: buildEmailText(payload, result),
-  };
+  const description = pickFirst(
+    payload?.pain,
+    payload?.description,
+    "Sin descripción"
+  );
 
-  if (replyTo) message.reply_to = replyTo;
+  return `<!doctype html>
+<html>
+  <body style="margin:0;background:#f6f3ec;color:#1f2933;font-family:Arial,sans-serif;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f6f3ec;padding:24px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;background:#ffffff;border:1px solid #e5dfd2;">
+            <tr>
+              <td style="padding:28px;">
+                <h1 style="margin:0 0 18px;font-size:22px;line-height:1.3;color:#12263a;">Hemos recibido su solicitud</h1>
+                <p style="margin:0 0 16px;line-height:1.6;">Hola ${escapeHtml(name)},</p>
+                <p style="margin:0 0 20px;line-height:1.6;">Gracias por contactar a De Sousa Consulting. Nuestro equipo revisará la información y se pondrá en contacto con usted.</p>
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+                  <tr>
+                    <td style="padding:10px 0;border-top:1px solid #ece7dc;color:#5f6b76;width:32%;">Servicio</td>
+                    <td style="padding:10px 0;border-top:1px solid #ece7dc;color:#12263a;font-weight:600;">${escapeHtml(service)}</td>
+                  </tr>
+                </table>
+                <h2 style="margin:20px 0 8px;font-size:15px;color:#12263a;">Resumen de su solicitud</h2>
+                <p style="margin:0;white-space:pre-wrap;color:#1f2933;line-height:1.5;">${escapeHtml(description)}</p>
+                <p style="margin:24px 0 0;color:#5f6b76;line-height:1.5;">De Sousa Consulting</p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`;
+}
 
+async function sendResendEmail(env, message, label) {
   const response = await fetch(RESEND_ENDPOINT, {
     method: "POST",
     headers: {
@@ -186,11 +218,65 @@ async function sendLeadNotification(env, payload, result) {
   const detail = await response.text().catch(() => "");
 
   if (!response.ok) {
-    console.error(`DESOUSA_EMAIL_FAILED: ${response.status} ${detail}`);
+    console.error(`DESOUSA_EMAIL_FAILED [${label}]: ${response.status} ${detail}`);
     return;
   }
 
-  console.log(`DESOUSA_EMAIL_SENT: ${detail}`);
+  console.log(`DESOUSA_EMAIL_SENT [${label}]: ${detail}`);
+}
+
+async function sendLeadEmails(env, payload, result) {
+  if (!env.RESEND_API_KEY) {
+    console.warn("DESOUSA_EMAIL_SKIPPED: RESEND_API_KEY is not configured");
+    return;
+  }
+
+  const internalTo = emailList(
+    env.DESOUSA_NOTIFICATION_TO,
+    "vasco_de_sousa@live.com"
+  );
+  if (!internalTo.length) {
+    console.warn("DESOUSA_EMAIL_SKIPPED: no notification recipient configured");
+    return;
+  }
+
+  const from =
+    env.DESOUSA_RESEND_FROM || "De Sousa Consulting <noreply@fbos.org>";
+  const service = resolveService(payload);
+  const customerEmail = pickFirst(payload?.email, payload?.customer_email);
+  const internalMessage = {
+    from,
+    to: internalTo,
+    subject: `Nueva solicitud De Sousa Consulting - ${service}`,
+    html: buildEmailHtml(payload, result),
+    text: buildEmailText(payload, result),
+  };
+
+  if (customerEmail) {
+    internalMessage.reply_to = customerEmail;
+  }
+
+  const emails = [sendResendEmail(env, internalMessage, "internal")];
+
+  if (customerEmail) {
+    emails.push(
+      sendResendEmail(
+        env,
+        {
+          from,
+          to: [customerEmail],
+          subject: `Confirmación de solicitud - ${service}`,
+          html: buildCustomerEmailHtml(payload),
+          text: buildCustomerEmailText(payload),
+        },
+        "customer"
+      )
+    );
+  } else {
+    console.warn("DESOUSA_CUSTOMER_EMAIL_SKIPPED: customer email is missing");
+  }
+
+  await Promise.all(emails);
 }
 
 async function proxyApiRequest(request, env, ctx) {
@@ -227,7 +313,7 @@ async function proxyApiRequest(request, env, ctx) {
 
     if (upstream.ok && result?.success && payload) {
       ctx.waitUntil(
-        sendLeadNotification(env, payload, result).catch((error) => {
+        sendLeadEmails(env, payload, result).catch((error) => {
           console.error(`DESOUSA_EMAIL_ERROR: ${error?.message || error}`);
         })
       );
