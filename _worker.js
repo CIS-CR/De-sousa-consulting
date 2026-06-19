@@ -177,25 +177,47 @@ function buildCustomerEmailHtml(payload) {
 
   return `<!doctype html>
 <html>
-  <body style="margin:0;background:#f6f3ec;color:#1f2933;font-family:Arial,sans-serif;">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f6f3ec;padding:24px;">
+  <body style="margin:0;background:#eef2f6;color:#243447;font-family:Arial,Helvetica,sans-serif;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eef2f6;padding:24px 12px;">
       <tr>
         <td align="center">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;background:#ffffff;border:1px solid #e5dfd2;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;background:#ffffff;border:1px solid #dce3ea;">
             <tr>
-              <td style="padding:28px;">
-                <h1 style="margin:0 0 18px;font-size:22px;line-height:1.3;color:#12263a;">Hemos recibido su solicitud</h1>
-                <p style="margin:0 0 16px;line-height:1.6;">Hola ${escapeHtml(name)},</p>
-                <p style="margin:0 0 20px;line-height:1.6;">Gracias por contactar a De Sousa Consulting. Nuestro equipo revisará la información y se pondrá en contacto con usted.</p>
-                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+              <td align="center" style="padding:24px 28px 20px;background:#ffffff;">
+                <img src="https://desousaconsulting.com/assets/logo-desousa.png" width="210" alt="De Sousa Consulting" style="display:block;width:210px;max-width:100%;height:auto;border:0;" />
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:30px 32px;background:#1d5590;color:#ffffff;">
+                <p style="margin:0 0 8px;font-size:12px;line-height:1.4;font-weight:bold;text-transform:uppercase;color:#dceafa;">Confirmación de solicitud</p>
+                <h1 style="margin:0;font-size:25px;line-height:1.3;color:#ffffff;">Hemos recibido su información</h1>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:30px 32px;">
+                <p style="margin:0 0 16px;font-size:16px;line-height:1.6;color:#243447;">Hola ${escapeHtml(name)},</p>
+                <p style="margin:0 0 24px;font-size:16px;line-height:1.6;color:#465768;">Gracias por contactar a De Sousa Consulting. Nuestro equipo revisará su solicitud y se pondrá en contacto con usted para conversar sobre los próximos pasos.</p>
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:#f5f7fa;border:1px solid #dce3ea;">
                   <tr>
-                    <td style="padding:10px 0;border-top:1px solid #ece7dc;color:#5f6b76;width:32%;">Servicio</td>
-                    <td style="padding:10px 0;border-top:1px solid #ece7dc;color:#12263a;font-weight:600;">${escapeHtml(service)}</td>
+                    <td style="padding:16px 18px;color:#657587;font-size:13px;line-height:1.4;width:30%;">Servicio solicitado</td>
+                    <td style="padding:16px 18px;color:#173f6b;font-size:15px;line-height:1.5;font-weight:bold;">${escapeHtml(service)}</td>
                   </tr>
                 </table>
-                <h2 style="margin:20px 0 8px;font-size:15px;color:#12263a;">Resumen de su solicitud</h2>
-                <p style="margin:0;white-space:pre-wrap;color:#1f2933;line-height:1.5;">${escapeHtml(description)}</p>
-                <p style="margin:24px 0 0;color:#5f6b76;line-height:1.5;">De Sousa Consulting</p>
+                <h2 style="margin:26px 0 10px;font-size:15px;line-height:1.4;color:#173f6b;">Resumen de su solicitud</h2>
+                <p style="margin:0;white-space:pre-wrap;color:#465768;font-size:15px;line-height:1.6;">${escapeHtml(description)}</p>
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:28px;border-top:1px solid #dce3ea;">
+                  <tr>
+                    <td style="padding-top:20px;color:#657587;font-size:13px;line-height:1.6;">
+                      Este correo confirma que recibimos su solicitud. No es necesario responder a este mensaje.
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="padding:20px 28px;background:#f5f7fa;border-top:1px solid #dce3ea;">
+                <p style="margin:0;color:#173f6b;font-size:13px;line-height:1.5;font-weight:bold;">De Sousa Consulting</p>
+                <p style="margin:4px 0 0;color:#758596;font-size:12px;line-height:1.5;">Estrategia, transformación y estructuración empresarial</p>
               </td>
             </tr>
           </table>
