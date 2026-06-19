@@ -1,5 +1,5 @@
 window.FBOS_CONFIG = {
-  apiBase: "https://api.fbos.org",
+  apiBase: window.location.origin,
   demoSlug: "de-sousa-consulting",
-  endpoint: "https://api.fbos.org/api/demos/de-sousa-consulting/submit",
+  endpoint: "/api/demos/de-sousa-consulting/submit",
 };
