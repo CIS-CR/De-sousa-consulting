@@ -155,6 +155,14 @@ function buildCustomerEmailText(payload) {
     "",
     "Hemos recibido correctamente su solicitud en De Sousa Consulting.",
     "",
+    "El pasado es experiencia.",
+    "El presente es oportunidad.",
+    "La estrategia correcta construye tu futuro.",
+    "",
+    "Las empresas que perduran no improvisan. Analizan, planifican y ejecutan con una visión de largo plazo.",
+    "",
+    "Permítanos acompañarle en el diseño de una estrategia clara y un plan estructurado que transforme los objetivos de hoy en los resultados del mañana.",
+    "",
     `Servicio: ${resolveService(payload)}`,
     "",
     "Resumen de su solicitud:",
@@ -188,7 +196,7 @@ function buildCustomerEmailHtml(payload) {
               </td>
             </tr>
             <tr>
-              <td style="padding:30px 32px;background:#1d5590;color:#ffffff;">
+              <td style="padding:30px 32px;background:#144982;color:#ffffff;">
                 <p style="margin:0 0 8px;font-size:12px;line-height:1.4;font-weight:bold;text-transform:uppercase;color:#dceafa;">Confirmación de solicitud</p>
                 <h1 style="margin:0;font-size:25px;line-height:1.3;color:#ffffff;">Hemos recibido su información</h1>
               </td>
@@ -197,13 +205,26 @@ function buildCustomerEmailHtml(payload) {
               <td style="padding:30px 32px;">
                 <p style="margin:0 0 16px;font-size:16px;line-height:1.6;color:#243447;">Hola ${escapeHtml(name)},</p>
                 <p style="margin:0 0 24px;font-size:16px;line-height:1.6;color:#465768;">Gracias por contactar a De Sousa Consulting. Nuestro equipo revisará su solicitud y se pondrá en contacto con usted para conversar sobre los próximos pasos.</p>
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 28px;border-collapse:collapse;border-left:4px solid #c8a96a;background:#f7f9fc;">
+                  <tr>
+                    <td style="padding:24px 24px 22px;">
+                      <p style="margin:0 0 16px;font-family:Georgia,'Times New Roman',serif;font-size:22px;line-height:1.4;color:#144982;">
+                        El pasado es experiencia.<br />
+                        El presente es oportunidad.<br />
+                        <strong>La estrategia correcta construye tu futuro.</strong>
+                      </p>
+                      <p style="margin:0 0 12px;font-size:15px;line-height:1.65;color:#465768;">Las empresas que perduran no improvisan. Analizan, planifican y ejecutan con una visión de largo plazo.</p>
+                      <p style="margin:0;font-size:15px;line-height:1.65;color:#465768;">Permítanos acompañarle en el diseño de una estrategia clara y un plan estructurado que transforme los objetivos de hoy en los resultados del mañana.</p>
+                    </td>
+                  </tr>
+                </table>
                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:#f5f7fa;border:1px solid #dce3ea;">
                   <tr>
                     <td style="padding:16px 18px;color:#657587;font-size:13px;line-height:1.4;width:30%;">Servicio solicitado</td>
-                    <td style="padding:16px 18px;color:#173f6b;font-size:15px;line-height:1.5;font-weight:bold;">${escapeHtml(service)}</td>
+                    <td style="padding:16px 18px;color:#0f3763;font-size:15px;line-height:1.5;font-weight:bold;">${escapeHtml(service)}</td>
                   </tr>
                 </table>
-                <h2 style="margin:26px 0 10px;font-size:15px;line-height:1.4;color:#173f6b;">Resumen de su solicitud</h2>
+                <h2 style="margin:26px 0 10px;font-size:15px;line-height:1.4;color:#0f3763;">Resumen de su solicitud</h2>
                 <p style="margin:0;white-space:pre-wrap;color:#465768;font-size:15px;line-height:1.6;">${escapeHtml(description)}</p>
                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:28px;border-top:1px solid #dce3ea;">
                   <tr>
@@ -216,7 +237,7 @@ function buildCustomerEmailHtml(payload) {
             </tr>
             <tr>
               <td align="center" style="padding:20px 28px;background:#f5f7fa;border-top:1px solid #dce3ea;">
-                <p style="margin:0;color:#173f6b;font-size:13px;line-height:1.5;font-weight:bold;">De Sousa Consulting</p>
+                <p style="margin:0;color:#0f3763;font-size:13px;line-height:1.5;font-weight:bold;">De Sousa Consulting</p>
                 <p style="margin:4px 0 0;color:#758596;font-size:12px;line-height:1.5;">Estrategia, transformación y estructuración empresarial</p>
               </td>
             </tr>
