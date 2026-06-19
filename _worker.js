@@ -183,11 +183,14 @@ async function sendLeadNotification(env, payload, result) {
     },
     body: JSON.stringify(message),
   });
+  const detail = await response.text().catch(() => "");
 
   if (!response.ok) {
-    const detail = await response.text().catch(() => "");
     console.error(`DESOUSA_EMAIL_FAILED: ${response.status} ${detail}`);
+    return;
   }
+
+  console.log(`DESOUSA_EMAIL_SENT: ${detail}`);
 }
 
 async function proxyApiRequest(request, env, ctx) {
