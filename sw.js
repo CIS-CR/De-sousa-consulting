@@ -1,5 +1,5 @@
-const STATIC_CACHE = "desousa-static-v3";
-const RUNTIME_CACHE = "desousa-runtime-v3";
+const STATIC_CACHE = "desousa-static-v4";
+const RUNTIME_CACHE = "desousa-runtime-v4";
 const PRECACHE_URLS = [
   "/",
   "/index.html",
