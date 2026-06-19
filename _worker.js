@@ -211,7 +211,7 @@ function buildCustomerEmailHtml(payload) {
                       <p style="margin:0 0 16px;font-family:Georgia,'Times New Roman',serif;font-size:22px;line-height:1.4;color:#144982;">
                         El pasado es experiencia.<br />
                         El presente es oportunidad.<br />
-                        <strong>La estrategia correcta construye tu futuro.</strong>
+                        La estrategia correcta construye tu futuro.
                       </p>
                       <p style="margin:0 0 12px;font-size:15px;line-height:1.65;color:#465768;">Las empresas que perduran no improvisan. Analizan, planifican y ejecutan con una visión de largo plazo.</p>
                       <p style="margin:0;font-size:15px;line-height:1.65;color:#465768;">Permítanos acompañarle en el diseño de una estrategia clara y un plan estructurado que transforme los objetivos de hoy en los resultados del mañana.</p>
