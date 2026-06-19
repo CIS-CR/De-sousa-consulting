@@ -199,7 +199,7 @@ function buildCustomerEmailHtml(payload) {
                       <h1 style="margin:0;font-size:25px;line-height:1.3;color:#ffffff;">Hemos recibido su información</h1>
                     </td>
                     <td align="right" style="width:104px;padding:0 0 0 20px;vertical-align:middle;">
-                      <img src="https://desousaconsulting.com/assets/logo-desousa-white.png" width="84" alt="De Sousa Consulting" style="display:block;width:84px;max-width:84px;height:auto;border:0;" />
+                      <img src="https://de-sousa-consulting.pages.dev/assets/logo-desousa-white.png" width="84" alt="De Sousa Consulting" style="display:block;width:84px;max-width:84px;height:auto;border:0;" />
                     </td>
                   </tr>
                 </table>
