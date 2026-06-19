@@ -191,14 +191,18 @@ function buildCustomerEmailHtml(payload) {
         <td align="center">
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;background:#ffffff;border:1px solid #dce3ea;">
             <tr>
-              <td align="center" style="padding:24px 28px 20px;background:#ffffff;">
-                <img src="https://desousaconsulting.com/assets/logo-desousa.png" width="210" alt="De Sousa Consulting" style="display:block;width:210px;max-width:100%;height:auto;border:0;" />
-              </td>
-            </tr>
-            <tr>
               <td style="padding:30px 32px;background:#144982;color:#ffffff;">
-                <p style="margin:0 0 8px;font-size:12px;line-height:1.4;font-weight:bold;text-transform:uppercase;color:#dceafa;">Confirmación de solicitud</p>
-                <h1 style="margin:0;font-size:25px;line-height:1.3;color:#ffffff;">Hemos recibido su información</h1>
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+                  <tr>
+                    <td style="padding:0;vertical-align:middle;">
+                      <p style="margin:0 0 8px;font-size:12px;line-height:1.4;font-weight:bold;text-transform:uppercase;color:#dceafa;">Confirmación de solicitud</p>
+                      <h1 style="margin:0;font-size:25px;line-height:1.3;color:#ffffff;">Hemos recibido su información</h1>
+                    </td>
+                    <td align="right" style="width:104px;padding:0 0 0 20px;vertical-align:middle;">
+                      <img src="https://desousaconsulting.com/assets/logo-desousa-white.png" width="84" alt="De Sousa Consulting" style="display:block;width:84px;max-width:84px;height:auto;border:0;" />
+                    </td>
+                  </tr>
+                </table>
               </td>
             </tr>
             <tr>
